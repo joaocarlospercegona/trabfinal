@@ -1,0 +1,48 @@
+header {
+   height: 75px;
+   background: var(--primaria);
+
+   display: flex;
+   justify-content: space-between;
+
+   border-bottom:1px solid var(--primaria);
+}
+
+
+#logo-img {
+  height: 65%;
+  margin-top: 1%;
+  margin-left: 1%;
+  border-radius: 3%;
+}
+
+
+#menu {
+  display: flex;
+}
+
+.tab {
+  font-size: 16px;
+  color: white;
+  padding: 0px 20px;
+}
+.tab.selected {
+  border-top-color: transparent;
+  border-top-style: solid;
+  border-top-width: 4px;
+  border-bottom-style: solid;
+  border-bottom-width: 4px;
+}
+
+
+#session {
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+}
+
+#user-name {
+  font-size: 16px;
+  color:var(--mto-escura);
+  margin-right: 7px;
+}
