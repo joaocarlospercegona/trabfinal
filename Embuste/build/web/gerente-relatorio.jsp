@@ -3,7 +3,7 @@
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Indústria de Beleza e Estética</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>
@@ -19,13 +19,13 @@
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
                 <button id='pessoas-tab' class='tab' onclick="location.href = 'gerente-funcionarios.html';">
-                    FuncionÃ¡rios
+                    Funcionários
                 </button>
                 <button id='atendimentos-tab' class='tab' onclick="location.href = 'gerente-atendimento.html';">
                     Atendimentos
                 </button>
                 <button id='relatorios-tab' class='tab selected'>
-                    RelatÃ³rios
+                    Relatórios
                 </button>
             </div>
             <div id='session'>
@@ -36,28 +36,32 @@
         </header> 
         <div class='caixa relatorio'>
             <div class='conteudo'>
-                <h1>RelatÃ³rios</h1>
-                <select required id ='relatorio-box' class='form-control campo0'  onclick='showBox()'>
-                    <option disabled selected hidden>RelatÃ³rios</option>
-                    <option>FuncionÃ¡rios</option>
-                    <option>Produtos mais reclamados</option>
-                    <option>Atendimentos em aberto por data</option>
-                    <option>ReclamaÃ§Ãµes</option>
-                </select>
-                <select disabled required id='reclama-box' class='form-control campo0'>
-                    <option>Todos</option>
-                    <option>Em aberto</option>
-                    <option>Finalizados</option>
-                </select>
-                <div>
-                    <label>Data de inÃ­cio:</label>
-                    <input id='data-ini-box' disabled class='form-control campo0' type='date'><br><br>
-                </div>
-                <div>
-                    <label>Data final:</label>
-                    <input id='data-fim-box' disabled class='form-control campo0' type='date'><br><br>
-                </div>
-                <button type='submit' class='btn btn-primary margem'>Gerar relatÃ³rio</button>
+                <h1>Relatórios</h1>
+                <form method='post' action="GeradorRelatorios"> 
+                    <select required id ='relatorio-box' name='relatorio-box' class='form-control campo0' onclick='showBox()'>
+                        <option disabled selected hidden>Escolha um Relatório...</option>
+                        <option value='func'>Funcionários</option>
+                        <option value='prod'>Produtos mais reclamados</option>
+                        <option value='ate'>Atendimentos em aberto por data</option>
+                        <option value='rec'>Reclamações</option>
+                    </select>
+                    <select disabled required id='reclama-box' class='form-control campo0'>
+                        <option>Todos</option>
+                        <option>Em aberto</option>
+                        <option>Finalizados</option>
+                    </select>
+                    <div>
+                        <label>Data de início:</label>
+                        <input id='data-ini-box' disabled class='form-control campo0' type='date'><br><br>
+                    </div>
+                    <div>
+                        <label>Data final:</label>
+                        <input id='data-fim-box' disabled class='form-control campo0' type='date'><br><br>
+                    </div>
+                    <button type='submit' class='btn btn-primary margem'>
+                        Gerar relatório
+                    </button>
+                </form>
             </div>
         </div>  
     </body>
