@@ -45,18 +45,18 @@
                         <option value='ate'>Atendimentos em aberto por data</option>
                         <option value='rec'>Reclamações</option>
                     </select>
-                    <select disabled required id='reclama-box' class='form-control campo0'>
+                    <select disabled required id='reclama-box' name='reclama-box' class='form-control campo0'>
                         <option>Todos</option>
                         <option>Em aberto</option>
                         <option>Finalizados</option>
                     </select>
                     <div>
                         <label>Data de início:</label>
-                        <input id='data-ini-box' disabled class='form-control campo0' type='date'><br><br>
+                        <input id='data-ini-box' disabled class='form-control campo0' name='data-ini-box' type='date'><br><br>
                     </div>
                     <div>
                         <label>Data final:</label>
-                        <input id='data-fim-box' disabled class='form-control campo0' type='date'><br><br>
+                        <input id='data-fim-box' disabled class='form-control campo0' name='data-fim-box' type='date'><br><br>
                     </div>
                     <button type='submit' class='btn btn-primary margem'>
                         Gerar relatório

@@ -7,6 +7,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,39 +24,52 @@ public class GeradorRelatorios extends HttpServlet {
     throws ServletException, IOException {
         Connection con = null;
         try {
-            String valor = request.getParameter("relatorio-box");
-            System.out.println(valor);
-            switch (valor){
-                case "ate":
-                    System.out.println("Atendimento");
-                    break;
-                case "rec":
-                    System.out.println("Reclamações");
-                    break;
-                case "prod":
-                    System.out.println("Produtos");
-                    break;
-                case "func":
-                    System.out.println("Funcionarios");
-                    break;
-            }
             // Conexão com o banco
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(
             "jdbc:postgresql://localhost:5432/relatorios",
             "usuario", "form4141");
-            // Caminho contextualizado do relatório compilado
-            String jasper = request.getContextPath() +
-            "/teste.jasper";
+            
+            String tipoRelatorio = request.getParameter("relatorio-box");
+            String jasper="./teste.jasper";
+            
             // Host onde o servlet esta executando
             String host = "http://" + request.getServerName() +
             ":" + request.getServerPort();
-            // URL para acesso ao relatório
-            URL jasperURL = new URL(host + jasper);
+            
             // Parâmetros do relatório
             HashMap params = new HashMap();
-            //Passândo parâmetros e convertendo o dados pra ser compativel
-            params.put("meu_id", 2);
+            
+            switch (tipoRelatorio){
+                case "ate":
+                    System.out.println("Atendimento");
+                    jasper = request.getContextPath() + "/teste.jasper";
+                    String dataInicio= request.getParameter("data-ini-box");
+                    String dataFim= request.getParameter("data-fim-box");
+                    System.out.println(dataInicio);
+                    System.out.println(dataFim);
+                    //Passando parâmetros e convertendo o dados pra ser compativel
+                    params.put("meu_id", 1);
+                    break;
+                case "rec":
+                    System.out.println("Reclamações");
+                    jasper = request.getContextPath() + "/rec.jasper";
+                    String situacaoReclamacao = request.getParameter("reclama-box");
+                    //Passando parâmetros e convertendo o dados pra ser compativel
+                    params.put("meu_id", 1);
+                    break;
+                case "prod":
+                    System.out.println("Produtos");
+                    jasper = request.getContextPath() + "/prod.jasper";
+                    break;
+                case "func":
+                    System.out.println("Funcionarios");
+                    jasper = request.getContextPath() + "/func.jasper";
+                    break;
+            }                        
+            // URL para acesso ao relatório
+            URL jasperURL = new URL(host + jasper);     
+            
             // Geração do relatório
             byte[] bytes = JasperRunManager.runReportToPdf(
             jasperURL.openStream(), params, con);
@@ -86,7 +100,7 @@ public class GeradorRelatorios extends HttpServlet {
         finally {
             if (con!=null)
 
-            try { con.close(); } catch(Exception e) {e.printStackTrace();}
+            try { con.close(); } catch(Exception e) {e.getStackTrace();}
         }
     } 
      @Override
