@@ -5,6 +5,15 @@
  */
 package Servlet;
 
+import static Facade.Facade.altera_Categoria;
+import static Facade.Facade.altera_Produtos;
+import static Facade.Facade.buscaTodas_Categorias;
+import static Facade.Facade.buscaTodos_Produtos;
+import static Facade.Facade.busca_Categoria;
+import static Facade.Facade.busca_Produtos;
+import static Facade.Facade.exclui_Categoria;
+import static Facade.Facade.insere_Categoria;
+import static Facade.Facade.insere_Produtos;
 import classes.Atendimento;
 import classes.Produto;
 import classes.categoria;
@@ -38,31 +47,42 @@ public class FuncionarioServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         HttpSession session = request.getSession();
-            String logado = (String) session.getAttribute("logado");
+             PrintWriter out = response.getWriter();
+             response.setContentType("text/html;charset=UTF-8");
+             HttpSession session = request.getSession();
+             String logado = (String) session.getAttribute("logado");
             
                 String action = request.getParameter("action");
                 if(action != null){
                     switch (action){  
                         case "painel_cadastro":
                         {
-                            List<Produto> produtos = new ArrayList();
-                            List<categoria> categorias = new ArrayList();
-                            //aqui iremos chamar o model para pegar os produtos
-                            //aqui iremos chamar o model para pegar as categorias
-                            request.setAttribute("produtos",produtos); 
-                            request.setAttribute("categorias",categorias);
+                            List<categoria> categorias = buscaTodas_Categorias();
+                            out.println(categorias);
+                            request.setAttribute("cat",categorias);
+                            request.setAttribute("func","categoria");
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cadastro.jsp");
                              rd.forward(request, response);
                             break;
                         }
+                        case "ver_produtos":
+                        {
+                              out.println("cheguei papai");
+                            List<Produto> produtos = buscaTodos_Produtos();
+                            request.setAttribute("func","produto");
+                            request.setAttribute("prod",produtos);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/funcionario-cadastro.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
                         case "cadastrar_produto":
                         {   
                             List<categoria> categorias = new ArrayList();
-                            categorias = buscar_Categorias();
-                            //request.setAttribute("categorias",categorias);
+                            categorias = buscaTodas_Categorias();
+                            request.setAttribute("categorias",categorias);
+                            request.setAttribute("func","cadastrar");
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cad-prod.jsp");
                              rd.forward(request, response);
@@ -70,6 +90,7 @@ public class FuncionarioServlet extends HttpServlet {
                         }
                         case "cadastrar_categoria":
                         {
+                            request.setAttribute("func","cadastrar");
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cad-categ.jsp");
                              rd.forward(request, response);
@@ -77,38 +98,133 @@ public class FuncionarioServlet extends HttpServlet {
                         }
                         case "cadastrando_produto":
                         {
-                            //editar o a tela cadastrar produto falta o campo peso
-                            //ver como recebe os campos da cadastrar produto... perguntar pro bolado_carlinhos
-                            
-                            int cod_categoria = 0;
-                            int peso = 0;
+                            String cod = request.getParameter("select");
+                            String pesoS = request.getParameter("peso");
+                            int cod_categoria = Integer.parseInt(cod);
+                            int peso = Integer.parseInt(pesoS);
                             Produto produto = new Produto();
-                            produto.setProduto_nome("");
-                            produto.setProduto_descricao("");
+                            produto.setProduto_nome(request.getParameter("nome"));
+                            produto.setProduto_descricao(request.getParameter("descricao"));
                             produto.setProduto_cod_categoria(cod_categoria);           
                             produto.setProduto_peso(peso);
                             
-                            //aqui chamamos o model para se conectar com o banco e inserir um novo produto
+                            insere_Produtos(produto);
                             
-                            //tem que criar uma menu para o funcionario, nao tem menu de cliente, funcionario nem gerente
+                            List<Produto> produtos = buscaTodos_Produtos();
+                            request.setAttribute("prod",produtos);
+                            request.setAttribute("func","produto");
                             RequestDispatcher rd = getServletContext().
-                                   getRequestDispatcher("/funcionario-cadastro.jsp");
+                                   getRequestDispatcher("/funcionario-cadastro");
                             rd.forward(request, response);
                             break;
                         }
                         case "cadastrando_categoria":
                         {
-                            //ver como recebe os campos da cadastrar produto... perguntar pro bolado_carlinhos
-                            
                             categoria categoria = new categoria();
-                            categoria.setCategoria_nome("");
-                            
+                            categoria.setCategoria_nome(request.getParameter("nome"));
                             //aqui chamamos o model para se conectar com o banco e inserir um novo produto
-                            
-                            //tem que criar uma menu para o funcionario, nao tem menu de cliente, funcionario nem gerente
-                            
+                            insere_Categoria(categoria);
+                            request.setAttribute("func","categoria");
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cadastro.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "alterar_categoria":
+                        {
+                            String idd = request.getParameter("id");
+                            int id = Integer.parseInt(idd);
+                            categoria categoria = new categoria();
+                            categoria = busca_Categoria(id);
+                            //vamos fazer algo para tudo ficar na funcionario cadastro categoria
+                            request.setAttribute("func","alterar");
+                            request.setAttribute("categoria", categoria);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/funcionario-cad-categ.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "alterar_produto":
+                        {
+                            String idd = request.getParameter("id");
+                            int id = Integer.parseInt(idd);
+                            Produto produto = new Produto();
+                            produto = busca_Produtos(id);
+                            request.setAttribute("func","alterar");
+                            request.setAttribute("produto", produto);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/funcionario-cad-prod.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "alterando_categoria":
+                        {
+                            String idd = request.getParameter("idc");
+                            int id = Integer.parseInt(idd);
+                            categoria categoria = new categoria();
+                            categoria.setCategoria_nome(request.getParameter("nome"));
+                            altera_Categoria(categoria,id);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/FuncionarioServlet?action=painel_cadastro");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "alterando_produto":
+                        {
+                            String cod = request.getParameter("select");
+                            String pesoS = request.getParameter("peso");
+                            int cod_categoria = Integer.parseInt(cod);
+                            int peso = Integer.parseInt(pesoS);
+                            String idd = request.getParameter("idp");
+                            int id = Integer.parseInt(idd);
+                            Produto produto = new Produto();
+                            produto.setProduto_nome(request.getParameter("nome"));
+                            produto.setProduto_descricao(request.getParameter("descricao"));
+                            produto.setProduto_peso(peso);
+                            produto.setProduto_cod_categoria(cod_categoria);
+                            
+                            altera_Produtos(produto, id);
+                            
+                            //parei aqui
+                            
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/funcionario-cad-prod.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "vizualizar_categoria":
+                        {
+                            String idd = request.getParameter("id");
+                            int id = Integer.parseInt(idd);
+                            categoria categoria = new categoria();
+                            categoria = busca_Categoria(id);
+                            request.setAttribute("func","visualizar");
+                            request.setAttribute("categoria", categoria);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/funcionario-cad-categ.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "visualizar_produto":
+                        {
+                            String idd = request.getParameter("id");
+                            int id = Integer.parseInt(idd);
+                            Produto produto = new Produto();
+                            produto = busca_Produtos(id);
+                            request.setAttribute("func","visualizar");
+                            request.setAttribute("prod", produto);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/funcionario-cad-prod.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "remover_categoria":
+                        {
+                            String idd = request.getParameter("id");
+                            int id = Integer.parseInt(idd);
+                            exclui_Categoria(id);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/FuncionarioServlet?action=painel_cadastro");
                             rd.forward(request, response);
                             break;
                         }

@@ -41,19 +41,57 @@
         </header> 
         <div class='caixa cadastro'>
             <div class='conteudo'>
-                <h1>Cadastro de Produto</h1>
-                <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
-                    <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome produto'> <br>            
-                    <input type="text"  class="form-control campo0" id="desc" name="descricao" placeholder="Descrição"> <br>
-                    <input type="number" class="form-control campo1" id="peso" name="peso" placeholder="peso"> <br>
-                    <select class='form-control campo1'>
-                      <option disabled selected hidden>Categorias</option>
-                      <c:forEach items="${categorias}" var="x">
-                          <option value="${i= i+1}">${x.categoria_nome}</option>
-                      </c:forEach>
-                    </select>
-                    <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
-                </form>
+                <c:if test="${func == 'cadastrar'}">
+                    <h1>Cadastro de Produto</h1>
+                    <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
+                        <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome produto'> <br>            
+                        <input type="text"  class="form-control campo0" id="desc" name="descricao" placeholder="Descrição"> <br>
+                        <input type="number" class="form-control campo1" id="peso" name="peso" placeholder="peso"> <br>
+                        <select name="select" class='form-control campo1'>
+                          <option disabled selected hidden>Categorias</option>
+                          <c:forEach items="${categorias}" var="x">
+                              <option value="${i= i+1}">${x.categoria_nome}</option>
+                          </c:forEach>
+                        </select>
+                        <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
+                    </form>
+                </c:if>
+                
+                <c:if test="${func == 'alterar'}">
+                    <h1>Alterar Produto</h1>
+                    <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
+                        <input type='text'  class='form-control campo0' id='nome'  value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
+                        <input type="text"  class="form-control campo0" id="desc"  value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
+                        <input type="number" class="form-control campo1" id="peso" value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
+                        
+<!--                        arrumar aqui-->
+                        <select name="select" class='form-control campo1'>
+                          <option disabled selected hidden>Categorias</option>
+                          <c:forEach items="${categorias}" var="x">
+                              <option value="${i= i+1}">${x.categoria_nome}</option>
+                          </c:forEach>
+                        </select>
+                        <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
+                    </form>
+                        
+                </c:if>
+                    
+                <c:if test="${func == 'visualizar'}">
+                    
+<!--                    ver como trazer o nome invez de o cod-->
+                   
+                    <h1>Visualiza Produto</h1>
+                    <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
+                        <input type='text'  class='form-control campo0' id='nome'  disabled value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
+                        <input type="text"  class="form-control campo0" id="desc"  disabled value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
+                        <input type="number" class="form-control campo1" id="peso" disabled value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
+                        <select disabled name="select" class='form-control campo1'>
+                          <option disabled selected hidden>${prod.produto_cod_categoria}</option>  
+                        </select>
+                        <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
+                    </form>
+                        
+                </c:if>
             </div>
         </div>     
     </body>

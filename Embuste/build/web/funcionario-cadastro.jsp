@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
@@ -13,6 +14,13 @@
         <script src='functions.js'></script>
         <link rel='stylesheet' href='css/styles.css'>
         <link rel='stylesheet' href='css/header.css'>
+        <script>
+            function redirecionar(opc){
+                window.location.href = opc;
+                
+
+            }
+        </script>
     </head>
     <body>
         <header>
@@ -33,32 +41,73 @@
         </header> 
         <div class='caixa cadastro'>
             <div class='conteudo'>
-                <h1>Cadastros</h1>
-                <select class='form-control campo2'>
-                    <option>Categorias</option>
-                    <option>Produtos</option>
+                <c:if test="${func == 'categoria'}" >
+                <h1>Categorias Cadastradas</h1>
+               
+                
+                <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
+                    <option value="FuncionarioServlet?action=painel_cadastro">Categorias</option>
+                    <option value="FuncionarioServlet?action=ver_produtos">Produtos</option>
                 </select>
+                
+                
                 <table class='table table-hover'>
                     <thead class='black white-text'>
                         <tr>
                             <td scope='col'>#</td>
                             <td>Nome</td>
+                            <td>Vizualizar</td>
+                            <td>Editar</td>
+                            <td>Remover</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${categorias}" var="x">
+                        <c:forEach items="${cat}" var="c">
                             <tr>
                                 <td scope='row'>1</td>
-                                <td>${x.categoria_nome}</td>
-                                <td width="50"><a href="FuncionarioServlet?action=visualizar&type=1"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
-                                <td width="50"><a href="FuncionarioServlet?action=alterar&type=1"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a href="FuncionarioServlet?action=remover&type=1"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td>${c.categoria_nome}</td>
+                                <td width="50"><a href="FuncionarioServlet?action=visualizar_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=alterar_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=remover_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <a href="FuncionarioServlet?action=cadastrar_produto"><button class='btn btn-success margem'>Cadastrar Produto</button></a>
                 <a href="FuncionarioServlet?action=cadastrar_categoria"><button class='btn btn-primary margem'>Cadastrar Categoria</button></a>
+            </c:if>
+            
+            <c:if test="${func == 'produto'}" >
+                <h1>Produtos Cadastrados</h1>
+               
+                
+                <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
+                    <option value="FuncionarioServlet?action=ver_produtos">Produtos</option>
+                    <option value="FuncionarioServlet?action=painel_cadastro">Categorias</option>
+                </select>
+                <table class='table table-hover'>
+                    <thead class='black white-text'>
+                        <tr>
+                            <td scope='col'>#</td>
+                            <td>Produto</td>
+                            <td>Vizualizar</td>
+                            <td>Editar</td>
+                            <td>Remover</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${prod}" var="c">
+                            <tr>
+                                <td scope='row'>1</td>
+                                <td>${c.produto_nome}</td>
+                                <td width="50"><a href="FuncionarioServlet?action=visualizar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=alterar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=remover_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <a href="FuncionarioServlet?action=cadastrar_produto"><button class='btn btn-primary margem'>Cadastrar Produto</button></a>
+            </c:if>    
             </div>
         </div>  
     </body>

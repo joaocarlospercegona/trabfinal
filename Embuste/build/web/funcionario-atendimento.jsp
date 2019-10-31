@@ -21,7 +21,7 @@
                 <button id='atendimentos-tab' class='tab selected'>
                     Atendimentos
                 </button>
-                <button id='produtos-tab' class='tab' onclick="location.href = 'funcionario-cadastro.jsp';">
+                <button id='produtos-tab' class='tab' onclick="location.href = 'FuncionarioServlet?action=painel_cadastro';">
                     Cadastros
                 </button>
             </div>

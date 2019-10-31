@@ -6,13 +6,17 @@
 package Facade;
 
 import DAO.AtendimentoDAO;
+import DAO.CategoriaDAO;
 import DAO.ClienteDAO;
 import DAO.FuncionarioDAO;
 import DAO.GerenteDAO;
+import DAO.ProdutoDAO;
 import classes.Atendimento;
 import classes.Cliente;
 import classes.Funcionario;
 import classes.Gerente;
+import classes.Produto;
+import classes.categoria;
 import java.util.List;
 
 /**
@@ -104,5 +108,51 @@ public class Facade {
         AtendimentoDAO dao = new AtendimentoDAO();
         List<Atendimento> c = dao.findEntities(true,100,1);
         return c;
+    }
+//-----------------------------------------------------------------------------------------------
+//CATEGORIAS
+    public static List<categoria> buscaTodas_Categorias(){
+        CategoriaDAO dao = new CategoriaDAO();
+        List<categoria> c = dao.findEntities(true,100,1);
+        return c;
+    }
+    public static void insere_Categoria(categoria categoria){
+        CategoriaDAO dao = new CategoriaDAO();
+        dao.create(categoria);
+    }
+     public static void altera_Categoria(categoria categoria, int id){ 
+        CategoriaDAO dao = new CategoriaDAO();
+        dao.edit(categoria,id); 
+    }
+    public static void exclui_Categoria(int idd){
+        CategoriaDAO dao = new CategoriaDAO();
+        dao.destroy(idd);
+    }
+    public static categoria busca_Categoria(int idd){
+            CategoriaDAO dao = new CategoriaDAO();
+                    return dao.find(idd);
+    }
+//-----------------------------------------------------------------------------------------------
+//PRODUTOS
+    public static List<Produto> buscaTodos_Produtos(){
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produto> c = dao.findEntities(true,100,1);
+        return c;
+    }
+    public static void insere_Produtos(Produto produto){
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.create(produto);
+    }
+     public static void altera_Produtos(Produto produto, int id){ 
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.edit(produto,id); 
+    }
+    public static void exclui_Produtos(int idd){
+        ProdutoDAO dao = new ProdutoDAO();
+        dao.destroy(idd);
+    }
+    public static Produto busca_Produtos(int idd){
+            ProdutoDAO dao = new ProdutoDAO();
+            return dao.find(idd);
     }
 }

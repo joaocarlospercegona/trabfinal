@@ -39,14 +39,38 @@
                 </button>
             </div>
         </header> 
-        <div class='caixa cadastro'>
-            <div class='conteudo'>
-                <h1>Cadastro de Categoria</h1>
-                <form method='post' action="FuncionarioServlet?action=cadastrando_categoria">          
-                    <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome categoria'> <br>            
-                    <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
-                </form>
-            </div>
-        </div>     
+        <c:if test="${func == 'cadastrar'}">
+            <div class='caixa cadastro'>
+                <div class='conteudo'>
+                    <h1>Cadastro de Categoria</h1>
+                    <form method='post' action="FuncionarioServlet?action=cadastrando_categoria">          
+                        <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome categoria'> <br>            
+                        <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
+                    </form>
+                </div>
+            </div>     
+        </c:if>
+        <c:if test="${func == 'alterar'}">
+            <div class='caixa cadastro'>
+                <div class='conteudo'>
+                    <h1>Cadastro de Categoria</h1>
+                    <form method='post' action="FuncionarioServlet?action=alterando_categoria&idc=${categoria_codigo}">          
+                        <input type='text'  class='form-control campo0' id='nome' name='nome' value="${categoria_nome}" placeholder='Nome categoria'> <br>            
+                        <button type='submit' class='btn btn-primary margem'>Alterar</button>
+                    </form>
+                </div>
+            </div>     
+        </c:if>
+        <c:if test="${func == 'visualizar'}">
+            <div class='caixa cadastro'>
+                <div class='conteudo'>
+                    <h1>Cadastro de Categoria</h1>
+                    <form method='post' action="FuncionarioServlet?action=painel_cadastro">          
+                        <input type='text'  class='form-control campo0' id='nome' name='nome' disabled  value="${categoria_nome}" placeholder='Nome categoria'> <br>            
+                        <button type='submit' class='btn btn-primary margem'>Voltar</button>
+                    </form>
+                </div>
+            </div>     
+        </c:if>
     </body>
 </html>
