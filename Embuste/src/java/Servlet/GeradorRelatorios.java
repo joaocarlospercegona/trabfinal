@@ -60,9 +60,13 @@ public class GeradorRelatorios extends HttpServlet {
                     DateFormat formatBR = new SimpleDateFormat("dd-mm-yyyy");
                     String d1 = formatBR.format(date1);
                     String d2 = formatBR.format(date2);
+                    
+                    //Transfroma de String para Date de novo
+                    Date da1 = formatUS.parse(d1);
+                    Date da2 = formatUS.parse(d2);
                     //Passando parâmetros e convertendo o dados pra ser compativel
-                    params.put("data-ini", d1);
-                    params.put("data-fim", d2);
+                    params.put("data-ini", da1);
+                    params.put("data-fim", da2);
                     break;
                 case "rec":
                     System.out.println("Reclamações");
