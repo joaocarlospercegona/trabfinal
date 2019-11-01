@@ -1,0 +1,6 @@
+Carlos: O que falta
+	Criar jaspers
+	Conferir versão(https://stackoverflow.com/questions/51451447/unpatched-itext-found-cannot-use-glyph-rendering)
+	Fazer estados e cidades
+	organizar palavras
+	Fazer encaminhamento para erro nos relatórios quando tiver tratamento (ex: erro.jsp)
