@@ -155,4 +155,11 @@ public class Facade {
             ProdutoDAO dao = new ProdutoDAO();
             return dao.find(idd);
     }
+    
+    public static String retorna_valor(int cod){
+        String a = null;
+            ProdutoDAO dao = new ProdutoDAO();
+            a= dao.retorna(cod);
+        return a;
+    }
 }

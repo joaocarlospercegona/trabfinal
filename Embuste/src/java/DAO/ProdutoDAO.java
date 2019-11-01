@@ -249,6 +249,29 @@ public class ProdutoDAO extends BaseDAOImp implements BaseDAO<Produto>{
     public void destroy(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public String retorna(int cod) {
+        String vo = null;
+        java.sql.PreparedStatement ps = null;
+        java.sql.ResultSet rs = null;
+        String sql = "select categoria_nome "
+                + " from produto, categoria where categoria.categoria_codigo = ?";
+        try {
+            ps = getConnection().prepareStatement(sql);
+            ps.setInt(1, cod);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                vo = rs.getString(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return vo;
+    }
     
 
 }

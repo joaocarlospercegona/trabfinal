@@ -14,6 +14,7 @@ import static Facade.Facade.busca_Produtos;
 import static Facade.Facade.exclui_Categoria;
 import static Facade.Facade.insere_Categoria;
 import static Facade.Facade.insere_Produtos;
+import static Facade.Facade.retorna_valor;
 import classes.Atendimento;
 import classes.Produto;
 import classes.categoria;
@@ -150,8 +151,10 @@ public class FuncionarioServlet extends HttpServlet {
                             int id = Integer.parseInt(idd);
                             Produto produto = new Produto();
                             produto = busca_Produtos(id);
+                            List<categoria> cat = buscaTodas_Categorias();
+                            request.setAttribute("categorias",cat);
                             request.setAttribute("func","alterar");
-                            request.setAttribute("produto", produto);
+                            request.setAttribute("prod", produto);
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cad-prod.jsp");
                             rd.forward(request, response);
@@ -211,6 +214,8 @@ public class FuncionarioServlet extends HttpServlet {
                             int id = Integer.parseInt(idd);
                             Produto produto = new Produto();
                             produto = busca_Produtos(id);
+                            String catnome = retorna_valor(produto.getProduto_cod_categoria());
+                            request.setAttribute("nome",catnome);   
                             request.setAttribute("func","visualizar");
                             request.setAttribute("prod", produto);
                             RequestDispatcher rd = getServletContext().

@@ -59,7 +59,7 @@
                 
                 <c:if test="${func == 'alterar'}">
                     <h1>Alterar Produto</h1>
-                    <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
+                    <form method='post' action="FuncionarioServlet?action=alterando_produto">          
                         <input type='text'  class='form-control campo0' id='nome'  value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc"  value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
                         <input type="number" class="form-control campo1" id="peso" value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
@@ -81,14 +81,14 @@
 <!--                    ver como trazer o nome invez de o cod-->
                    
                     <h1>Visualiza Produto</h1>
-                    <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
+                    <form method='post' action="FuncionarioServlet?action=painel_cadastro">          
                         <input type='text'  class='form-control campo0' id='nome'  disabled value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc"  disabled value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
                         <input type="number" class="form-control campo1" id="peso" disabled value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
                         <select disabled name="select" class='form-control campo1'>
-                          <option disabled selected hidden>${prod.produto_cod_categoria}</option>  
+                          <option disabled selected hidden>${nome}</option>  
                         </select>
-                        <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
+                        <button type='submit' class='btn btn-primary margem'>voltar</button>
                     </form>
                         
                 </c:if>

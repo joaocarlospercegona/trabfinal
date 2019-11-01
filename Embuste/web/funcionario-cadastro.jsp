@@ -99,7 +99,7 @@
                             <tr>
                                 <td scope='row'>1</td>
                                 <td>${c.produto_nome}</td>
-                                <td width="50"><a href="FuncionarioServlet?action=visualizar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?actio    n=visualizar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
                                 <td width="50"><a href="FuncionarioServlet?action=alterar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
                                 <td width="50"><a href="FuncionarioServlet?action=remover_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
                             </tr>
