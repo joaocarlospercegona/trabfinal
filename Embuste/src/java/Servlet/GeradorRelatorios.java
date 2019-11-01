@@ -7,8 +7,13 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +32,7 @@ public class GeradorRelatorios extends HttpServlet {
             // Conexão com o banco
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(
-            "jdbc:postgresql://localhost:5432/relatorios",
+            "jdbc:postgresql://localhost:5432/Embuste",
             "usuario", "form4141");
             
             String tipoRelatorio = request.getParameter("relatorio-box");
@@ -42,14 +47,22 @@ public class GeradorRelatorios extends HttpServlet {
             
             switch (tipoRelatorio){
                 case "ate":
-                    System.out.println("Atendimento");
-                    jasper = request.getContextPath() + "/teste.jasper";
+                    jasper = request.getContextPath() + "/ate.jasper";
                     String dataInicio= request.getParameter("data-ini-box");
                     String dataFim= request.getParameter("data-fim-box");
-                    System.out.println(dataInicio);
-                    System.out.println(dataFim);
+                    
+                    //Primeiro converte de String para Date
+                    DateFormat formatUS = new SimpleDateFormat("yyyy-mm-dd");
+                    Date date1 = formatUS.parse(dataInicio);
+                    Date date2 = formatUS.parse(dataFim);
+
+                    //Depois formata data
+                    DateFormat formatBR = new SimpleDateFormat("dd-mm-yyyy");
+                    String d1 = formatBR.format(date1);
+                    String d2 = formatBR.format(date2);
                     //Passando parâmetros e convertendo o dados pra ser compativel
-                    params.put("meu_id", 1);
+                    params.put("data-ini", d1);
+                    params.put("data-fim", d2);
                     break;
                 case "rec":
                     System.out.println("Reclamações");
@@ -59,11 +72,9 @@ public class GeradorRelatorios extends HttpServlet {
                     params.put("meu_id", 1);
                     break;
                 case "prod":
-                    System.out.println("Produtos");
                     jasper = request.getContextPath() + "/prod.jasper";
                     break;
                 case "func":
-                    System.out.println("Funcionarios");
                     jasper = request.getContextPath() + "/func.jasper";
                     break;
             }                        
@@ -96,6 +107,8 @@ public class GeradorRelatorios extends HttpServlet {
             request.setAttribute("mensagem", "Erro no Jasper : " +
             e.getMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(GeradorRelatorios.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally {
             if (con!=null)
