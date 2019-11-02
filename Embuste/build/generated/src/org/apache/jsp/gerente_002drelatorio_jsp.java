@@ -89,9 +89,9 @@ public final class gerente_002drelatorio_jsp extends org.apache.jasper.runtime.H
       out.write("                        <option value='rec'>Reclamações</option>\n");
       out.write("                    </select>\n");
       out.write("                    <select disabled required id='reclama-box' name='reclama-box' class='form-control campo0'>\n");
-      out.write("                        <option>Todos</option>\n");
+      out.write("                        <option>Todas</option>\n");
       out.write("                        <option>Em aberto</option>\n");
-      out.write("                        <option>Finalizados</option>\n");
+      out.write("                        <option>Finalizadas</option>\n");
       out.write("                    </select>\n");
       out.write("                    <div>\n");
       out.write("                        <label>Data de início:</label>\n");

@@ -46,9 +46,9 @@
                         <option value='rec'>Reclamações</option>
                     </select>
                     <select disabled required id='reclama-box' name='reclama-box' class='form-control campo0'>
-                        <option>Todos</option>
+                        <option>Todas</option>
                         <option>Em aberto</option>
-                        <option>Finalizados</option>
+                        <option>Finalizadas</option>
                     </select>
                     <div>
                         <label>Data de início:</label>

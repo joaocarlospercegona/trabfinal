@@ -62,18 +62,25 @@ public class GeradorRelatorios extends HttpServlet {
                     String d2 = formatBR.format(date2);
                     
                     //Transfroma de String para Date de novo
-                    Date da1 = formatUS.parse(d1);
-                    Date da2 = formatUS.parse(d2);
+                    Date da1 = formatBR.parse(d1);
+                    Date da2 = formatBR.parse(d2);
                     //Passando parâmetros e convertendo o dados pra ser compativel
                     params.put("data-ini", da1);
                     params.put("data-fim", da2);
                     break;
                 case "rec":
                     System.out.println("Reclamações");
-                    jasper = request.getContextPath() + "/rec.jasper";
-                    String situacaoReclamacao = request.getParameter("reclama-box");
-                    //Passando parâmetros e convertendo o dados pra ser compativel
-                    params.put("meu_id", 1);
+                    String tipo = request.getParameter("reclama-box");
+                    if (tipo.equals("Todas")){
+                        jasper = request.getContextPath() + "/rec.jasper";  
+                    }
+                    else{        
+                        jasper = request.getContextPath() + "/rec-sit.jasper";
+                        if (tipo.equals("Finalizadas"))
+                            params.put("sit-rec", "Finalizada");
+                        else
+                            params.put("sit-rec", tipo);
+                    }
                     break;
                 case "prod":
                     jasper = request.getContextPath() + "/prod.jasper";
