@@ -75,7 +75,7 @@ public class GeradorRelatorios extends HttpServlet {
                         jasper = request.getContextPath() + "/rec.jasper";  
                     }
                     else{        
-                        jasper = request.getContextPath() + "/rec-sit.jasper";
+                        jasper = request.getContextPath() + "/rec_sit.jasper";
                         if (tipo.equals("Finalizadas"))
                             params.put("sit-rec", "Finalizada");
                         else
