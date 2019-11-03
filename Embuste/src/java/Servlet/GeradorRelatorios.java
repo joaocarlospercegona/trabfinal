@@ -38,11 +38,9 @@ public class GeradorRelatorios extends HttpServlet {
             String tipoRelatorio = request.getParameter("relatorio-box");
             String jasper="./teste.jasper";
             
-            // Host onde o servlet esta executando
             String host = "http://" + request.getServerName() +
             ":" + request.getServerPort();
             
-            // Parâmetros do relatório
             HashMap params = new HashMap();
             
             switch (tipoRelatorio){
@@ -51,25 +49,23 @@ public class GeradorRelatorios extends HttpServlet {
                     String dataInicio= request.getParameter("data-ini-box");
                     String dataFim= request.getParameter("data-fim-box");
                     
-                    //Primeiro converte de String para Date
-                    DateFormat formatUS = new SimpleDateFormat("yyyy-mm-dd");
+                    DateFormat formatUS = new SimpleDateFormat("yyyy-MM-dd");
                     Date date1 = formatUS.parse(dataInicio);
                     Date date2 = formatUS.parse(dataFim);
 
-                    //Depois formata data
-                    DateFormat formatBR = new SimpleDateFormat("dd-mm-yyyy");
+                    DateFormat formatBR = new SimpleDateFormat("dd-MM-yyyy");
                     String d1 = formatBR.format(date1);
                     String d2 = formatBR.format(date2);
                     
-                    //Transfroma de String para Date de novo
                     Date da1 = formatBR.parse(d1);
                     Date da2 = formatBR.parse(d2);
-                    //Passando parâmetros e convertendo o dados pra ser compativel
+                    
                     params.put("data-ini", da1);
                     params.put("data-fim", da2);
+                    params.put("sql-1", da1);
+                    params.put("sql-2", da2);
                     break;
                 case "rec":
-                    System.out.println("Reclamações");
                     String tipo = request.getParameter("reclama-box");
                     if (tipo.equals("Todas")){
                         jasper = request.getContextPath() + "/rec.jasper";  
