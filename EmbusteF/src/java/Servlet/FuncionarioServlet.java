@@ -8,7 +8,10 @@ package Servlet;
 import static Facade.Facade.altera_Categoria;
 import static Facade.Facade.altera_Produtos;
 import static Facade.Facade.buscaTodas_Categorias;
+import static Facade.Facade.buscaTodos_Atendimentos;
+import static Facade.Facade.buscaTodos_Atendimentos_abertos;
 import static Facade.Facade.buscaTodos_Produtos;
+import static Facade.Facade.busca_Atendimento;
 import static Facade.Facade.busca_Categoria;
 import static Facade.Facade.busca_Produtos;
 import static Facade.Facade.exclui_Categoria;
@@ -22,6 +25,8 @@ import classes.categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -247,33 +252,70 @@ public class FuncionarioServlet extends HttpServlet {
                         }
                         case "atendimentos_abertos":
                         {
-                            //OS ATENDIMENTOS EM ABERTOS SERAO OS QUE TEM 1 NA SITUACAO E OS ENCERRADOS 0
+                            List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();
                             List<Atendimento> atendimentos = new ArrayList();
-                            //aqui vai chamar o model para conectar com o banco e trazer os atendimentos em aberto
-                            request.setAttribute("atendimentos_abertos",atendimentos);
-                            //aqui ver se iremos criar duas jsp uma para abertos e outra para todos os atendimentos
+                            Calendar a = Calendar.getInstance();
+                            a.setTime(new Date());//data maior
+                            Calendar b = Calendar.getInstance();
+                            
+                            for(Atendimento x : atendiment){
+                                b.setTime(x.getAtendimento_data_hora());
+                                a.add(Calendar.DATE, - b.get(Calendar.DAY_OF_MONTH));
+                                if(a.get(Calendar.DAY_OF_MONTH) > 7){
+                                    out.println("mais que sete dias");
+                                    x.setAtendimento_nivel(1);
+                                }
+                                else{
+                                    x.setAtendimento_nivel(0);
+                                }
+                                atendimentos.add(x);
+                            }
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            request.setAttribute("atendimentos",atendimentos);
+                            request.setAttribute("func","aberto");
                             RequestDispatcher rd = getServletContext().
-                                   getRequestDispatcher("/funcionario-atendimentos.jsp");
+                                   getRequestDispatcher("/funcionario-atendimento.jsp");
                             rd.forward(request, response);
                             break;
                         }
                         case "todos_atendimentos":
                         {
                             List<Atendimento> atendimentos = new ArrayList();
-                            //aqui via chamar o model para conectar com o banco e trazer todos os atendimentos
+                            List<Atendimento> atendiment = buscaTodos_Atendimentos();
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            
+                            Calendar a = Calendar.getInstance();
+                            a.setTime(new Date());//data maior
+                            Calendar b = Calendar.getInstance();
+                            
+                            for(Atendimento x : atendiment){
+                                b.setTime(x.getAtendimento_data_hora());
+                                a.add(Calendar.DATE, - b.get(Calendar.DAY_OF_MONTH));
+                                if(a.get(Calendar.DAY_OF_MONTH) > 7){
+                                    out.println("mais que sete dias");
+                                    x.setAtendimento_nivel(1);
+                                }
+                                else{
+                                    x.setAtendimento_nivel(0);
+                                }
+                                atendimentos.add(x);
+                            } 
                             request.setAttribute("atendimentos",atendimentos);
-                            //aqui ver se iremos criar duas jsp uma para abertos e outra para todos os atendimentos
+                            request.setAttribute("func","todos");
                             RequestDispatcher rd = getServletContext().
-                                   getRequestDispatcher("/funcionario-atendimentos.jsp");
+                                   getRequestDispatcher("/funcionario-atendimento.jsp");
                             rd.forward(request, response);
                             break;
                         }
                         case "resolucao":
                         {
-                            //PAREI NESSE AQUI//////////---------------------
+                            String cod = request.getParameter("cod");
+                            out.println(cod);
                             Atendimento atendimento = new Atendimento();
-                            //aqui vai chamar o model para conectar com o banco e trazer o atendimento escolhido pelo funcionario
-                            request.setAttribute("antedimento",atendimento);
+                            atendimento = busca_Atendimento(cod);
+                            request.setAttribute("atendimento",atendimento); 
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/resolucao-atendimento.jsp");
                             rd.forward(request, response);

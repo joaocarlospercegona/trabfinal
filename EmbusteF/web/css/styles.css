@@ -1,13 +1,13 @@
-
+/**** Limpar as formatações do CSS */
 body {
   font-family: sans-serif;
   font-weight: normal;
   font-style: normal;
   font-size: 14px;
-  -webkit-user-select: none;
+  /*-webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none;*/
 }
 * {
   padding: 0;
@@ -29,7 +29,7 @@ body {
 }
 
 :root {
-   Palheta 
+  /* Palheta */
   --primaria: #21B180;
   --mto-escura: #1D1D35;
   --escura: #435A3E;
@@ -55,7 +55,7 @@ h2 {
   font-weight: bold;
 }
 
-*** Footer 
+/**** Footer */
 
 html { height: 100%;  position: relative; min-height: 100%;}
 body { min-height: 100%; padding:0; margin:0; position:relative; }

@@ -7,10 +7,12 @@ package Servlet;
 
 import static Facade.Facade.altera_Funcionario;
 import static Facade.Facade.altera_Gerente;
+import static Facade.Facade.buscaTodas_Categorias;
 import static Facade.Facade.buscaTodos_Atendimentos;
 import static Facade.Facade.buscaTodos_Atendimentos_abertos;
 import static Facade.Facade.buscaTodos_Funcionario;
 import static Facade.Facade.buscaTodos_Gerente;
+import static Facade.Facade.buscaTodos_Produtos;
 import static Facade.Facade.busca_Cliente;
 import static Facade.Facade.busca_Funcionario;
 import static Facade.Facade.busca_Gerente;
@@ -23,6 +25,8 @@ import classes.Cliente;
 import classes.Funcionario;
 import classes.Gerente;
 import classes.Pessoa;
+import classes.Produto;
+import classes.categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -362,7 +366,8 @@ public class GerenteServlet extends HttpServlet {
                                 }
                                 atendimentos.add(x);
                             }
-                            
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
                             request.setAttribute("atendimentos",atendimentos);
                             request.setAttribute("func","aberto");
                             RequestDispatcher rd = getServletContext().
@@ -372,7 +377,27 @@ public class GerenteServlet extends HttpServlet {
                         }
                         case "todos_atendimentos":
                         {
-                            List<Atendimento> atendimentos = buscaTodos_Atendimentos();
+                            List<Atendimento> atendimentos = new ArrayList();
+                            List<Atendimento> atendiment = buscaTodos_Atendimentos();
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            
+                            Calendar a = Calendar.getInstance();
+                            a.setTime(new Date());//data maior
+                            Calendar b = Calendar.getInstance();
+                            
+                            for(Atendimento x : atendiment){
+                                b.setTime(x.getAtendimento_data_hora());
+                                a.add(Calendar.DATE, - b.get(Calendar.DAY_OF_MONTH));
+                                if(a.get(Calendar.DAY_OF_MONTH) > 7){
+                                    out.println("mais que sete dias");
+                                    x.setAtendimento_nivel(1);
+                                }
+                                else{
+                                    x.setAtendimento_nivel(0);
+                                }
+                                atendimentos.add(x);
+                            } 
                             request.setAttribute("atendimentos",atendimentos);
                             request.setAttribute("func","todos");
                             RequestDispatcher rd = getServletContext().

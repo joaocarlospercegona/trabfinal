@@ -20,7 +20,7 @@
 
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
                     Sair
                 </button>
             </div>
@@ -28,16 +28,13 @@
         <div class='caixa relatorio'>
             <div class='conteudo'>
                 <h1>Atendimento</h1>
-                <p>Cliente: Nome</p>
-                <p>Data: 22/09/19</p>
-                <p>NÂ°Pedido: 132454</p>
-                <p>Protocolo: 13544</p>
-                <p><b>Esmalte cor errada</b></p>
-                <p>O esmalte recebido nÃ£o foi o encomendado.</p>
-                <form method="get" action="gerente-atendimento.html">
-                    <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
-                    <button type='submit' class='btn btn-danger margem'>Voltar</button>
-                </form>
+                <p>CPF - Cliente: ${atendimento.cpf_cliente}</p>
+                <p>Data: ${atendimento.data_hora}</p>
+                <p>Situação: ${atendimento.situacao}</p>
+                <p>Descrição: ${atendimento.descricao}</p>
+<!--            fazer um campo de texto para solução-->
+                <a href="FuncionarioServlet?action=finalizar"><button type='submit' class='btn btn-primary margem'>Fechar atendimento</button></a>
+                <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
             </div>
         </div>  
         <footer>

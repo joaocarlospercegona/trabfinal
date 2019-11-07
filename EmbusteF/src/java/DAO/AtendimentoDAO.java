@@ -6,6 +6,7 @@
 package DAO;
 
 import classes.Atendimento;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -32,7 +33,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
         try {
           verificaConexao();
-          ps = conn.prepareStatement("select * from atendimento order by atendimento_data_hora");
+          ps = conn.prepareStatement("select * from atendimento order by atendimento_data_hora desc");
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -68,6 +69,39 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
         return result;
 
     }
+    
+     public Atendimento find(String cod) {
+        Atendimento p = null;
+
+        java.sql.PreparedStatement ps = null;
+        java.sql.ResultSet rs = null;
+        String sql = "SELECT * from atendimento where atendimento_codigo = ?";
+
+        try {
+            ps = getConnection().prepareStatement(sql);
+            ps.setString(1, cod);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                  p = new Atendimento();
+                  p.setAtendimento_codigo(rs.getInt("atendimento_codigo"));
+                  p.setAtendimento_data_hora(rs.getDate("atendimento_data_hora"));
+                  p.setAtendimento_cpf_cliente(rs.getString("atendimento_cpf_cliente"));
+                  p.setAtendimento_situacao(rs.getString("atendimento_situacao"));
+                  p.setAtendimento_cod_produto(rs.getInt("atendimento_cod_produto"));
+                  p.setAtendimento_cod_tipo_atendimento(rs.getInt("atendimento_cod_atendimento"));
+                  p.setAtendimento_descricao(rs.getString("atendimento_descricao"));
+                  p.setAtendimento_solucao(rs.getString("atendimento_solucao"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return p;
+    }
+
     
     @Override
     public void create(Atendimento vo) {

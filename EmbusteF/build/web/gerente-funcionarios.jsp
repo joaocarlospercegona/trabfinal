@@ -23,6 +23,7 @@
         </script>
     </head>
     <body>
+        <c:set var="i" value="0"/>  
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
@@ -68,7 +69,7 @@
                     <tbody>
                         <c:forEach items="${funcionarios}" var="x">
                             <tr>
-                                <td scope='row'>1</td>
+                                <td scope='row'>${i = i+1}</td>
                                 <td>${x.funcionario_nome}</td>
                                 <td>${x.funcionario_cpf}</td>
                                 <td>${x.funcionario_email}</td>
@@ -108,7 +109,7 @@
                     <tbody>
                         <c:forEach items="${gerentes}" var="x">
                             <tr>
-                                <td scope='row'>1</td>
+                                <td scope='row'>${i = i+1}</td>
                                 <td>${x.gerente_nome}</td>
                                 <td>${x.gerente_cpf}</td>
                                 <td>${x.gerente_email}</td>

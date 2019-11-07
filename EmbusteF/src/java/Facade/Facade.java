@@ -121,6 +121,19 @@ public class Facade {
         List<Atendimento> c = dao.findEntities(true,100,1);
         return c;
     }
+    
+    public static Atendimento busca_Atendimento(String cod){
+        Atendimento a = new Atendimento();
+        int coda = Integer.parseInt(cod);
+        AtendimentoDAO dao = new AtendimentoDAO();
+        List<Atendimento> c = dao.findEntities(true,100,1);
+        for(Atendimento x : c){
+            if(x.getAtendimento_codigo() == coda){
+                a = x;
+            }
+        }
+        return a;
+    }
 //-----------------------------------------------------------------------------------------------
 //CATEGORIAS
     public static List<categoria> buscaTodas_Categorias(){

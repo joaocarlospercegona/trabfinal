@@ -26,7 +26,7 @@
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
-                <button id='atendimentos-tab' class='tab' onclick="location.href = 'funcionario-atendimento.html';">
+                <button id='atendimentos-tab' class='tab' onclick="location.href = 'FuncionarioServlet?action=todos_atendimentos';">
                     Atendimentos
                 </button>
                 <button id='produtos-tab' class='tab selected'>
@@ -34,7 +34,7 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
                     Sair
                 </button>
             </div>

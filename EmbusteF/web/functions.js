@@ -17,15 +17,3 @@ function showBox() {
         data2.disabled = true;
     }
 }
-
-//Escolher linha de uma tabela
-
-window.onload = defineObject;
-
-
-function defineObject(){
-var elements= document.getElementsByTagName('td');
-    for(var i=0; i<elements.length;i++)    {
-        (elements)[i].addEventListener("click", function(){ alert(this.innerHTML); });
-    }    
-}

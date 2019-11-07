@@ -12,8 +12,8 @@
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
         <script src='functions.js'></script>
-        <link rel='stylesheet' href='css/styles.css'>
         <link rel='stylesheet' href='css/header.css'>
+        <link rel='stylesheet' href='css/styles.css'>
         <script>
             function redirecionar(opc){
                     window.location.href = opc;
@@ -52,27 +52,35 @@
                     <table class='table table-hover'>
                         <thead class='black white-text'>
                             <tr>
-                                <td scope='col'>#</td>
-                                <td>Data</td>
-                                <td>Produto</td>
-                                <td>Situação</td>
+                                <td width="30" scope='col'>#</td>
+                                <td width="200">Data</td>
+                                <td width="200">Produto</td>
+                                <td width="200">Situação</td>
+                                <td width="100">Analisar Atendimento</td>
                             </tr>
                         </thead>
                         <tbody>
                             <c:set var="i" value="0"/>
                             <c:forEach items="${atendimentos}" var="x">
-                                <tr bgcolor="RED">
+                                <tr>
                                     <td scope='row'>${i = i+1}</td>
                                     <td>${x.atendimento_data_hora}</td>
-                                    <td>${x.atendimento_cod_produto}</td>
-                                    <td>${x.atendimento_situacao}</td>
+                                        <c:forEach items="${produtos}" var="a">
+                                            <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
+                                                <td>${a.produto_nome}</td>
+                                            </c:if>
+                                        </c:forEach>
+                                    <c:if test="${x.atendimento_nivel == 1}">
+                                        <td style="color:red">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                    <c:if test="${x.atendimento_nivel == 0}">
+                                        <td style="color:yellow">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                    <td><a href="resolucao-atendimento.jsp"><img src="ver.png" width=45 height=40></a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                <form method="get" action="resolucao-atendimento.jsp">
-                    <button type='submit' class='btn btn-primary margem'>Verificar atendimento</button>
-                </form>
             </c:if>
             
             <c:if test="${func == 'aberto'}">
@@ -84,27 +92,35 @@
                     <table  class="table">
                         <thead class="thead-dark">
                             <tr>
-                                <td scope='col'>#</td>
-                                <td>Data</td>
-                                <td>Produto</td>
-                                <td>Situação</td>
+                                <td width="30" scope='col'>#</td>
+                                <td width="200">Data</td>
+                                <td width="200">Produto</td>
+                                <td width="200">Situação</td>
+                                <td width="100">Analisar Atendimento</td>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach items="${atendimentos}" var="x"> 
-                                <tr bgcolor="RED    ">
-
-                                    <td scope='row'>${i = i+1}</td>
-                                    <td>${x.atendimento_data_hora}</td>
-                                    <td>${x.atendimento_cod_produto}</td>
-                                    <td>${x.atendimento_situacao}</td>
-                                </tr>
+                                    <tr>
+                                        <td scope='row'>${i = i+1}</td>
+                                        <td>${x.atendimento_data_hora}</td>
+                                        
+                                        <c:forEach items="${produtos}" var="a">
+                                            <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
+                                                <td>${a.produto_nome}</td>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${x.atendimento_nivel == 1}">
+                                            <td style="color:red">${x.atendimento_situacao}</td>
+                                        </c:if>
+                                        <c:if test="${x.atendimento_nivel == 0}">
+                                            <td>${x.atendimento_situacao}</td>
+                                        </c:if>
+                                        <td><a href="resolucao-atendimento.jsp"><img src="ver.png" width=45 height=40></a></td>
+                                    </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                <form method="get" action="resolucao-atendimento.jsp">
-                    <button type='submit' class='btn btn-primary margem'>Verificar atendimento</button>
-                </form>
             </c:if>
             </div>
         </div>  

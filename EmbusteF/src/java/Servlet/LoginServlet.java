@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 //                                List<Atendimento> ListaAtendimentos = buscaTodos_Atendimentos();
 //                                request.setAttribute("ListaAtendimentos", ListaAtendimentos);
                                 RequestDispatcher rd = getServletContext().
-                                    getRequestDispatcher("/funcionario-atendimento.jsp");
+                                    getRequestDispatcher("/FuncionarioServlet?action=todos_atendimentos");
                                 rd.forward(request, response);
                             }
                         }

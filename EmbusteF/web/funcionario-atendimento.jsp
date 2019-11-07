@@ -1,9 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estatica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>    
@@ -13,6 +14,11 @@
         <script src='functions.js'></script>
         <link rel='stylesheet' href='css/styles.css'>
         <link rel='stylesheet' href='css/header.css'>
+           <script>
+            function redirecionar(opc){
+                    window.location.href = opc;
+            }
+        </script>
     </head>
     <body>
         <header>
@@ -26,57 +32,92 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
                     Sair
                 </button>
             </div>
         </header> 
         <div class='caixa tabela'>
             <div class='conteudo'>
-                <h1>HistÃ³rico</h1>
-                <select class='form-control campo2'>
-                    <option>Todos os atendimentos</option>
-                    <option>Atendimentos em aberto</option>
-                </select>
-                <table class='table table-hover'>
-                    <thead class='black white-text'>
-                        <tr>
-                            <td scope='col'>#</td>
-                            <td>Data</td>
-                            <td>Produto</td>
-                            <td>SituaÃ§Ã£o</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope='row'>1</td>
-                            <td>30/09/2019 - 14:04</td>
-                            <td>Batom</td>
-                            <td style="color: darkorange">NÃ£o resolvido</td>
-                        </tr>
-                        <tr>
-                            <td scope='row'>2</td>
-                            <td>26/09/2019 - 12:54</td>
-                            <td>Base</td>
-                            <td style="color: darkorange">NÃ£o resolvido</td>
-                        </tr>
-                        <tr>
-                            <td scope='row'>3</td>
-                            <td>23/09/2019 - 08:27</td>
-                            <td>LÃ¡pis de Olho</td>
-                            <td style="color: red"> NÃ£o Resolvido</td>
-                        </tr>
-                        <tr>
-                            <td scope='row'>4</td>
-                            <td>22/09/2019 - 07:47</td>
-                            <td>Sombra</td>
-                            <td style="color:green">Resolvido</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <form method="get" action="resolucao-atendimento.html">
-                    <button type='submit' class='btn btn-primary margem'>Verificar atendimento</button>
-                </form>
+                <h1>Histórico</h1>
+                <c:if test="${func == 'todos'}">
+                    <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
+                        <option value="FuncionarioServlet?action=todos_atendimentos">Todos os atendimentos</option>
+                        <option value="FuncionarioServlet?action=atendimentos_abertos">Atendimentos em aberto</option>
+                    </select>
+                    <table class='table table-hover'>
+                        <thead class='black white-text'>
+                            <tr>
+                                <td width="30" scope='col'>#</td>
+                                <td width="200">Data</td>
+                                <td width="200">Produto</td>
+                                <td width="200">Situação</td>
+                                <td width="100">Analisar Atendimento</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:set var="i" value="0"/>
+                            <c:forEach items="${atendimentos}" var="x">
+                                <tr>
+                                    <td scope='row'>${i = i+1}</td>
+                                    <td>${x.atendimento_data_hora}</td>
+                                        <c:forEach items="${produtos}" var="a">
+                                            <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
+                                                <td>${a.produto_nome}</td>
+                                            </c:if>
+                                        </c:forEach>
+                                    <c:if test="${x.atendimento_nivel == 1}">
+                                        <td style="color:red">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                    <c:if test="${x.atendimento_nivel == 0}">
+                                        <td style="color:yellow">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                    <td><a href="FuncionarioServlet?action=resolucao&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+            </c:if>
+            
+            <c:if test="${func == 'aberto'}">
+                    <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
+                        <option value="FuncionarioServlet?action=atendimentos_abertos">Atendimentos em aberto</option>
+                        <option value="FuncionarioServlet?action=todos_atendimentos">Todos os atendimentos</option>
+                    </select>
+            <c:set var="i" value="0"/>  
+                    <table  class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <td width="30" scope='col'>#</td>
+                                <td width="200">Data</td>
+                                <td width="200">Produto</td>
+                                <td width="200">Situação</td>
+                                <td width="100">Analisar Atendimento</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${atendimentos}" var="x"> 
+                                    <tr>
+                                        <td scope='row'>${i = i+1}</td>
+                                        <td>${x.atendimento_data_hora}</td>
+                                        
+                                        <c:forEach items="${produtos}" var="a">
+                                            <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
+                                                <td>${a.produto_nome}</td>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${x.atendimento_nivel == 1}">
+                                            <td style="color:red">${x.atendimento_situacao}</td>
+                                        </c:if>
+                                        <c:if test="${x.atendimento_nivel == 0}">
+                                            <td>${x.atendimento_situacao}</td>
+                                        </c:if>
+                                        <td><a href="FuncionarioServlet?action=resolucao&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
+                                    </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+            </c:if>
             </div>
         </div>  
     </body>
