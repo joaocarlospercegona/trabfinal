@@ -5,14 +5,17 @@
  */
 package Servlet;
 
+import static Facade.Facade.BuscaTipo;
 import static Facade.Facade.altera_Categoria;
 import static Facade.Facade.altera_Produtos;
+import static Facade.Facade.altera_atendimento;
 import static Facade.Facade.buscaTodas_Categorias;
 import static Facade.Facade.buscaTodos_Atendimentos;
 import static Facade.Facade.buscaTodos_Atendimentos_abertos;
 import static Facade.Facade.buscaTodos_Produtos;
 import static Facade.Facade.busca_Atendimento;
 import static Facade.Facade.busca_Categoria;
+import static Facade.Facade.busca_Cliente;
 import static Facade.Facade.busca_Produtos;
 import static Facade.Facade.exclui_Categoria;
 import static Facade.Facade.exclui_Produtos;
@@ -20,7 +23,9 @@ import static Facade.Facade.insere_Categoria;
 import static Facade.Facade.insere_Produtos;
 import static Facade.Facade.retorna_valor;
 import classes.Atendimento;
+import classes.Cliente;
 import classes.Produto;
+import classes.Tipo_Atendimento;
 import classes.categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -293,9 +298,12 @@ public class FuncionarioServlet extends HttpServlet {
                             for(Atendimento x : atendiment){
                                 b.setTime(x.getAtendimento_data_hora());
                                 a.add(Calendar.DATE, - b.get(Calendar.DAY_OF_MONTH));
-                                if(a.get(Calendar.DAY_OF_MONTH) > 7){
+                                if((a.get(Calendar.DAY_OF_MONTH) > 7)&&(!x.getAtendimento_situacao().equals("Finalizado"))){
                                     out.println("mais que sete dias");
                                     x.setAtendimento_nivel(1);
+                                }
+                                else if(x.getAtendimento_situacao().equals("Finalizado")){
+                                    x.setAtendimento_nivel(2);
                                 }
                                 else{
                                     x.setAtendimento_nivel(0);
@@ -311,13 +319,33 @@ public class FuncionarioServlet extends HttpServlet {
                         }
                         case "resolucao":
                         {
+                            Cliente c = new Cliente();
+                            Produto p = new Produto();
+                            Tipo_Atendimento t = new Tipo_Atendimento();
                             String cod = request.getParameter("cod");
                             out.println(cod);
                             Atendimento atendimento = new Atendimento();
                             atendimento = busca_Atendimento(cod);
+                            c = busca_Cliente(atendimento.getAtendimento_cpf_cliente());
+                            p = busca_Produtos(atendimento.getAtendimento_cod_produto());
+                            t = BuscaTipo(atendimento.getAtendimento_cod_tipo_atendimento());
+                            request.setAttribute("tipo",t);
+                            request.setAttribute("produto",p);
+                            request.setAttribute("cliente",c);
                             request.setAttribute("atendimento",atendimento); 
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/resolucao-atendimento.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "finalizar":
+                        {
+                            String solucao = request.getParameter("solucao");
+                            String ids = request.getParameter("id");    
+                            int id = Integer.parseInt(ids);
+                            altera_atendimento(solucao, id);
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/FuncionarioServlet?action=todos_atendimentos");
                             rd.forward(request, response);
                             break;
                         }

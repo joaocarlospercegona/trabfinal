@@ -66,6 +66,9 @@
                                                 <td>${a.produto_nome}</td>
                                             </c:if>
                                         </c:forEach>
+                                    <c:if test="${x.atendimento_nivel == 2}">
+                                        <td style="color:green">${x.atendimento_situacao}</td>
+                                    </c:if>
                                     <c:if test="${x.atendimento_nivel == 1}">
                                         <td style="color:red">${x.atendimento_situacao}</td>
                                     </c:if>
@@ -106,6 +109,9 @@
                                                 <td>${a.produto_nome}</td>
                                             </c:if>
                                         </c:forEach>
+                                        <c:if test="${x.atendimento_nivel == 2}">
+                                            <td style="color:green">${x.atendimento_situacao}</td>
+                                        </c:if>
                                         <c:if test="${x.atendimento_nivel == 1}">
                                             <td style="color:red">${x.atendimento_situacao}</td>
                                         </c:if>

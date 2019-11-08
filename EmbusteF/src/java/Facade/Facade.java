@@ -16,6 +16,7 @@ import classes.Cliente;
 import classes.Funcionario;
 import classes.Gerente;
 import classes.Produto;
+import classes.Tipo_Atendimento;
 import classes.categoria;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +106,14 @@ public class Facade {
     }
 //------------------------------------------------------------------------------------------------
 //ATENDIMENTO
+    public static Tipo_Atendimento BuscaTipo(int id){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        return dao.findt(id);
+    }
+    public static void altera_atendimento(String solucao, int id){ 
+        AtendimentoDAO dao = new AtendimentoDAO();
+        dao.edit(solucao, id); 
+    }
     public static List<Atendimento> buscaTodos_Atendimentos_abertos(){
         AtendimentoDAO dao = new AtendimentoDAO();
         List<Atendimento> c = dao.findEntities(true,100,1);

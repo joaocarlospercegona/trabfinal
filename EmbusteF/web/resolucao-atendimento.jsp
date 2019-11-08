@@ -28,12 +28,19 @@
         <div class='caixa relatorio'>
             <div class='conteudo'>
                 <h1>Atendimento</h1>
-                <p>CPF - Cliente: ${atendimento.cpf_cliente}</p>
-                <p>Data: ${atendimento.data_hora}</p>
-                <p>Situação: ${atendimento.situacao}</p>
-                <p>Descrição: ${atendimento.descricao}</p>
-<!--            fazer um campo de texto para solução-->
-                <a href="FuncionarioServlet?action=finalizar"><button type='submit' class='btn btn-primary margem'>Fechar atendimento</button></a>
+                <p>Código: ${atendimento.atendimento_codigo}</p>
+                <p>Data: ${atendimento.atendimento_data_hora}</p>
+                <p>Cliente: ${cliente.cliente_nome}</p>
+                <p>CPF:  ${atendimento.atendimento_cpf_cliente}</p>
+                <p>Situação: ${atendimento.atendimento_situacao}</p>
+                <p>Produto:  ${produto.produto_nome}</p>
+                <p>Tipo-Atendimento: ${tipo.tipo_atendimento_nome} </p>
+                <p>Descrição: ${atendimento.atendimento_descricao}</p>
+                <h3>Solução:</h3>
+                <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
+                    <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
+                    <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
+                </form>
                 <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
             </div>
         </div>  

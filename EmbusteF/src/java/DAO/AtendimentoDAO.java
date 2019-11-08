@@ -6,6 +6,7 @@
 package DAO;
 
 import classes.Atendimento;
+import classes.Tipo_Atendimento;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,6 +25,27 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
     public AtendimentoDAO(java.sql.Connection con) {
         setConnection(con);
+    }
+    
+    public void edit(String solucao, int id) {
+        java.sql.PreparedStatement ps = null;
+      String sql = "UPDATE atendimento SET atendimento_solucao = ?, atendimento_situacao = 'Finalizado' where atendimento_codigo = ?";
+
+        try {
+            ps = getConnection().prepareStatement(sql);
+            
+            ps.setString(1, solucao);
+            ps.setInt(2, id);
+            
+            if (ps.executeUpdate() == 0) {
+                log.warning(ps.toString() + " not updated.");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(ps);
+        }
     }
     
     public List<Atendimento> findEntities(boolean all, int maxResults, int firstResult) {
@@ -101,7 +123,32 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
         }
         return p;
     }
+     
+     public Tipo_Atendimento findt(int cod) {
+        Tipo_Atendimento p = null;
 
+        java.sql.PreparedStatement ps = null;
+        java.sql.ResultSet rs = null;
+        String sql = "SELECT * from tipo_atendimento where tipo_atendimento_codigo = ?";
+
+        try {
+            ps = getConnection().prepareStatement(sql);
+            ps.setInt(1, cod);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                  p = new Tipo_Atendimento();
+                  p.setTipo_atendimento_codigo(rs.getInt("tipo_atendimento_codigo"));
+                  p.setTipo_atendimento_nome(rs.getString("tipo_atendimento_nome"));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return p;
+    }
     
     @Override
     public void create(Atendimento vo) {
