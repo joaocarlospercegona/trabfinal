@@ -23,7 +23,7 @@
     </head>
     <body>
             <c:if test="${logado == null}">
-                <jsp:forward page="index.jsp"> 
+                <jsp:forward page="login.jsp"> 
                     <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
                 </jsp:forward>
             </c:if>
@@ -41,7 +41,7 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                     Sair
                 </button>
             </div>

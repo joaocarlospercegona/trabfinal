@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import static Facade.Facade.BuscaTipo;
 import static Facade.Facade.BuscaTodos_Tipos;
 import static Facade.Facade.altera_Cliente;
 import static Facade.Facade.buscaTodas_Categorias;
@@ -12,6 +13,7 @@ import static Facade.Facade.buscaTodos_Atendimentos;
 import static Facade.Facade.buscaTodos_Produtos;
 import static Facade.Facade.busca_Atendimento;
 import static Facade.Facade.busca_Cliente;
+import static Facade.Facade.busca_Produtos;
 import static Facade.Facade.exclui_Atendimento;
 import static Facade.Facade.insere_Cliente;
 import static Facade.Facade.insere_atendimento;
@@ -204,7 +206,15 @@ public class ClienteServlet extends HttpServlet {
                             Atendimento a = busca_Atendimento(cod);
                             request.setAttribute("atendimento", a);
                             request.setAttribute("clien", "cliente");
-                            //olhar a servlet gerente para terminar aqui
+                            Cliente c = new Cliente(); 
+                            c = busca_Cliente(a.getAtendimento_cpf_cliente());
+                            Produto p = new Produto();
+                            p = busca_Produtos(a.getAtendimento_cod_produto());
+                            Tipo_Atendimento t = new Tipo_Atendimento();
+                            t = BuscaTipo(a.getAtendimento_cod_tipo_atendimento());
+                            request.setAttribute("tipo",t);
+                            request.setAttribute("produto",p);
+                            request.setAttribute("cliente",c);
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/resolucao-atendimento.jsp");
                             rd.forward(request, response);

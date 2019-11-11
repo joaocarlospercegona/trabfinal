@@ -17,7 +17,7 @@
     </head>
     <body>
         <c:if test="${logado == null}">
-            <jsp:forward page="index.jsp"> 
+            <jsp:forward page="login.jsp"> 
                 <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
             </jsp:forward>
         </c:if>  
@@ -36,7 +36,7 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                     Sair
                 </button>
             </div>
@@ -66,7 +66,14 @@
                                             <td>${a.produto_nome}</td>    
                                         </c:if>
                                     </c:forEach>
-                                    <td>${x.atendimento_situacao}</td>
+                                            
+                                    <c:if test="${x.atendimento_situacao.equals('Em aberto')}">
+                                        <td style="color:yellow">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                    <c:if test="${x.atendimento_situacao.equals('Finalizado')}">
+                                        <td style="color:green">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                        
                                     <td><a href="ClienteServlet?action=ver_atendimento&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
                                     <c:if test="${x.atendimento_nivel == 1}">
                                         <td><img src="exclui.png" width=45 height=40></a></td>

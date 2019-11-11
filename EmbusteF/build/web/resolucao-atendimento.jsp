@@ -15,13 +15,18 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body>
+        <c:if test="${logado == null}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>  
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
 
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                     Sair
                 </button>
             </div>
@@ -44,7 +49,12 @@
                         <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
                     </form>
                 </c:if>
-                <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
+                <c:if test="${clien.equals('cliente')}">
+                    <a href="ClienteServlet?action=Listagem_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
+                </c:if>
+                <c:if test="${!clien.equals('cliente')}">
+                    <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
+                </c:if>
             </div>
         </div>  
         <footer>
