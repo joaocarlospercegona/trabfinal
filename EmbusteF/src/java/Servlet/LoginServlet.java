@@ -13,6 +13,7 @@ import classes.Atendimento;
 import classes.Cliente;
 import classes.Funcionario;
 import classes.Gerente;
+import classes.LoginBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -58,11 +59,12 @@ public class LoginServlet extends HttpServlet {
                         List<Cliente> lista = buscaTodos_Cliente();
                         for (Cliente x: lista) {
                             if(usuario.equals(x.getCliente_email())&&(senha.equals(x.getCliente_senha()))){
-                                session.setAttribute("cpf_logado", x.getCliente_cpf());
-                                //List<Atendimento> ListaAtendimentos = buscaTodos_Atendimentos_Cliente(x.getCliente_cpf()); 
-                                //request.setAttribute("Atendimentos",ListaAtendimentos);
+                                LoginBean p = new LoginBean();
+                                p.setCpf(x.getCliente_cpf());
+                                p.setNome(x.getCliente_nome());
+                                session.setAttribute("logado", p);
                                 RequestDispatcher rd = getServletContext().
-                                    getRequestDispatcher("/cliente-meus-atendimentos.jsp");
+                                    getRequestDispatcher("/ClienteServlet?action=Listagem_atendimentos");
                                 rd.forward(request, response);
                             }
                         }
@@ -78,8 +80,10 @@ public class LoginServlet extends HttpServlet {
                         List<Funcionario> lista = buscaTodos_Funcionario();
                         for (Funcionario x: lista) {
                             if(usuario.equals(x.getFuncionario_email())&&(senha.equals(x.getFuncionario_senha()))){
-//                                List<Atendimento> ListaAtendimentos = buscaTodos_Atendimentos();
-//                                request.setAttribute("ListaAtendimentos", ListaAtendimentos);
+                                LoginBean p = new LoginBean();
+                                p.setCpf(x.getFuncionario_cpf());
+                                p.setNome(x.getFuncionario_nome());
+                                session.setAttribute("logado", p);
                                 RequestDispatcher rd = getServletContext().
                                     getRequestDispatcher("/FuncionarioServlet?action=todos_atendimentos");
                                 rd.forward(request, response);
@@ -97,8 +101,10 @@ public class LoginServlet extends HttpServlet {
                         List<Gerente> lista = buscaTodos_Gerente();
                         for (Gerente x: lista) {
                             if(usuario.equals(x.getGerente_email())&&(senha.equals(x.getGerente_senha()))){
-//                                List<Atendimento> ListaAtendimentos = buscaTodos_Atendimentos();
-//                                request.setAttribute("ListaAtendimentos", ListaAtendimentos);
+                                LoginBean p = new LoginBean();
+                                p.setCpf(x.getGerente_cpf());
+                                p.setNome(x.getGerente_nome());
+                                session.setAttribute("logado", p);
                                 RequestDispatcher rd = getServletContext().
                                     getRequestDispatcher("/GerenteServlet?action=atendimentos_abertos");
                                 rd.forward(request, response);

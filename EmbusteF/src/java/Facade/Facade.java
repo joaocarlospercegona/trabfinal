@@ -110,6 +110,11 @@ public class Facade {
         AtendimentoDAO dao = new AtendimentoDAO();
         return dao.findt(id);
     }
+    public static List<Tipo_Atendimento> BuscaTodos_Tipos(){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        List<Tipo_Atendimento> c = dao.findEntitiest(true,100,1);
+        return c;
+    }
     public static void altera_atendimento(String solucao, int id){ 
         AtendimentoDAO dao = new AtendimentoDAO();
         dao.edit(solucao, id); 
@@ -142,6 +147,16 @@ public class Facade {
             }
         }
         return a;
+    }
+     public static void insere_atendimento(Atendimento a){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        dao.create(a);
+    }
+     
+    public static void exclui_Atendimento(String cod){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        int codd = Integer.parseInt(cod);
+        dao.destroy(codd);
     }
 //-----------------------------------------------------------------------------------------------
 //CATEGORIAS

@@ -5,12 +5,34 @@
  */
 package Servlet;
 
+import static Facade.Facade.BuscaTodos_Tipos;
 import static Facade.Facade.altera_Cliente;
+import static Facade.Facade.buscaTodas_Categorias;
+import static Facade.Facade.buscaTodos_Atendimentos;
+import static Facade.Facade.buscaTodos_Produtos;
+import static Facade.Facade.busca_Atendimento;
 import static Facade.Facade.busca_Cliente;
+import static Facade.Facade.exclui_Atendimento;
 import static Facade.Facade.insere_Cliente;
+import static Facade.Facade.insere_atendimento;
+import classes.Atendimento;
 import classes.Cliente;
+import classes.LoginBean;
+import classes.Produto;
+import classes.Tipo_Atendimento;
+import classes.categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,17 +58,20 @@ public class ClienteServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-           // String logado = (String) session.getAttribute("logado");
-            String cpf = (String) session.getAttribute("cpf_logado");
-            //FAZER O IF DE LOGADO NOVAMENTE
-            
-            
-            //TRAZER O CASE NEW AQUI PRA CIMA
+            LoginBean logado = (LoginBean) session.getAttribute("logado");
             String action = request.getParameter("action");
+            String cpf = logado.getCpf();
+            if((logado == null)&&(!action.equals("cadastro_cliente"))){
+                request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
+                RequestDispatcher rd = getServletContext().
+                    getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
+            else{
                 if(action != null){
                     switch (action){
                         case "cadastro_cliente":
@@ -116,12 +141,35 @@ public class ClienteServlet extends HttpServlet {
                             }
                             break;
                         }
+                        case "cadastrando_atendimento":
+                        {
+                            int produto = Integer.parseInt(request.getParameter("produto"));
+                            int tipoA = Integer.parseInt(request.getParameter("tipoA"));
+                            Atendimento a = new Atendimento();
+                            a.setAtendimento_cod_produto(produto);
+                            a.setAtendimento_cod_tipo_atendimento(tipoA);
+                            a.setAtendimento_cpf_cliente(logado.getCpf());
+                            Date data = new Date();
+                            SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
+                            String dataS = formatador.format(data);
+                            data = formatador.parse(dataS);
+                            a.setAtendimento_data_hora(data);
+                            a.setAtendimento_descricao(request.getParameter("descricao"));
+                            a.setAtendimento_situacao("Em aberto");
+                            insere_atendimento(a);
+                            RequestDispatcher rd = getServletContext().
+                                getRequestDispatcher("/ClienteServlet?action=Listagem_atendimentos");
+                            rd.forward(request, response);
+                            break;
+                        }
                         case "novo_atendimento":
                         {       
-                                //Precisa trazer todos os DADOS DE CATEGORIA
-                                //Precisa trazer todos os produtos de todas a categorias
-                                //Ver sobre os tipos de atendimentos ... 
-                                
+                                List<Produto> prod = buscaTodos_Produtos();
+                                request.setAttribute("produtos",prod);
+                                List<categoria> cat = buscaTodas_Categorias();
+                                request.setAttribute("categorias",cat);
+                                List<Tipo_Atendimento> tipo = BuscaTodos_Tipos();
+                                request.setAttribute("tipos_atendimentos",tipo);
                                 RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/cliente-novo-atendimento.jsp");
                                 rd.forward(request, response);
@@ -129,13 +177,53 @@ public class ClienteServlet extends HttpServlet {
                         }
                         case "Listagem_atendimentos":
                         {
-                            //vai ter q buscar no bando de dados os atendimentos.
+                            List<Atendimento> atendimentos = new ArrayList();
+                            List<Atendimento> atendiment = buscaTodos_Atendimentos();
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            
+                            for(Atendimento x : atendiment){
+                                if(x.getAtendimento_situacao().equals("Finalizado")){
+                                    x.setAtendimento_nivel(1);
+                                }
+                                else if(x.getAtendimento_situacao().equals("Em aberto")){
+                                    x.setAtendimento_nivel(0);
+                                }
+                                atendimentos.add(x);
+                            }
+                            out.println(atendimentos);
+                            request.setAttribute("atendimentos", atendimentos);
+                            RequestDispatcher rd = getServletContext().
+                                getRequestDispatcher("/cliente-meus-atendimentos.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "ver_atendimento":
+                        {
+                            String cod = request.getParameter("cod");
+                            Atendimento a = busca_Atendimento(cod);
+                            request.setAttribute("atendimento", a);
+                            request.setAttribute("clien", "cliente");
+                            //olhar a servlet gerente para terminar aqui
+                            RequestDispatcher rd = getServletContext().
+                                getRequestDispatcher("/resolucao-atendimento.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "remover_atendimento":
+                        {
+                            String cod = request.getParameter("cod");
+                            exclui_Atendimento(cod);
+                            RequestDispatcher rd = getServletContext().
+                                getRequestDispatcher("/ClienteServlet?action=Listagem_atendimentos");
+                            rd.forward(request, response);
                             break;
                         }
                     }
                 
             }
             }
+    }
     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -150,7 +238,11 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -164,7 +256,11 @@ public class ClienteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

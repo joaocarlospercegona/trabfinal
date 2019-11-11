@@ -24,6 +24,7 @@ import static Facade.Facade.insere_Produtos;
 import static Facade.Facade.retorna_valor;
 import classes.Atendimento;
 import classes.Cliente;
+import classes.LoginBean;
 import classes.Produto;
 import classes.Tipo_Atendimento;
 import classes.categoria;
@@ -62,9 +63,16 @@ public class FuncionarioServlet extends HttpServlet {
              PrintWriter out = response.getWriter();
              response.setContentType("text/html;charset=UTF-8");
              HttpSession session = request.getSession();
-             String logado = (String) session.getAttribute("logado");
-            
-                String action = request.getParameter("action");
+            LoginBean logado = (LoginBean) session.getAttribute("logado");
+            String action = request.getParameter("action");
+            String cpf = logado.getCpf();
+            if(logado == null){
+                request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
+                RequestDispatcher rd = getServletContext().
+                    getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
+            else{
                 if(action != null){
                     switch (action){  
                         case "painel_cadastro":
@@ -350,7 +358,7 @@ public class FuncionarioServlet extends HttpServlet {
                             break;
                         }
                     }
-                
+                }
         
             }
     }

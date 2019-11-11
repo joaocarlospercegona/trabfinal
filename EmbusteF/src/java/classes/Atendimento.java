@@ -5,6 +5,7 @@
  */
 package classes;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -114,7 +115,6 @@ public class Atendimento {
     public String toString() {
         return "Atendimento{" + "atendimento_codigo=" + atendimento_codigo + ", atendimento_data_hora=" + atendimento_data_hora + ", atendimento_cpf_cliente=" + atendimento_cpf_cliente + ", atendimento_situacao=" + atendimento_situacao + ", atendimento_cod_produto=" + atendimento_cod_produto + ", atendimento_cod_tipo_atendimento=" + atendimento_cod_tipo_atendimento + ", atendimento_descricao=" + atendimento_descricao + ", atendimento_solucao=" + atendimento_solucao + ", atendimento_nivel=" + atendimento_nivel + '}';
     }
-
     
     
     

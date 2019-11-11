@@ -1,9 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estatica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>
@@ -14,13 +15,18 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body>
+            <c:if test="${logado == null}">
+                <jsp:forward page="index.jsp"> 
+                    <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+                </jsp:forward>
+            </c:if>
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
                 <button id='novo-tab' class='tab selected'>
                     Novo atendimento
                 </button>
-                <button id='historico-tab' class='tab' onclick="location.href = 'cliente-meus-atendimentos.html';">
+                <button id='historico-tab' class='tab' onclick="location.href = 'ClienteServlet?action=Listagem_atendimentos';">
                     Meus atendimentos
                 </button>
                 <button id='alterar-tab' class='tab' onclick="location.href = 'ClienteServlet?action=alterar_dados';">
@@ -28,38 +34,29 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
                     Sair
                 </button>
             </div>
         </header>
         <div class='caixa cadastro'>
             <div class='conteudo'>
-                <h1>InformaÃ§Ãµes sobre o atendimento</h1>
-                <form method='post' action='Servlet'>
-                    <select required class='form-control campo1'>
-                        <option disabled selected hidden>Categoria</option>
-                        <option>Maquiagem</option>
-                        <option>Perfume</option>
-                        <option>Batom</option>
-                        <option>Cremes</option>
-                    </select>
-                    <select required class='form-control campo1'>
+                <h1>Informações sobre o atendimento</h1>
+                <form method='post' action='ClienteServlet?action=cadastrando_atendimento'>
+                    <select name="produto" required class='form-control campo1'>
                         <option disabled selected hidden>Produto</option>
-                        <option>Beibe mozao</option>
-                        <option>Beibe eu sou a diva</option>
-                        <option>Beibe arrasou miga</option>
-                        <option>Beibe sua loka</option>
+                        <c:forEach items="${produtos}" var="p">
+                            <option name="produto" value="${p.produto_codigo}">${p.produto_nome}</option>
+                        </c:forEach>
                     </select>
-                    <select required class='form-control campo0'>
+                    <select name="tipoA" required class='form-control campo1'>
                         <option disabled selected hidden>Tipo de atendimento</option>
-                        <option>ReclamaÃ§Ã£o</option>
-                        <option>Efeito colateral</option>
-                        <option>DevoluÃ§Ã£o</option>
-                        <option>Troca</option>
+                        <c:forEach items="${tipos_atendimentos}" var="t">
+                            <option name="tipoA" value="${t.tipo_atendimento_codigo}">${t.tipo_atendimento_nome}</option>
+                        </c:forEach>
                     </select>
                     <div class='form-group green-border-focus'>
-                        <textarea class='form-control campo0'rows='10' placeholder='DescriÃ§Ã£o'></textarea>
+                        <textarea class='form-control campo0'rows='10' name="descricao" placeholder='Descrição'></textarea>
                     </div>      
                     <button type='submit' class='btn btn-primary margem'>Solicitar atendimento</button>
                 </form>

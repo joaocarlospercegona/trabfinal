@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
@@ -37,10 +38,12 @@
                 <p>Tipo-Atendimento: ${tipo.tipo_atendimento_nome} </p>
                 <p>Descrição: ${atendimento.atendimento_descricao}</p>
                 <h3>Solução:</h3>
-                <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
-                    <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
-                    <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
-                </form>
+                <c:if test="${!clien.equals('cliente')}">
+                    <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
+                        <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
+                        <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
+                    </form>
+                </c:if>
                 <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
             </div>
         </div>  

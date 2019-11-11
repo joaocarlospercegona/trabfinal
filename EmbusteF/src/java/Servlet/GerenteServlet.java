@@ -24,6 +24,7 @@ import classes.Atendimento;
 import classes.Cliente;
 import classes.Funcionario;
 import classes.Gerente;
+import classes.LoginBean;
 import classes.Pessoa;
 import classes.Produto;
 import classes.categoria;
@@ -63,8 +64,16 @@ public class GerenteServlet extends HttpServlet {
              PrintWriter out = response.getWriter();
              response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-            //String logado = (String) session.getAttribute("logado");
-                String action = request.getParameter("action");
+            LoginBean logado = (LoginBean) session.getAttribute("logado");
+            String action = request.getParameter("action");
+            String cpf1 = logado.getCpf();
+            if(logado == null){
+                request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
+                RequestDispatcher rd = getServletContext().
+                    getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
+            else{
                 if(action != null){
                     switch (action){ 
                         case "listar":
@@ -410,7 +419,7 @@ public class GerenteServlet extends HttpServlet {
                         
                     }
                 }
-        
+            }
             
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

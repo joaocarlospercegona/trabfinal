@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
@@ -21,13 +22,18 @@
         </script>
     </head>
     <body>
+            <c:if test="${logado == null}">
+                <jsp:forward page="index.jsp"> 
+                    <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+                </jsp:forward>
+            </c:if>
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
                 <button id='novo-tab' class='tab' onclick="location.href = 'cliente-novo-atendimento.jsp';">
                     Novo atendimento
                 </button>
-                <button id='historico-tab' class='tab' onclick="location.href = 'cliente-meus-atendimentos.jsp';">
+                <button id='historico-tab' class='tab' onclick="location.href = 'ClienteServlet?action=Listagem_atendimentos';">
                     Meus atendimentos
                 </button>
                 <button id='alterar-tab' class='tab selected'>

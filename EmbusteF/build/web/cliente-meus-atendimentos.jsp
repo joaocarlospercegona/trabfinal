@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,10 +16,16 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body>
+        <c:if test="${logado == null}">
+            <jsp:forward page="index.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>  
+
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>        
-                <button id='novo-tab' class='tab' onclick="location.href = 'cliente-novo-atendimento.jsp';">
+                <button id='novo-tab' class='tab' onclick="location.href = 'ClienteServlet?action=novo_atendimento';">
                     Novo atendimento
                 </button>        
                 <button id='historico-tab' class='tab selected'>
@@ -36,45 +43,41 @@
         </header>
         <div class='caixa tabela'>
             <div class='conteudo'>
-                <h1>HistÃ³rico</h1>
+                <h1>Histórico</h1>
                 <table class='table table-hover'>
                     <thead class='black white-text'>
                         <tr>
                             <td scope='col'>#</td>
                             <td>Data</td>
                             <td>Produto</td>
-                            <td>SituaÃ§Ã£o</td>
+                            <td>Situação</td>
+                            <td>Observar</td>
+                            <td>Remover</td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope='row'>1</td>
-                            <td>30/09/2019 - 14:04</td>
-                            <td>Batom</td>
-                            <td style="color: darkorange">NÃ£o resolvido</td>
-                        </tr>
-                        <tr>
-                            <td scope='row'>2</td>
-                            <td>26/09/2019 - 12:54</td>
-                            <td>Base</td>
-                            <td style="color: darkorange">NÃ£o resolvido</td>
-                        </tr>
-                        <tr>
-                            <td scope='row'>3</td>
-                            <td>23/09/2019 - 08:27</td>
-                            <td>LÃ¡pis de Olho</td>
-                            <td style="color: red"> NÃ£o Resolvido</td>
-                        </tr>
-                        <tr>
-                            <td scope='row'>4</td>
-                            <td>22/09/2019 - 07:47</td>
-                            <td>Sombra</td>
-                            <td style="color:green">Resolvido</td>
-                        </tr>
+                        <c:set var="i" value="0"/>
+                            <c:forEach items="${atendimentos}" var="x">
+                                <tr>
+                                    <td scope='row'>${i = i+1}</td>
+                                    <td>${x.atendimento_data_hora}</td>
+                                    <c:forEach items="${produtos}" var="a">
+                                        <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
+                                            <td>${a.produto_nome}</td>    
+                                        </c:if>
+                                    </c:forEach>
+                                    <td>${x.atendimento_situacao}</td>
+                                    <td><a href="ClienteServlet?action=ver_atendimento&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
+                                    <c:if test="${x.atendimento_nivel == 1}">
+                                        <td><img src="exclui.png" width=45 height=40></a></td>
+                                    </c:if>
+                                    <c:if test="${x.atendimento_nivel == 0}">
+                                        <td><a href="ClienteServlet?action=remover_atendimento&cod=${x.atendimento_codigo}"><img src="exclui.png" width=45 height=40 ></a></td>
+                                    </c:if>
+                                </tr>
+                            </c:forEach>
                     </tbody>
                 </table>
-                <button type='submit' class='btn btn-primary margem'>Visualizar/Alterar</button>
-                <button type='submit' class='btn btn-danger margem'>Remover</button>
             </div>  
         </div>
     </body>

@@ -7,6 +7,7 @@ package DAO;
 
 import classes.Atendimento;
 import classes.Tipo_Atendimento;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
@@ -91,6 +92,44 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
         return result;
 
     }
+    public List<Tipo_Atendimento> findEntitiest(boolean all, int maxResults, int firstResult) {
+        List<Tipo_Atendimento> result = null;
+      java.sql.PreparedStatement ps = null;
+      java.sql.ResultSet rs = null;
+
+        try {
+          verificaConexao();
+          ps = conn.prepareStatement("select * from tipo_atendimento");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                result = new java.util.ArrayList<Tipo_Atendimento>();
+                if (!all) {
+                    int contagem = 1;  // primeiro next
+                    while (contagem < firstResult) {
+                        rs.next();
+                        contagem++;
+                    }
+                }
+                do {
+                  Tipo_Atendimento p = new Tipo_Atendimento();
+                  p.setTipo_atendimento_codigo(rs.getInt("tipo_atendimento_codigo"));
+                  p.setTipo_atendimento_nome(rs.getString("tipo_atendimento_nome"));
+                  
+                  result.add(p);
+                } while ((result.size() < maxResults || all) && rs.next());
+            }
+
+        } catch (java.sql.SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return result;
+
+    }
     
      public Atendimento find(String cod) {
         Atendimento p = null;
@@ -151,8 +190,33 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
     }
     
     @Override
-    public void create(Atendimento vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void create(Atendimento a) {
+        java.sql.PreparedStatement ps = null;
+      java.sql.ResultSet rs = null;
+      String sql = "INSERT INTO atendimento (atendimento_data_hora, atendimento_cpf_cliente, atendimento_situacao, atendimento_cod_produto, atendimento_cod_tipo_atendimento, atendimento_descricao) VALUES (?,?,?,?,?,?)";
+
+        try {
+            ps = getConnection().prepareStatement(sql);
+            
+            ps.setDate(1, new java.sql.Date(a.getAtendimento_data_hora().getTime()));
+            ps.setString(2, a.getAtendimento_cpf_cliente());
+            ps.setString(3, a.getAtendimento_situacao());
+            ps.setInt(4, a.getAtendimento_cod_produto());
+            ps.setInt(5, a.getAtendimento_cod_tipo_atendimento());
+            ps.setString(6, a.getAtendimento_descricao());
+            
+            if (ps.executeUpdate() == 0) {
+                log.warning(ps.toString() + " not inserted.");
+            } else {
+                rs = ps.getGeneratedKeys();
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(ps);
+        }
+
     }
 
     @Override
@@ -162,12 +226,26 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
     @Override
     public void destroy(Atendimento obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        destroy( obj.getAtendimento_codigo());
     }
 
-    @Override
-    public void destroy(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void destroy(int id) {
+        java.sql.PreparedStatement ps = null;
+      String sql = "delete from atendimento where atendimento_codigo = ?";
+
+      try {
+          ps = getConnection().prepareStatement(sql);
+          ps.setInt(1, id);
+          if (ps.executeUpdate() == 0) {
+              log.warning(ps.toString() + " not deleted.");
+          }
+      } catch (SQLException ex) {
+          ex.printStackTrace();
+          //log.severe("", ex);
+      } finally {
+          JDBCUtils.close(ps);
+      }
     }
 
     @Override
@@ -187,6 +265,11 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
     @Override
     public int getCount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void destroy(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
