@@ -77,10 +77,12 @@ public class FuncionarioServlet extends HttpServlet {
                     switch (action){  
                         case "painel_cadastro":
                         {
+                            String msg = (String) request.getAttribute("msg");
                             List<categoria> categorias = buscaTodas_Categorias();
                             out.println(categorias);
                             request.setAttribute("cat",categorias);
                             request.setAttribute("func","categoria");
+                            request.setAttribute("msgC",msg);
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cadastro.jsp");
                              rd.forward(request, response);
@@ -214,14 +216,17 @@ public class FuncionarioServlet extends HttpServlet {
                             rd.forward(request, response);
                             break;
                         }
-                        case "vizualizar_categoria":
+                        case "visualizar_categoria":
                         {
                             String idd = request.getParameter("id");
                             int id = Integer.parseInt(idd);
                             categoria categoria = new categoria();
+                            
                             categoria = busca_Categoria(id);
                             request.setAttribute("func","visualizar");
                             request.setAttribute("categoria", categoria);
+                            out.println("cat:" + categoria);
+                            
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cad-categ.jsp");
                             rd.forward(request, response);
@@ -247,7 +252,8 @@ public class FuncionarioServlet extends HttpServlet {
                         {
                             String idd = request.getParameter("id");
                             int id = Integer.parseInt(idd);
-                            exclui_Categoria(id);
+                            String msg = exclui_Categoria(id);
+                            request.setAttribute("msg",msg);
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/FuncionarioServlet?action=painel_cadastro");
                             rd.forward(request, response);

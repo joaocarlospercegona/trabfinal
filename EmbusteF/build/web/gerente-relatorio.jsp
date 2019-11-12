@@ -18,14 +18,14 @@
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
-                <button id='pessoas-tab' class='tab' onclick="location.href = 'gerente-funcionarios.jsp';">
-                    Funcionários
+                <button id='pessoas-tab' class='tab' onclick="location.href = 'GerenteServlet?action=listar';">
+                    Funcionarios
                 </button>
-                <button id='atendimentos-tab' class='tab' onclick="location.href = 'gerente-atendimento.jsp';">
+                <button id='atendimentos-tab' class='tab' onclick="location.href = 'GerenteServlet?action=atendimentos_abertos';">
                     Atendimentos
                 </button>
                 <button id='relatorios-tab' class='tab selected'>
-                    Relatórios
+                    Relatorios
                 </button>
             </div>
             <div id='session'>

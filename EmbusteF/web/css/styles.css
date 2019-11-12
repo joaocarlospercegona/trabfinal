@@ -171,3 +171,8 @@ label{
 thead{
     font-weight: bold;
 }
+
+.erro-msg{
+    color:red;
+    text-align: center;
+}

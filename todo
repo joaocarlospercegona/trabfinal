@@ -1,0 +1,12 @@
+O que falta:
+	Consertar sessions
+	Mostrar mensagem quando não for possível deletar
+	Fazer estados e cidades
+	Tratamento de erros
+	Se atendimento finalizado, mostrar a solução
+	Mudar botões CRUD para imagem
+	Botão voltar em tudo
+	Remover gerente/funcionario
+	Confirm nas remoções
+	Exceções
+	Não possibilitar solução para gerente 

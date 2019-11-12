@@ -10,7 +10,7 @@
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estetica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>    
@@ -54,8 +54,8 @@
             <div class='caixa cadastro'>
                 <div class='conteudo'>
                     <h1>Cadastro de Categoria</h1>
-                    <form method='post' action="FuncionarioServlet?action=alterando_categoria&idc=${categoria_codigo}">          
-                        <input type='text'  class='form-control campo0' id='nome' name='nome' value="${categoria_nome}" placeholder='Nome categoria'> <br>            
+                    <form method='post' action="FuncionarioServlet?action=alterando_categoria&idc=${categoria.categoria_codigo}">          
+                        <input type='text'  class='form-control campo0' id='nome' name='nome' value="${categoria.categoria_nome}" placeholder='Nome categoria'> <br>            
                         <button type='submit' class='btn btn-primary margem'>Alterar</button>
                     </form>
                 </div>
@@ -66,7 +66,7 @@
                 <div class='conteudo'>
                     <h1>Cadastro de Categoria</h1>
                     <form method='post' action="FuncionarioServlet?action=painel_cadastro">          
-                        <input type='text'  class='form-control campo0' id='nome' name='nome' disabled  value="${categoria_nome}" placeholder='Nome categoria'> <br>            
+                        <input type='text'  class='form-control campo0' id='nome' name='nome' disabled  value="${categoria.categoria_nome}" placeholder='Nome categoria'> <br>            
                         <button type='submit' class='btn btn-primary margem'>Voltar</button>
                     </form>
                 </div>

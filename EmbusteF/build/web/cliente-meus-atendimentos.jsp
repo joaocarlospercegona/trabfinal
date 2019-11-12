@@ -79,7 +79,7 @@
                                         <td><img src="exclui.png" width=45 height=40></button></td>
                                     </c:if>
                                     <c:if test="${x.atendimento_nivel == 0}">
-                                        <td><a onclick="confirmaDelete(${x.atendimento_codigo})"><img src="exclui.png" width=45 height=40 ></a></td>
+                                        <td><a onclick="confirmaDeleteAte(${x.atendimento_codigo})"><img src="exclui.png" width=45 height=40 ></a></td>
                                     </c:if>
                                 </tr>
                             </c:forEach>

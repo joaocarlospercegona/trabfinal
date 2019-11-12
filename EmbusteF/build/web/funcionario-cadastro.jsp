@@ -4,7 +4,7 @@
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estetica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>    
@@ -20,6 +20,10 @@
                 
 
             }
+function funcao1(msg)
+{
+    alert(msg);
+}
         </script>
     </head>
     <body>
@@ -39,12 +43,12 @@
                 </button>
             </div>
         </header> 
+        <h4 style="color:red; text-align: center">${msgC}</h4>
         <div class='caixa cadastro'>
             <div class='conteudo'>
                 <c:if test="${func == 'categoria'}" >
-                <h1>Categorias Cadastradas</h1>
-               
-                
+                    <h1>Categorias Cadastradas</h1>    
+                    
                 <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
                     <option value="FuncionarioServlet?action=painel_cadastro">Categorias</option>
                     <option value="FuncionarioServlet?action=ver_produtos">Produtos</option>
@@ -56,19 +60,20 @@
                         <tr>
                             <td scope='col'>#</td>
                             <td>Nome</td>
-                            <td>Vizualizar</td>
+                            <td>Visualizar</td>
                             <td>Editar</td>
                             <td>Remover</td>
                         </tr>
                     </thead>
                     <tbody>
+                        <c:set var="k" value="0"></c:set>
                         <c:forEach items="${cat}" var="c">
                             <tr>
-                                <td scope='row'>1</td>
+                                <td scope='row'>${k = k+1}</td>
                                 <td>${c.categoria_nome}</td>
                                 <td width="50"><a href="FuncionarioServlet?action=visualizar_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
                                 <td width="50"><a href="FuncionarioServlet?action=alterar_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a href="FuncionarioServlet?action=remover_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td width="50"><a onclick="confirmaDeleteCat(${c.categoria_codigo})"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -95,13 +100,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <c:set var="i" value="0"></c:set>
                         <c:forEach items="${prod}" var="c">
                             <tr>
-                                <td scope='row'>1</td>
+                                <td scope='row'>${i = i+1}</td>
                                 <td>${c.produto_nome}</td>
                                 <td width="50"><a href="FuncionarioServlet?action=visualizar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
                                 <td width="50"><a href="FuncionarioServlet?action=alterar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a href="FuncionarioServlet?action=remover_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td width="50"><a onclick="confirmaDeleteProd(${c.produto_codigo})"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

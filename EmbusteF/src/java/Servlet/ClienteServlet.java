@@ -10,6 +10,7 @@ import static Facade.Facade.BuscaTodos_Tipos;
 import static Facade.Facade.altera_Cliente;
 import static Facade.Facade.buscaTodas_Categorias;
 import static Facade.Facade.buscaTodos_Atendimentos;
+import static Facade.Facade.buscaTodos_Atendimentos_Cliente;
 import static Facade.Facade.buscaTodos_Produtos;
 import static Facade.Facade.busca_Atendimento;
 import static Facade.Facade.busca_Cliente;
@@ -67,6 +68,7 @@ public class ClienteServlet extends HttpServlet {
             LoginBean logado = (LoginBean) session.getAttribute("logado");
             String action = request.getParameter("action");
             String cpf = logado.getCpf();
+            
             if((logado == null)&&(!action.equals("cadastro_cliente"))){
                 request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
                 RequestDispatcher rd = getServletContext().
@@ -180,7 +182,7 @@ public class ClienteServlet extends HttpServlet {
                         case "Listagem_atendimentos":
                         {
                             List<Atendimento> atendimentos = new ArrayList();
-                            List<Atendimento> atendiment = buscaTodos_Atendimentos();
+                            List<Atendimento> atendiment = buscaTodos_Atendimentos_Cliente(logado.getCpf());
                             List<Produto> prod = buscaTodos_Produtos();
                             request.setAttribute("produtos",prod);
                             

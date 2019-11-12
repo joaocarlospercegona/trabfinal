@@ -72,7 +72,7 @@ public class CategoriaDAO extends BaseDAOImp implements BaseDAO<categoria>{
         }
     }
     
-    public void destroy(int id) {
+    public String destroy(int id) {
       java.sql.PreparedStatement ps = null;
       String sql = "delete from categoria where categoria_codigo = ?";
 
@@ -84,10 +84,11 @@ public class CategoriaDAO extends BaseDAOImp implements BaseDAO<categoria>{
           }
       } catch (SQLException ex) {
           ex.printStackTrace();
-          //log.severe("", ex);
+          return "Não foi possivel deletar";
       } finally {
           JDBCUtils.close(ps);
       }
+      return null;
     }
     
     @Override

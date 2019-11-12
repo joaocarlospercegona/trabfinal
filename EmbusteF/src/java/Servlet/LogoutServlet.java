@@ -39,7 +39,7 @@ public class LogoutServlet extends HttpServlet {
                 session.invalidate();
                 request.setAttribute("msg","Usuario Desconectado com sucesso");
                 RequestDispatcher rd = getServletContext().
-                    getRequestDispatcher("/Login.jsp");
+                    getRequestDispatcher("/login.jsp");
                 rd.forward(request, response);
             }
     }

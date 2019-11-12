@@ -173,9 +173,10 @@ public class Facade {
         CategoriaDAO dao = new CategoriaDAO();
         dao.edit(categoria,id); 
     }
-    public static void exclui_Categoria(int idd){
+    public static String exclui_Categoria(int idd){
         CategoriaDAO dao = new CategoriaDAO();
-        dao.destroy(idd);
+        String msg = dao.destroy(idd);
+        return msg;
     }
     public static categoria busca_Categoria(int idd){
             CategoriaDAO dao = new CategoriaDAO();

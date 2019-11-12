@@ -18,8 +18,21 @@ function showBox() {
     }
 }
 
-function confirmaDelete (ba){
+function confirmaDeleteAte (ba){
     var del=confirm("Deseja realmente apagar?");
     if (del==true)
         window.location.href = "ClienteServlet?action=remover_atendimento&cod=" + ba;   
 }
+
+function confirmaDeleteProd (ba){
+    var del=confirm("Deseja realmente apagar?");
+    if (del==true)
+        window.location.href = "FuncionarioServlet?action=remover_produto&id=" + ba;   
+}
+
+function confirmaDeleteCat (ba){
+    var del=confirm("Deseja realmente apagar?");
+    if (del==true)
+        window.location.href = "FuncionarioServlet?action=remover_categoria&id=" + ba;   
+}
+

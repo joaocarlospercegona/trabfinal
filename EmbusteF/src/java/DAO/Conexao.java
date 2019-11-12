@@ -44,7 +44,7 @@ public final class Conexao {
 
 //                c = DriverManager.getConnection("jdbc:h2:file:C:\\projetos\\aula\\AgendaJDBC\\dados\\agenda",
                 c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Embuste",
-                "postgres", "1804");
+                "usuario", "form4141");
 
                 if (c != null) {
                     this.conn = c;

@@ -1,6 +1,0 @@
-Carlos: O que falta
-	Fazer estados e cidades
-	organizar palavras
-	Fazer encaminhamento para erro nos relatórios quando tiver tratamento (ex: erro.jsp)
-
-"Atendimento entre "+ $P{data-fim}.toString() + " e " + $P{data-fim}.toString()
