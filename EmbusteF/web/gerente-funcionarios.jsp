@@ -4,7 +4,7 @@
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste Industria de Beleza e Estatica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estetica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>    

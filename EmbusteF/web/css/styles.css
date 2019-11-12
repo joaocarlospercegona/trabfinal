@@ -167,3 +167,7 @@ label{
   color: var(--vermelho);
   text-shadow: 2px 2px black;
 }
+
+thead{
+    font-weight: bold;
+}
