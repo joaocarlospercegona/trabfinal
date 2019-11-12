@@ -17,3 +17,9 @@ function showBox() {
         data2.disabled = true;
     }
 }
+
+function confirmaDelete (ba){
+    var del=confirm("Deseja realmente apagar?");
+    if (del==true)
+        window.location.href = "ClienteServlet?action=remover_atendimento&cod=" + ba;   
+}

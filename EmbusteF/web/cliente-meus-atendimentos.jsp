@@ -76,10 +76,10 @@
                                         
                                     <td><a href="ClienteServlet?action=ver_atendimento&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
                                     <c:if test="${x.atendimento_nivel == 1}">
-                                        <td><img src="exclui.png" width=45 height=40></a></td>
+                                        <td><img src="exclui.png" width=45 height=40></button></td>
                                     </c:if>
                                     <c:if test="${x.atendimento_nivel == 0}">
-                                        <td><a href="ClienteServlet?action=remover_atendimento&cod=${x.atendimento_codigo}"><img src="exclui.png" width=45 height=40 ></a></td>
+                                        <td><a onclick="confirmaDelete(${x.atendimento_codigo})"><img src="exclui.png" width=45 height=40 ></a></td>
                                     </c:if>
                                 </tr>
                             </c:forEach>

@@ -18,10 +18,10 @@
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
-                <button id='pessoas-tab' class='tab' onclick="location.href = 'gerente-funcionarios.html';">
+                <button id='pessoas-tab' class='tab' onclick="location.href = 'gerente-funcionarios.jsp';">
                     Funcionários
                 </button>
-                <button id='atendimentos-tab' class='tab' onclick="location.href = 'gerente-atendimento.html';">
+                <button id='atendimentos-tab' class='tab' onclick="location.href = 'gerente-atendimento.jsp';">
                     Atendimentos
                 </button>
                 <button id='relatorios-tab' class='tab selected'>

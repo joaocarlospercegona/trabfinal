@@ -89,7 +89,7 @@
                         <tr>
                             <td scope='col'>#</td>
                             <td>Produto</td>
-                            <td>Vizualizar</td>
+                            <td>Visualizar</td>
                             <td>Editar</td>
                             <td>Remover</td>
                         </tr>
