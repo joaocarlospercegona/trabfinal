@@ -79,9 +79,9 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
             ps.setString(5,  gerente.getGerente_bairro());
             ps.setString(6,  gerente.getGerente_cep());
             ps.setString(7,  gerente.getGerente_cidade());
-            ps.setString(8,  gerente.getGerente_estado());
-            ps.setString(9,  gerente.getGerente_telefone());
-            ps.setString(10, gerente.getGerente_senha());
+            ps.setString(8,  gerente.getGerente_telefone());
+            ps.setString(9, gerente.getGerente_senha());
+            ps.setString(10,  gerente.getGerente_estado());
             ps.setString(11, cpf);
             
             if (ps.executeUpdate() == 0) {
@@ -108,7 +108,7 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
     @Override
     public void destroy(String cpf) {
     java.sql.PreparedStatement ps = null;
-      String sql = "delete from funcionario where funcionario_cpf = ?";
+      String sql = "delete from gerente where gerente_cpf = ?";
 
       try {
           ps = getConnection().prepareStatement(sql);

@@ -148,14 +148,12 @@ public class GerenteServlet extends HttpServlet {
                                     insere_Funcionario(funcionario);
                                 }
                                 RequestDispatcher rd = getServletContext().
-                                getRequestDispatcher("/login.jsp");
+                                getRequestDispatcher("/GerenteServlet?action=listar_gerente");
                                 rd.forward(request, response);
                             }
                             break;
                         }
-                        case "vizualizar":{
-                            break;
-                        }
+                        
                         case "alterar":
                         {
                             String cpf = (String)request.getParameter("cpf");
@@ -211,8 +209,8 @@ public class GerenteServlet extends HttpServlet {
                             String cpf = (String) request.getParameter("cpfu");
                             String email = (String) request.getParameter("emailu");
                             String option = (String) request.getParameter("tipo");
-                            //option == 1 eh gerente
-                            //option == 2 eh funcionario
+                            //option == 2 eh gerente
+                            //option == 1 eh funcionario
                             String func = (String) request.getParameter("func");
                             out.println(func);
                             out.println(option);
