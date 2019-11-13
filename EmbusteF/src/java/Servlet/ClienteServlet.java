@@ -140,7 +140,7 @@ public class ClienteServlet extends HttpServlet {
                                 altera_Cliente(c, c.getCliente_cpf());
                                 
                                 RequestDispatcher rd = getServletContext().
-                                    getRequestDispatcher("/cliente-meus-atendimentos.jsp");
+                                    getRequestDispatcher("/ClienteServlet?action=Listagem_atendimentos");
                                 rd.forward(request, response);
                             }
                             break;

@@ -73,7 +73,7 @@
                               <option value="${i= i+1}">${x.categoria_nome}</option>
                           </c:forEach>
                         </select>
-                        <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
+                        <button type='submit' class='btn btn-primary margem'>Alterar</button>
                     </form>
                         
                 </c:if>

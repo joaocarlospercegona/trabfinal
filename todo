@@ -1,11 +1,11 @@
 O que falta:
-	Salvar cadastro gerente/funcionario
+	Gerente -> aba funcionários (cadastro e remoção)
+	Colocar atendimento cliente em ordem decrescente
 	Consertar sessions
 	Mostrar mensagem quando não for possível deletar
 	Fazer estados e cidades
 	Arrumar solução(conferir para todos os usuários)
 	Botão voltar em tudo
-	Arrumar remover gerente/funcionario
 	Exceções
 	Não possibilitar solução para gerente 
 	Conferir combo-box novo atendimento cliente
@@ -13,3 +13,5 @@ O que falta:
 	Fazer mesma condição para caso altere algo
 	Mensagens de notificação para session
 	Conferir todos "cancelar"
+	Mostrar msg caso senha não seja igual
+	Arrumar placeholders
