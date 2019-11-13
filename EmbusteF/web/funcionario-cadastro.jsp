@@ -71,9 +71,9 @@ function funcao1(msg)
                             <tr>
                                 <td scope='row'>${k = k+1}</td>
                                 <td>${c.categoria_nome}</td>
-                                <td width="50"><a href="FuncionarioServlet?action=visualizar_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
-                                <td width="50"><a href="FuncionarioServlet?action=alterar_categoria&id=${c.categoria_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a onclick="confirmaDeleteCat(${c.categoria_codigo})"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=visualizar_categoria&id=${c.categoria_codigo}"><img src="ver.png" width=45 height=40></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=alterar_categoria&id=${c.categoria_codigo}"><img src="edit.png" width=45 height=40></a></td>
+                                <td width="50"><a onclick="confirmaDeleteCat(${c.categoria_codigo})"><img src="exclui.png" width=45 height=40></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -105,9 +105,9 @@ function funcao1(msg)
                             <tr>
                                 <td scope='row'>${i = i+1}</td>
                                 <td>${c.produto_nome}</td>
-                                <td width="50"><a href="FuncionarioServlet?action=visualizar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
-                                <td width="50"><a href="FuncionarioServlet?action=alterar_produto&id=${c.produto_codigo}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a onclick="confirmaDeleteProd(${c.produto_codigo})"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=visualizar_produto&id=${c.produto_codigo}"><img src="ver.png" width=45 height=40></a></td>
+                                <td width="50"><a href="FuncionarioServlet?action=alterar_produto&id=${c.produto_codigo}"><img src="edit.png" width=45 height=40></a></td>
+                                <td width="50"><a onclick="confirmaDeleteProd(${c.produto_codigo})"><img src="exclui.png" width=45 height=40></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

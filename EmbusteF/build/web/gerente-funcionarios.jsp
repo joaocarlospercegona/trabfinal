@@ -63,6 +63,9 @@
                             <td>Nome</td>
                             <td>CPF</td>
                             <td>E-mail</td>
+                            <td>Consultar</td>
+                            <td>Editar</td>
+                            <td>Remover</td>
                         </tr>
                     </thead>
                     
@@ -73,9 +76,9 @@
                                 <td>${x.funcionario_nome}</td>
                                 <td>${x.funcionario_cpf}</td>
                                 <td>${x.funcionario_email}</td>
-                                <td width="50"><a href="GerenteServlet?action=visualizar&type=1&cpf=${x.funcionario_cpf}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
-                                <td width="50"><a href="GerenteServlet?action=alterar&type=1&cpf=${x.funcionario_cpf}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a href="GerenteServlet?action=remover&type=1&cpf=${x.funcionario_cpf}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td width="50"><a href="GerenteServlet?action=visualizar&type=1&cpf=${x.funcionario_cpf}"><img src="ver.png" width=45 height=40></a></td>
+                                <td width="50"><a href="GerenteServlet?action=alterar&type=1&cpf=${x.funcionario_cpf}"><img src="edit.png" width=45 height=40></a></td>
+                                <td width="50"><a onclick="confirmaDeleteGrt(${x.funcionario_cpf})"><img src="exclui.png" width=45 height=40></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -83,13 +86,8 @@
                 <form method="post" action="GerenteServlet?action=novo">
                     <button type='submit' class='btn btn-success margem' >Cadastrar</button>
                 </form>
-    </c:if>
-
-    <c:if test="${func == 'gerente'}" >
+    </c:if><c:if test="${func == 'gerente'}" >
                 <h1>Gerentes</h1>
-                
-<!--            VER COMO MUDAR DE TELA AQUI-->
-
                 <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
                     <option value="GerenteServlet?action=listar_gerente">Gerente</option>
                     <option value="GerenteServlet?action=listar">Funcionarios</option>
@@ -102,7 +100,10 @@
                             <td scope='col'>#</td>
                             <td>Nome</td>
                             <td>CPF</td>
-                            <td>E-mail</td>
+                            <td>E-mail</td>                            
+                            <td>Consultar</td>
+                            <td>Editar</td>
+                            <td>Remover</td>
                         </tr>
                     </thead>
                     
@@ -113,9 +114,9 @@
                                 <td>${x.gerente_nome}</td>
                                 <td>${x.gerente_cpf}</td>
                                 <td>${x.gerente_email}</td>
-                                <td width="50"><a href="GerenteServlet?action=visualizar&type=2&cpf=${x.gerente_cpf}"><button type='submit' class='btn btn-primary margem'>Visualizar</button></a></td>
-                                <td width="50"><a href="GerenteServlet?action=alterar&type=2&cpf=${x.gerente_cpf}"><button type='submit' class='btn btn-danger margem'>Alterar</button></a></td>
-                                <td width="50"><a href="GerenteServlet?action=remover&type=2&cpf=${x.gerente_cpf}"><button type='submit' class='btn btn-danger margem'>Remover</button></a></td>
+                                <td width="50"><a href="GerenteServlet?action=visualizar&type=2&cpf=${x.gerente_cpf}"><img src="ver.png" width=45 height=40></a></td>
+                                <td width="50"><a href="GerenteServlet?action=alterar&type=2&cpf=${x.gerente_cpf}"><img src="edit.png" width=45 height=40></a></td>
+                                <td width="50"><a onclick="confirmaDeleteGrt(${x.gerente_cpf})"><img src="exclui.png" width=45 height=40></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -36,3 +36,16 @@ function confirmaDeleteCat (ba){
         window.location.href = "FuncionarioServlet?action=remover_categoria&id=" + ba;   
 }
 
+function confirmaDeleteGrt (ba){
+    var del=confirm("Deseja realmente apagar?");
+    if (del==true)
+        window.location.href = "GerenteServlet?action=remover&type=2&cpf=" + ba;   
+}
+
+function confirmaDeleteFunc (ba){
+    var del=confirm("Deseja realmente apagar?");
+    if (del==true)
+        window.location.href = "GerenteServlet?action=remover&type=1&cpf=" + ba;   
+}
+
+

@@ -1,12 +1,15 @@
 O que falta:
+	Salvar cadastro gerente/funcionario
 	Consertar sessions
 	Mostrar mensagem quando não for possível deletar
 	Fazer estados e cidades
-	Tratamento de erros
-	Se atendimento finalizado, mostrar a solução
-	Mudar botões CRUD para imagem
+	Arrumar solução(conferir para todos os usuários)
 	Botão voltar em tudo
-	Remover gerente/funcionario
-	Confirm nas remoções
+	Arrumar remover gerente/funcionario
 	Exceções
 	Não possibilitar solução para gerente 
+	Conferir combo-box novo atendimento cliente
+	Unificar tabelas de login
+	Fazer mesma condição para caso altere algo
+	Mensagens de notificação para session
+	Conferir todos "cancelar"
