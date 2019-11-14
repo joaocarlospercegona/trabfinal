@@ -78,7 +78,7 @@
                                 <td>${x.funcionario_email}</td>
                                 <td width="50"><a href="GerenteServlet?action=visualizar&type=1&cpf=${x.funcionario_cpf}"><img src="ver.png" width=45 height=40></a></td>
                                 <td width="50"><a href="GerenteServlet?action=alterar&type=1&cpf=${x.funcionario_cpf}"><img src="edit.png" width=45 height=40></a></td>
-                                <td width="50"><a onclick="confirmaDeleteGrt(${x.funcionario_cpf})"><img src="exclui.png" width=45 height=40></a></td>
+                                <td width="50"><a onclick="confirmaDeleteFunc(${x.funcionario_cpf})"><img src="exclui.png" width=45 height=40></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -1,17 +1,13 @@
 O que falta:
-	Gerente -> aba funcionários (cadastro e remoção)
 	Colocar atendimento cliente em ordem decrescente
-	Consertar sessions
 	Mostrar mensagem quando não for possível deletar
 	Fazer estados e cidades
 	Arrumar solução(conferir para todos os usuários)
 	Botão voltar em tudo
-	Exceções
-	Não possibilitar solução para gerente 
-	Conferir combo-box novo atendimento cliente
+	Exceções 
 	Unificar tabelas de login
-	Fazer mesma condição para caso altere algo
-	Mensagens de notificação para session
-	Conferir todos "cancelar"
+	Mensagens de notificação para session (ñ esta logado)
 	Mostrar msg caso senha não seja igual
-	Arrumar placeholders
+    Ver calculo e data do atendimentos em aberto
+    Fazer validaçao via url tentando pular de cliente para gerente ou func e vise e versa (Refazer a classe loginBean com tipo ... Tipo = 1 cliente, 2 = func ...)
+    atendimento finalizado nao esta mostrando a soluçao para o funcionario
