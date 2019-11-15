@@ -64,6 +64,7 @@
                     <input type='password'  class='form-control campo1' id='senha' name='senha' placeholder='Sua senha' value="${c.cliente_senha}"><br>
                     <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='Confirme sua senha' value="${c.cliente_senha}"><br> 
                     <button type='submit' class='btn btn-primary margem'>Alterar dados</button>
+                    <button onclick="location.href = 'LogoutServlet';">Voltar</button>
                     <p>Obs: CPF e email não podem ser alterados</p>
                 </form>
             </div>

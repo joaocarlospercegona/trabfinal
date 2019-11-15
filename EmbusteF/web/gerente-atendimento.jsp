@@ -76,7 +76,7 @@
                                     <c:if test="${x.atendimento_nivel == 0}">
                                         <td style="color:yellow">${x.atendimento_situacao}</td>
                                     </c:if>
-                                    <td><a href="resolucao-atendimento.jsp"><img src="ver.png" width=45 height=40></a></td>
+                                    <td><a href="GerenteServlet?action=resolucao&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

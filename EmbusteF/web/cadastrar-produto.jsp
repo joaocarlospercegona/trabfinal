@@ -3,7 +3,7 @@
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estetica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>
@@ -20,7 +20,7 @@
 
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                     Sair
                 </button>
             </div>
