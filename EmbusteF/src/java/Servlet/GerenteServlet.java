@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 import static Facade.Facade.altera_Funcionario;
@@ -45,22 +40,9 @@ import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-/**
- *
- * @author joao
- */
 @WebServlet(name = "GerenteServlet", urlPatterns = {"/GerenteServlet"})
 public class GerenteServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
              PrintWriter out = response.getWriter();
@@ -223,9 +205,7 @@ public class GerenteServlet extends HttpServlet {
                             if(senha.equals(senha2)){
                                 Funcionario funcionario = new Funcionario();
                                 Gerente gerente = new Gerente();
-                            
-                            //aqui receber todos os dados...
-                            
+                                                        
                                 funcionario.setFuncionario_nome((String) request.getParameter("nome"));
                                 funcionario.setFuncionario_cpf(cpf);
                                 funcionario.setFuncionario_email(email);

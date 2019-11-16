@@ -1,15 +1,21 @@
-O que falta:
-	transação funcionario/gerente
-	Conferir duplicação de página
-	Colocar atendimento cliente em ordem decrescente
-	Mostrar mensagem quando não for possível deletar
+Funcionalidades:
+	Tirar transação funcionario/gerente
+	Arrumar ordem de listagem dos atendimentos
 	Fazer estados e cidades
-	Mudar solução atendimento para Gerente/Func	 
-	Unificar tabelas de login
-	Mensagens de notificação para session (ñ esta logado)
-	Mostrar msg caso senha não seja igual
+	Mudar solução atendimento de Gerente/Func	
     	Sessão diferente para cada tipo de usuario
-	Confirm de delete na tela de funcionarios funciona apenas com Razer(possivelmente pq foi adicionado pelo banco)
+	Confirm n funciona com . no CPF (metacaracter)
+	Tela inicial do gerente
+	Impedir remoçao do gerente logado
+	Criptografar senhas
 	Exceções
+	
+Minors:
+	Mudar de "Em Aberto" para "Aberto" (conferir jasper)
+	Colocar stroke nas palavras em amarelo
+	Melhorar tela solução
+	"Já possuo minha conta" no cadastro
+	Organizar código
+	
 
 
