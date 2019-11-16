@@ -41,6 +41,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  *
@@ -273,20 +275,14 @@ public class FuncionarioServlet extends HttpServlet {
                         {
                             List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();
                             List<Atendimento> atendimentos = new ArrayList();
-                            Calendar a = Calendar.getInstance();
-                            a.setTime(new Date());//data maior
-                            Calendar b = Calendar.getInstance();
-                            
+                            DateTime dataAtual = new DateTime();
                             for(Atendimento x : atendiment){
-                                b.setTime(x.getAtendimento_data_hora());
-                                a.add(Calendar.DATE, - b.get(Calendar.DAY_OF_MONTH));
-                                if(a.get(Calendar.DAY_OF_MONTH) > 7){
-                                    out.println("mais que sete dias");
+                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
+                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
+                                if (dias > 7)
                                     x.setAtendimento_nivel(1);
-                                }
-                                else{
+                                else
                                     x.setAtendimento_nivel(0);
-                                }
                                 atendimentos.add(x);
                             }
                             List<Produto> prod = buscaTodos_Produtos();
@@ -304,26 +300,18 @@ public class FuncionarioServlet extends HttpServlet {
                             List<Atendimento> atendiment = buscaTodos_Atendimentos();
                             List<Produto> prod = buscaTodos_Produtos();
                             request.setAttribute("produtos",prod);
-                            
-                            Calendar a = Calendar.getInstance();
-                            a.setTime(new Date());//data maior
-                            Calendar b = Calendar.getInstance();
-                            
+                            DateTime dataAtual = new DateTime();
                             for(Atendimento x : atendiment){
-                                b.setTime(x.getAtendimento_data_hora());
-                                a.add(Calendar.DATE, - b.get(Calendar.DAY_OF_MONTH));
-                                if((a.get(Calendar.DAY_OF_MONTH) > 7)&&(!x.getAtendimento_situacao().equals("Finalizado"))){
-                                    out.println("mais que sete dias");
-                                    x.setAtendimento_nivel(1);
-                                }
-                                else if(x.getAtendimento_situacao().equals("Finalizado")){
+                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
+                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
+                                if (x.getAtendimento_situacao().equals("Finalizado"))
                                     x.setAtendimento_nivel(2);
-                                }
-                                else{
+                                else if (dias > 7)
+                                    x.setAtendimento_nivel(1);
+                                else
                                     x.setAtendimento_nivel(0);
-                                }
                                 atendimentos.add(x);
-                            } 
+                            }     
                             request.setAttribute("atendimentos",atendimentos);
                             request.setAttribute("func","todos");
                             RequestDispatcher rd = getServletContext().
