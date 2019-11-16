@@ -46,7 +46,7 @@
                     <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
                         <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc" name="descricao" placeholder="Descrição"> <br>
-                        <input type="number" class="form-control campo1" id="peso" name="peso" placeholder="peso"> <br>
+                        <input type="number" class="form-control campo1" id="peso" name="peso" placeholder="Peso (em gramas)"> <br>
                         <select name="select" class='form-control campo1'>
                           <option disabled selected hidden>Categorias</option>
                           <c:forEach items="${categorias}" var="x">
@@ -63,9 +63,7 @@
                     <form method='post' action="FuncionarioServlet?action=alterando_produto&idp=${prod.produto_codigo}">          
                         <input type='text'  class='form-control campo0' id='nome'  value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc"  value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
-                        <input type="number" class="form-control campo1" id="peso" value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
-                        
-<!--                        arrumar aqui-->
+                        <input type="number" class="form-control campo1" id="peso" value="${prod.produto_peso}" name="peso" placeholder="Peso (em gramas)"> <br>
                         <select name="select" class='form-control campo1'>
                           <c:forEach items="${categorias}" var="x">
                               <c:if test="${nome == x.categoria_nome}">
@@ -86,7 +84,7 @@
                     <form method='post' action="FuncionarioServlet?action=ver_produtos">          
                         <input type='text'  class='form-control campo0' id='nome'  disabled value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc"  disabled value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
-                        <input type="number" class="form-control campo1" id="peso" disabled value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
+                        <input type="number" class="form-control campo1" id="peso" disabled value="${prod.produto_peso}" name="peso" placeholder="Peso (em gramas)"> <br>
                         <select disabled name="select" class='form-control campo1'>
                           <option disabled selected hidden>${nome}</option>  
                         </select>
