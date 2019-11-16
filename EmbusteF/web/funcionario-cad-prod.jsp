@@ -42,7 +42,7 @@
         <div class='caixa cadastro'>
             <div class='conteudo'>
                 <c:if test="${func == 'cadastrar'}">
-                    <h1>Cadastro de Produto</h1>
+                    <h1>Cadastrar Produto</h1>
                     <form method='post' action="FuncionarioServlet?action=cadastrando_produto">          
                         <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc" name="descricao" placeholder="Descrição"> <br>
@@ -55,6 +55,7 @@
                         </select>
                         <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
                     </form>
+                    <button class='btn btn-danger margem' onclick= "location.href='FuncionarioServlet?action=ver_produtos'">Voltar</button>
                 </c:if>
                 
                 <c:if test="${func == 'alterar'}">
@@ -75,20 +76,21 @@
                         </select>
                         <button type='submit' class='btn btn-primary margem'>Alterar</button>
                     </form>
+                        <button class='btn btn-danger margem' onclick= "location.href='FuncionarioServlet?action=ver_produtos'">Voltar</button>
                         
                 </c:if>
                     
                 <c:if test="${func == 'visualizar'}">
                                        
-                    <h1>Visualiza Produto</h1>
-                    <form method='post' action="FuncionarioServlet?action=painel_cadastro">          
+                    <h1>Produto</h1>
+                    <form method='post' action="FuncionarioServlet?action=ver_produtos">          
                         <input type='text'  class='form-control campo0' id='nome'  disabled value="${prod.produto_nome}" name='nome' placeholder='Nome produto'> <br>            
                         <input type="text"  class="form-control campo0" id="desc"  disabled value="${prod.produto_descricao}" name="descricao" placeholder="Descrição"> <br>
                         <input type="number" class="form-control campo1" id="peso" disabled value="${prod.produto_peso}" name="peso" placeholder="peso"> <br>
                         <select disabled name="select" class='form-control campo1'>
                           <option disabled selected hidden>${nome}</option>  
                         </select>
-                        <button type='submit' class='btn btn-primary margem'>voltar</button>
+                        <button type='submit' class='btn btn-primary margem'>Voltar</button>
                     </form>
                         
                 </c:if>

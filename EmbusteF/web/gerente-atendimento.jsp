@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
@@ -64,7 +65,7 @@
                             <c:forEach items="${atendimentos}" var="x">
                                 <tr>
                                     <td scope='row'>${i = i+1}</td>
-                                    <td>${x.atendimento_data_hora}</td>
+                                    <td><fmt:formatDate value="${x.atendimento_data_hora}" pattern="dd/MM/yyyy"/></td>
                                         <c:forEach items="${produtos}" var="a">
                                             <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
                                                 <td>${a.produto_nome}</td>
@@ -75,6 +76,9 @@
                                     </c:if>
                                     <c:if test="${x.atendimento_nivel == 0}">
                                         <td style="color:yellow">${x.atendimento_situacao}</td>
+                                    </c:if>
+                                    <c:if test="${x.atendimento_nivel == 2}">
+                                        <td style="color:green">${x.atendimento_situacao}</td>
                                     </c:if>
                                     <td><a href="GerenteServlet?action=resolucao&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
                                 </tr>
@@ -103,7 +107,7 @@
                             <c:forEach items="${atendimentos}" var="x"> 
                                     <tr>
                                         <td scope='row'>${i = i+1}</td>
-                                        <td>${x.atendimento_data_hora}</td>
+                                        <td><fmt:formatDate value="${x.atendimento_data_hora}" pattern="dd/MM/yyyy"/></td>
                                         
                                         <c:forEach items="${produtos}" var="a">
                                             <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
