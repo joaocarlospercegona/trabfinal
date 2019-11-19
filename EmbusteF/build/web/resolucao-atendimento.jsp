@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
@@ -35,19 +36,24 @@
             <div class='conteudo'>
                 <h1>Atendimento</h1>
                 <p>Código: ${atendimento.atendimento_codigo}</p>
-                <p>Data: ${atendimento.atendimento_data_hora}</p>
+                <p>Data: <fmt:formatDate value="${atendimento.atendimento_data_hora}" pattern="dd/MM/yyyy"/></p>
                 <p>Cliente: ${cliente.cliente_nome}</p>
                 <p>CPF:  ${atendimento.atendimento_cpf_cliente}</p>
                 <p>Situação: ${atendimento.atendimento_situacao}</p>
                 <p>Produto:  ${produto.produto_nome}</p>
-                <p>Tipo-Atendimento: ${tipo.tipo_atendimento_nome} </p>
+                <p>Tipo de Atendimento: ${tipo.tipo_atendimento_nome} </p>
                 <p>Descrição: ${atendimento.atendimento_descricao}</p>
-                <h3>Solução:</h3>
+                <p>Solução:</p>
                 <c:if test="${!clien.equals('cliente')}">
+                    <c:if test="${ empty atendimento.atendimento_solucao}">
                     <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
                         <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
                         <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
                     </form>
+                    </c:if>
+                    <c:if test="${not empty atendimento.atendimento_solucao}">
+                        <p>${atendimento.atendimento_solucao}</p>
+                    </c:if>
                 </c:if>
                 <c:if test="${clien.equals('cliente')}">
                     <a href="ClienteServlet?action=Listagem_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>

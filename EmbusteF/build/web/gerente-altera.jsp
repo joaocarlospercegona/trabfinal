@@ -1,23 +1,17 @@
-<%-- 
-    Document   : gerente-altera
-    Created on : 27/10/2019, 17:09:12
-    Author     : joao
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste Indústria de Beleza e Estética</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estetica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  <!-- mascara -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <link rel='stylesheet' href='css/styles.css'>
         <link rel='stylesheet' href='css/header.css'>
@@ -32,7 +26,7 @@
             <div id='menu'>
 
                 <div id='session'>
-                    <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                    <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                         Sair
                     </button>
                 </div>
@@ -70,6 +64,7 @@
                     <br>
                     </div>
                     <button type='submit' class='btn btn-primary margem'>Alterar dados</button>
+                    <button class='btn btn-danger margem' onclick= "location.href='GerenteServlet?action=listar'">Voltar</button>
                     <p>Obs: CPF e email não podem ser alterados</p>
                 </form>
             </div>

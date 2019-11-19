@@ -59,11 +59,12 @@
                     <input type='text'  class='form-control campo1' id='cidade' name='cidade' placeholder='Cidade' value="${c.cliente_cidade}"><br> 
                     <input type='text'  class='form-control campo1' id='bairro' name='bairro' placeholder='Bairro' value="${c.cliente_bairro}"><br>
                     <input type='text'  class='form-control campo1' id='rua' name='rua' placeholder='Rua' value="${c.cliente_rua}"><br>
-                    <input type='number'  class='form-control campo2' id='numero' name='numero' placeholder='NÃºmero' value="${c.cliente_numero}"><br>
+                    <input type='number'  class='form-control campo2' id='numero' name='numero' placeholder='Numero' value="${c.cliente_numero}"><br>
                     <input type='text'  class='form-control campo2' id='complemento' name='complemento' placeholder='Complemento' value="${c.cliente_complemento}"><br> 
                     <input type='password'  class='form-control campo1' id='senha' name='senha' placeholder='Sua senha' value="${c.cliente_senha}"><br>
-                    <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='ConfirmaÃ§Ã£o da senha' value="${c.cliente_senha}"><br> 
+                    <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='Confirme sua senha' value="${c.cliente_senha}"><br> 
                     <button type='submit' class='btn btn-primary margem'>Alterar dados</button>
+                    <button onclick="location.href = 'LogoutServlet';">Voltar</button>
                     <p>Obs: CPF e email não podem ser alterados</p>
                 </form>
             </div>

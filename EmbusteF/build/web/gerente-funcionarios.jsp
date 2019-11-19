@@ -47,9 +47,6 @@
             <div class='conteudo'>
     <c:if test="${func == 'funcionario'}" >
                 <h1>Funcionarios</h1>
-                
-<!--            VER COMO MUDAR DE TELA AQUI-->
-
                 <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
                     <option value="GerenteServlet?action=listar">Funcionarios</option>
                     <option value="GerenteServlet?action=listar_gerente">Gerente</option>

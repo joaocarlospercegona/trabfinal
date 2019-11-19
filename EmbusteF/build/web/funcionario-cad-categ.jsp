@@ -42,29 +42,31 @@
         <c:if test="${func == 'cadastrar'}">
             <div class='caixa cadastro'>
                 <div class='conteudo'>
-                    <h1>Cadastro de Categoria</h1>
+                    <h1>Cadastrar Categoria</h1>
                     <form method='post' action="FuncionarioServlet?action=cadastrando_categoria">          
                         <input type='text'  class='form-control campo0' id='nome' name='nome' placeholder='Nome categoria'> <br>            
                         <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
                     </form>
+                    <button class='btn btn-danger margem' onclick= "location.href='FuncionarioServlet?action=painel_cadastro'">Voltar</button>
                 </div>
             </div>     
         </c:if>
         <c:if test="${func == 'alterar'}">
             <div class='caixa cadastro'>
                 <div class='conteudo'>
-                    <h1>Cadastro de Categoria</h1>
+                    <h1>Alterar Categoria</h1>
                     <form method='post' action="FuncionarioServlet?action=alterando_categoria&idc=${categoria.categoria_codigo}">          
                         <input type='text'  class='form-control campo0' id='nome' name='nome' value="${categoria.categoria_nome}" placeholder='Nome categoria'> <br>            
                         <button type='submit' class='btn btn-primary margem'>Alterar</button>
                     </form>
+                        <button class='btn btn-danger margem' onclick= "location.href='FuncionarioServlet?action=painel_cadastro'">Voltar</button>
                 </div>
             </div>     
         </c:if>
         <c:if test="${func == 'visualizar'}">
             <div class='caixa cadastro'>
                 <div class='conteudo'>
-                    <h1>Cadastro de Categoria</h1>
+                    <h1>Categoria</h1>
                     <form method='post' action="FuncionarioServlet?action=painel_cadastro">          
                         <input type='text'  class='form-control campo0' id='nome' name='nome' disabled  value="${categoria.categoria_nome}" placeholder='Nome categoria'> <br>            
                         <button type='submit' class='btn btn-primary margem'>Voltar</button>

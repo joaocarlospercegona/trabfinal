@@ -26,7 +26,7 @@
             <div id='menu'>
 
                 <div id='session'>
-                    <button id='user-name' class='drop-button'  onclick="location.href = 'login.html';">
+                    <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                         Sair
                     </button>
                 </div>
@@ -49,15 +49,14 @@
                     <input type='text'  class='form-control campo2' id='complemento' name='complemento' placeholder='Complemento'><br> 
                     <input type='password'  class='form-control campo1' id='senha' name='senha' placeholder='Sua senha'><br>
                     <input type='password'  class='form-control campo1' id='senha' name='senha2' placeholder='Confirmação da senha'><br> 
-                    <select name="tipo" id="tipo" required class='form-control campo1'>
+                    <select name="tipo" id="tipo" required class='form-control campo0'>
                         <option disabled selected hidden>Cargo</option>
                         <option  value="1">Gerente</option>
                         <option  value="2">Funcionario</option>
                     </select>
                     <button type='submit' class='btn btn-primary margem'>Salvar</button>
-                    <a href="GerenteServlet?action=listar"><button class='btn btn-danger margem'>Cancelar</button></a>
                 </form>
-
+                <button class='btn btn-danger margem' onclick= "location.href='GerenteServlet?action=listar'">Voltar</button>
             </div>
         </div>  
     </body>

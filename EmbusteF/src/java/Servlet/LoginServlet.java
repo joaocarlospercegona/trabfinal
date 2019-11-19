@@ -109,11 +109,11 @@ public class LoginServlet extends HttpServlet {
                                     getRequestDispatcher("/GerenteServlet?action=atendimentos_abertos");
                                 rd.forward(request, response);
                             }
+                        }
                             request.setAttribute("msg","Usuario/Senha Invalidos");
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/login.jsp");
-                            rd.forward(request, response);
-                        }                    
+                            rd.forward(request, response);                    
                     }
                     
                 }catch(Exception ex){

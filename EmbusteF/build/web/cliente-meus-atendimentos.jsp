@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -60,7 +61,7 @@
                             <c:forEach items="${atendimentos}" var="x">
                                 <tr>
                                     <td scope='row'>${i = i+1}</td>
-                                    <td>${x.atendimento_data_hora}</td>
+                                    <td><fmt:formatDate value="${x.atendimento_data_hora}" pattern="dd/MM/yyyy"/></td>
                                     <c:forEach items="${produtos}" var="a">
                                         <c:if test="${x.atendimento_cod_produto == a.produto_codigo}">
                                             <td>${a.produto_nome}</td>    
