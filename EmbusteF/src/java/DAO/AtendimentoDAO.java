@@ -56,7 +56,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
         try {
           verificaConexao();
-          ps = conn.prepareStatement("select * from atendimento order by atendimento_data_hora desc");
+          ps = conn.prepareStatement("select * from atendimento order by atendimento_data_hora");
             rs = ps.executeQuery();
 
             if (rs.next()) {

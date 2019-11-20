@@ -281,7 +281,7 @@ public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
 
         try {
           verificaConexao();
-          ps = conn.prepareStatement("select * from atendimento where atendimento_cpf_cliente = ? ");
+          ps = conn.prepareStatement("select * from atendimento where atendimento_cpf_cliente = ? order by atendimento_data_hora desc");
           ps.setString(1, cpf);  
           rs = ps.executeQuery();
 

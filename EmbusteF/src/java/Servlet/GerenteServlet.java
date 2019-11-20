@@ -337,22 +337,22 @@ public class GerenteServlet extends HttpServlet {
                         
                         case "atendimentos_abertos":
                         {
-//                            List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();
-//                            List<Atendimento> atendimentos = new ArrayList();
-//                            DateTime dataAtual = new DateTime();
-//                            for(Atendimento x : atendiment){
-//                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
-//                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
-//                                if (dias > 7)
-//                                    x.setAtendimento_nivel(1);
-//                                else
-//                                    x.setAtendimento_nivel(0);
-//                                atendimentos.add(x);
-//                            }
-//                            List<Produto> prod = buscaTodos_Produtos();
-//                            request.setAttribute("produtos",prod);
-//                            request.setAttribute("atendimentos",atendimentos);
-//                            request.setAttribute("func","aberto");
+                            List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();
+                            List<Atendimento> atendimentos = new ArrayList();
+                            DateTime dataAtual = new DateTime();
+                            for(Atendimento x : atendiment){
+                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
+                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
+                                if (dias > 7)
+                                    x.setAtendimento_nivel(1);
+                                else
+                                    x.setAtendimento_nivel(0);
+                                atendimentos.add(x);
+                            }
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            request.setAttribute("atendimentos",atendimentos);
+                            request.setAttribute("func","aberto");
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/gerente-atendimento.jsp");
                             rd.forward(request, response);
@@ -360,32 +360,29 @@ public class GerenteServlet extends HttpServlet {
                         }
                         case "todos_atendimentos":
                         {
-//                            List<Atendimento> atendimentos = new ArrayList();
-//                            List<Atendimento> atendiment = buscaTodos_Atendimentos();
-//                            List<Produto> prod = buscaTodos_Produtos();
-//                            request.setAttribute("produtos",prod);
-//                            DateTime dataAtual = new DateTime();
-//                            for(Atendimento x : atendiment){
-//                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
-//                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
-//                                if (x.getAtendimento_situacao().equals("Finalizado"))
-//                                    x.setAtendimento_nivel(2);
-//                                else if (dias > 7)
-//                                    x.setAtendimento_nivel(1);
-//                                else
-//                                    x.setAtendimento_nivel(0);
-//                                atendimentos.add(x);
-//                            }                            
-//                            request.setAttribute("atendimentos",atendimentos);
-//                            request.setAttribute("func","todos");
+                            List<Atendimento> atendimentos = new ArrayList();
+                            List<Atendimento> atendiment = buscaTodos_Atendimentos();
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            DateTime dataAtual = new DateTime();
+                            for(Atendimento x : atendiment){
+                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
+                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
+                                if (x.getAtendimento_situacao().equals("Finalizado"))
+                                    x.setAtendimento_nivel(2);
+                                else if (dias > 7)
+                                    x.setAtendimento_nivel(1);
+                                else
+                                    x.setAtendimento_nivel(0);
+                                atendimentos.add(x);
+                            }                            
+                            request.setAttribute("atendimentos",atendimentos);
+                            request.setAttribute("func","todos");
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/gerente-atendimento.jsp");
                             rd.forward(request, response);
                             break;
-                        }
-                        
-                        //aqui ira os cases dos relatorios todos em pdf ver como faz
-                        
+                        }                        
                     }
                 }
             }
