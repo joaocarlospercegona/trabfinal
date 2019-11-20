@@ -20,8 +20,28 @@
                     window.location.href = opc;
             }
         </script>
+        <script>
+            $(document).ready(function(){
+                    $("#myModal").modal('show');
+            });
+        </script>
     </head>
     <body>
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title">Olá!</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Quantidade de atendimentos efetuados até o momento:</h5>
+                        <h5>Quantidade de atendimentos em aberto e a porcentagem em relação ao total:</h5>
+                        <h5>Tipo de atendimento e atendimentos aberto/atendimentos total</h5>                        
+                    </div>
+                </div>
+            </div>
+        </div>        
         <c:if test="${empty gerenteOn}">
             <jsp:forward page="login.jsp"> 
                 <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
