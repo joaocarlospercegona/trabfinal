@@ -260,11 +260,9 @@ public class GerenteServlet extends HttpServlet {
                             if(option.equals(func)){
                                 if(option.equals("2")){
                                     altera_Gerente(gerente, gerente.getGerente_cpf());
-                                    out.println("Alterando gerente");
                                 }
                                 else if(option.equals("1")){
                                     altera_Funcionario(funcionario, cpf);
-                                    out.println("Alterando funcionario");
                                 }
                             }
                             else{
@@ -292,11 +290,9 @@ public class GerenteServlet extends HttpServlet {
                             //1 funcionario
                             //2 gerente
                             if(type.equals("1")){
-                                out.println("exclui func");
                                 exclui_Funcionario(cpf);
                             }
                             else if(type.equals("2")){
-                                out.println("exclui gerente");
                                 exclui_Gerente(cpf);
                             }
                             RequestDispatcher rd = getServletContext().
