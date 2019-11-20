@@ -41,19 +41,18 @@
                 <p>CPF:  ${atendimento.atendimento_cpf_cliente}</p>
                 <p>Situação: ${atendimento.atendimento_situacao}</p>
                 <p>Produto:  ${produto.produto_nome}</p>
-                <p>Tipo de Atendimento: ${tipo.tipo_atendimento_nome} </p>
+                <p>Tipo de Atendimento: ${tipo.tipo_atendimento_nome} </p>                
                 <p>Descrição: ${atendimento.atendimento_descricao}</p>
-                <p>Solução:</p>
-                <c:if test="${(!empty funcOn)}">
-                    <c:if test="${ empty atendimento.atendimento_solucao}">
-                    <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
-                        <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
-                        <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
-                    </form>
-                    </c:if>
-                    <c:if test="${not empty atendimento.atendimento_solucao}">
-                        <p>${atendimento.atendimento_solucao}</p>
-                    </c:if>
+                <c:if test="${empty atendimento.atendimento_solucao}">
+                    <c:if test="${(!empty funcOn)}">
+                        <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
+                            <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
+                            <button type='submit' class='btn btn-primary margem'>Fechar atendimento</button>
+                        </form>
+                    </c:if>                    
+                </c:if>
+                <c:if test="${!empty atendimento.atendimento_solucao}">
+                    <p>Solução: ${atendimento.atendimento_solucao}</p>
                 </c:if>
                 <c:if test="${(!empty clienteOn)}">
                     <a href="ClienteServlet?action=Listagem_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
@@ -62,7 +61,7 @@
                     <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
                 </c:if>
                 <c:if test="${(!empty gerenteOn)}">
-                    <a href="GerenteServlet?action=listar"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
+                    <a href="GerenteServlet?action=atendimentos_abertos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
                 </c:if>
             </div>
         </div>  
