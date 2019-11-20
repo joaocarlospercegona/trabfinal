@@ -23,6 +23,11 @@
         </script>
     </head>
     <body>
+        <c:if test="${empty gerenteOn}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
         <c:set var="i" value="0"/>  
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
@@ -38,7 +43,7 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                     Sair
                 </button>
             </div>

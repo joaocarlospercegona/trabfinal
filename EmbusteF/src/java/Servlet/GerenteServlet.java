@@ -1,5 +1,6 @@
 package Servlet;
 
+import static Facade.Facade.BuscaTipo;
 import static Facade.Facade.altera_Funcionario;
 import static Facade.Facade.altera_Gerente;
 import static Facade.Facade.buscaTodas_Categorias;
@@ -8,9 +9,11 @@ import static Facade.Facade.buscaTodos_Atendimentos_abertos;
 import static Facade.Facade.buscaTodos_Funcionario;
 import static Facade.Facade.buscaTodos_Gerente;
 import static Facade.Facade.buscaTodos_Produtos;
+import static Facade.Facade.busca_Atendimento;
 import static Facade.Facade.busca_Cliente;
 import static Facade.Facade.busca_Funcionario;
 import static Facade.Facade.busca_Gerente;
+import static Facade.Facade.busca_Produtos;
 import static Facade.Facade.exclui_Funcionario;
 import static Facade.Facade.exclui_Gerente;
 import static Facade.Facade.insere_Funcionario;
@@ -22,6 +25,7 @@ import classes.Gerente;
 import classes.LoginBean;
 import classes.Pessoa;
 import classes.Produto;
+import classes.Tipo_Atendimento;
 import classes.categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +52,7 @@ public class GerenteServlet extends HttpServlet {
              PrintWriter out = response.getWriter();
              response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-            LoginBean logado = (LoginBean) session.getAttribute("logado");
+            LoginBean logado = (LoginBean) session.getAttribute("gerenteOn");
             String action = request.getParameter("action");
             String cpf1 = logado.getCpf();
             if(logado == null){
@@ -77,6 +81,27 @@ public class GerenteServlet extends HttpServlet {
                             request.setAttribute("func","gerente");
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/gerente-funcionarios.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }
+                        case "resolucao":
+                        {
+                            Cliente c = new Cliente();
+                            Produto p = new Produto();
+                            Tipo_Atendimento t = new Tipo_Atendimento();
+                            String cod = request.getParameter("cod");
+                            out.println(cod);
+                            Atendimento atendimento = new Atendimento();
+                            atendimento = busca_Atendimento(cod);
+                            c = busca_Cliente(atendimento.getAtendimento_cpf_cliente());
+                            p = busca_Produtos(atendimento.getAtendimento_cod_produto());
+                            t = BuscaTipo(atendimento.getAtendimento_cod_tipo_atendimento());
+                            request.setAttribute("tipo",t);
+                            request.setAttribute("produto",p);
+                            request.setAttribute("cliente",c);
+                            request.setAttribute("atendimento",atendimento); 
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/resolucao-atendimento.jsp");
                             rd.forward(request, response);
                             break;
                         }
@@ -248,18 +273,16 @@ public class GerenteServlet extends HttpServlet {
                                     //deletar o usuario da table func e inserir ele na gerencia
                                     exclui_Funcionario(cpf);
                                     insere_Gerente(gerente);
-                                    out.println("deleta funcio");
                                 }
                                 else if(option.equals("1")){
                                     //deletar o usuario da table gerente e inserir na funcionario
                                     exclui_Gerente(cpf);
                                     insere_Funcionario(funcionario);
-                                    out.println("deleta gerente");
                                 }
                             }
-//                             RequestDispatcher rd = getServletContext().
-//                                   getRequestDispatcher("/GerenteServlet?action=listar");
-//                             rd.forward(request, response);
+                             RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/GerenteServlet?action=listar");
+                             rd.forward(request, response);
                             }
                             break;
                         }

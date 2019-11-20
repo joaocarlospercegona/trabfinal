@@ -1,16 +1,10 @@
-<%-- 
-    Document   : gerente-ver
-    Created on : 27/10/2019, 21:57:27
-    Author     : joao
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
         <meta charset='UTF-8'>
-        <title>BEIBE - Beauty Embuste IndÃºstria de Beleza e EstÃ©tica</title>
+        <title>BEIBE - Beauty Embuste Industria de Beleza e Estetica</title>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <link rel='shortcut icon' href='static/favicon.ico' type='image/x-icon'>
         <link rel='icon' href='static/favicon.ico' type='image/x-icon'>
@@ -27,6 +21,12 @@
             $("#cpf").mask("000.000.000-00");
         </script>
     </head>
+    <body>
+        <c:if test="${empty gerenteOn}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
        <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>

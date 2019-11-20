@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 import static Facade.Facade.BuscaTipo;
@@ -65,10 +60,10 @@ public class FuncionarioServlet extends HttpServlet {
              PrintWriter out = response.getWriter();
              response.setContentType("text/html;charset=UTF-8");
              HttpSession session = request.getSession();
-            LoginBean logado = (LoginBean) session.getAttribute("logado");
+            LoginBean funcOn = (LoginBean) session.getAttribute("funcOn");
             String action = request.getParameter("action");
-            String cpf = logado.getCpf();
-            if(logado == null){
+            String cpf = funcOn.getCpf();
+            if(funcOn == null){
                 request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
                 RequestDispatcher rd = getServletContext().
                     getRequestDispatcher("/login.jsp");
@@ -92,7 +87,6 @@ public class FuncionarioServlet extends HttpServlet {
                         }
                         case "ver_produtos":
                         {
-                              out.println("cheguei papai");
                             List<Produto> produtos = buscaTodos_Produtos();
                             request.setAttribute("func","produto");
                             request.setAttribute("prod",produtos);
@@ -210,8 +204,6 @@ public class FuncionarioServlet extends HttpServlet {
                             produto.setProduto_cod_categoria(cod_categoria);
                             
                             altera_Produtos(produto, id);
-                            
-                            //parei aqui
                             
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/FuncionarioServlet?action=ver_produtos");

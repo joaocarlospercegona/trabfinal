@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 import static Facade.Facade.BuscaTipo;
@@ -65,11 +60,11 @@ public class ClienteServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
-            LoginBean logado = (LoginBean) session.getAttribute("logado");
+            LoginBean clienteOn = (LoginBean) session.getAttribute("clienteOn");
             String action = request.getParameter("action");
-            String cpf = logado.getCpf();
+            String cpf = clienteOn.getCpf();
             
-            if((logado == null)&&(!action.equals("cadastro_cliente"))){
+            if((clienteOn == null)&&(!action.equals("cadastro_cliente"))){
                 request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
                 RequestDispatcher rd = getServletContext().
                     getRequestDispatcher("/login.jsp");
@@ -152,7 +147,7 @@ public class ClienteServlet extends HttpServlet {
                             Atendimento a = new Atendimento();
                             a.setAtendimento_cod_produto(produto);
                             a.setAtendimento_cod_tipo_atendimento(tipoA);
-                            a.setAtendimento_cpf_cliente(logado.getCpf());
+                            a.setAtendimento_cpf_cliente(clienteOn.getCpf());
                             Date data = new Date();
                             SimpleDateFormat formatador = new SimpleDateFormat("dd-MM-yyyy");
                             String dataS = formatador.format(data);
@@ -182,7 +177,7 @@ public class ClienteServlet extends HttpServlet {
                         case "Listagem_atendimentos":
                         {
                             List<Atendimento> atendimentos = new ArrayList();
-                            List<Atendimento> atendiment = buscaTodos_Atendimentos_Cliente(logado.getCpf());
+                            List<Atendimento> atendiment = buscaTodos_Atendimentos_Cliente(clienteOn.getCpf());
                             List<Produto> prod = buscaTodos_Produtos();
                             request.setAttribute("produtos",prod);
                             

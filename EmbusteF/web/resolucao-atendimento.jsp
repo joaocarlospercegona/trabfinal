@@ -16,7 +16,7 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body>
-        <c:if test="${logado == null}">
+        <c:if test="${(empty gerenteOn) && (empty funcOn) && (empty clienteOn)}">
             <jsp:forward page="login.jsp"> 
                 <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
             </jsp:forward>
@@ -44,7 +44,7 @@
                 <p>Tipo de Atendimento: ${tipo.tipo_atendimento_nome} </p>
                 <p>Descrição: ${atendimento.atendimento_descricao}</p>
                 <p>Solução:</p>
-                <c:if test="${!clien.equals('cliente')}">
+                <c:if test="${(!empty funcOn)}">
                     <c:if test="${ empty atendimento.atendimento_solucao}">
                     <form method="post" action="FuncionarioServlet?action=finalizar&id=${atendimento.atendimento_codigo}">
                         <input type='text' class='form-control campo0' id='solucao' name='solucao' placeholder='Solução'>             
@@ -55,11 +55,14 @@
                         <p>${atendimento.atendimento_solucao}</p>
                     </c:if>
                 </c:if>
-                <c:if test="${clien.equals('cliente')}">
+                <c:if test="${(!empty clienteOn)}">
                     <a href="ClienteServlet?action=Listagem_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
                 </c:if>
-                <c:if test="${!clien.equals('cliente')}">
+                <c:if test="${(!empty funcOn)}">
                     <a href="FuncionarioServlet?action=todos_atendimentos"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
+                </c:if>
+                <c:if test="${(!empty gerenteOn)}">
+                    <a href="GerenteServlet?action=listar"> <button type='submit' class='btn btn-danger margem'>Voltar</button></a>
                 </c:if>
             </div>
         </div>  

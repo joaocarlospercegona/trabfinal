@@ -11,7 +11,7 @@
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css'>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  <!-- mascara -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <link rel='stylesheet' href='css/styles.css'>
         <link rel='stylesheet' href='css/header.css'>
@@ -22,11 +22,11 @@
         </script>
     </head>
     <body>
-            <c:if test="${logado == null}">
-                <jsp:forward page="login.jsp"> 
-                    <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
-                </jsp:forward>
-            </c:if>
+        <c:if test="${clienteOn == null}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
@@ -64,7 +64,7 @@
                     <input type='password'  class='form-control campo1' id='senha' name='senha' placeholder='Sua senha' value="${c.cliente_senha}"><br>
                     <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='Confirme sua senha' value="${c.cliente_senha}"><br> 
                     <button type='submit' class='btn btn-primary margem'>Alterar dados</button>
-                    <button onclick="location.href = 'LogoutServlet';">Voltar</button>
+                    <button class='btn btn-danger margem' onclick="location.href = 'ClienteServlet?action=Listagem_atendimentos';">Voltar</button>
                     <p>Obs: CPF e email não podem ser alterados</p>
                 </form>
             </div>

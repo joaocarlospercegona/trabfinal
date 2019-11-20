@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getCliente_cpf());
                                 p.setNome(x.getCliente_nome());
-                                session.setAttribute("logado", p);
+                                session.setAttribute("clienteOn", p);
                                 RequestDispatcher rd = getServletContext().
                                     getRequestDispatcher("/ClienteServlet?action=Listagem_atendimentos");
                                 rd.forward(request, response);
@@ -73,9 +73,7 @@ public class LoginServlet extends HttpServlet {
                             getRequestDispatcher("/login.jsp");
                         rd.forward(request, response);
                     }
-                    
-                    //Concluido o primeiro if tipo 1.
-                    
+                                        
                     if("2".equals(tipo)){
                         List<Funcionario> lista = buscaTodos_Funcionario();
                         for (Funcionario x: lista) {
@@ -83,7 +81,7 @@ public class LoginServlet extends HttpServlet {
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getFuncionario_cpf());
                                 p.setNome(x.getFuncionario_nome());
-                                session.setAttribute("logado", p);
+                                session.setAttribute("funcOn", p);
                                 RequestDispatcher rd = getServletContext().
                                     getRequestDispatcher("/FuncionarioServlet?action=todos_atendimentos");
                                 rd.forward(request, response);
@@ -95,8 +93,6 @@ public class LoginServlet extends HttpServlet {
                             rd.forward(request, response);                        
                     }
                     
-                    //Concluido o segundo if tipo 2
-                    
                     if("3".equals(tipo)){
                         List<Gerente> lista = buscaTodos_Gerente();
                         for (Gerente x: lista) {
@@ -104,7 +100,7 @@ public class LoginServlet extends HttpServlet {
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getGerente_cpf());
                                 p.setNome(x.getGerente_nome());
-                                session.setAttribute("logado", p);
+                                session.setAttribute("gerenteOn", p);
                                 RequestDispatcher rd = getServletContext().
                                     getRequestDispatcher("/GerenteServlet?action=atendimentos_abertos");
                                 rd.forward(request, response);

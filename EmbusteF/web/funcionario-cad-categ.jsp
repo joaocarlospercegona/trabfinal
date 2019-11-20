@@ -1,9 +1,3 @@
-<%-- 
-    Document   : funcionario-cad-categ
-    Created on : 28/10/2019, 19:47:58
-    Author     : joao
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -22,6 +16,11 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body style='text-align:center; background-color: white'>
+        <c:if test="${funcOn == null}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
         <c:set var="i" value="0"/>
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>

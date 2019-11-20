@@ -21,15 +21,21 @@
             $("#cpf").mask("000.000.000-00");
         </script>
     </head>
+    <body>
+        <c:if test="${empty gerenteOn}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
        <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
-
                 <div id='session'>
                     <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                         Sair
                     </button>
                 </div>
+            </div>
         </header>
         <div class='caixa cadastro'>
             <div class='conteudo'>
@@ -44,12 +50,12 @@
                     <input type='text'  class='form-control campo1' id='cidade' name='cidade' placeholder='Cidade' value="${c.pessoa_cidade}"><br> 
                     <input type='text'  class='form-control campo1' id='bairro' name='bairro' placeholder='Bairro' value="${c.pessoa_bairro}"><br>
                     <input type='text'  class='form-control campo1' id='rua' name='rua' placeholder='Rua' value="${c.pessoa_rua}"><br>
-                    <input type='number'  class='form-control campo2' id='numero' name='numero' placeholder='NÃºmero' value="${c.pessoa_numero}"><br>
+                    <input type='number'  class='form-control campo2' id='numero' name='numero' placeholder='Numero' value="${c.pessoa_numero}"><br>
                     <input type='text'  class='form-control campo2' id='complemento' name='complemento' placeholder='Complemento' value="${c.pessoa_complemento}"><br> 
                     <input type='password'  class='form-control campo1' id='senha' name='senha' placeholder='Sua senha' value="${c.pessoa_senha}"><br>
-                    <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='ConfirmaÃ§Ã£o da senha' value="${c.pessoa_senha}"><br> 
+                    <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='Confirme sua senha' value="${c.pessoa_senha}"><br> 
                     <div>
-                        <select name="tipo" id="tipo" required class='form-control campo1'>
+                        <select name="tipo" id="tipo" required class='form-control campo0'>
                             <c:if test="${func == '1'}" >
                                 <option  value="2">Gerente</option>
                                 <option   selected hidden value="1">Funcionario</option>
@@ -64,11 +70,11 @@
                     <br>
                     </div>
                     <button type='submit' class='btn btn-primary margem'>Alterar dados</button>
-                    <button class='btn btn-danger margem' onclick= "location.href='GerenteServlet?action=listar'">Voltar</button>
-                    <p>Obs: CPF e email não podem ser alterados</p>
                 </form>
+                <button class='btn btn-danger margem' onclick= "location.href='GerenteServlet?action=listar'">Voltar</button>
+                <p>Obs: CPF e email não podem ser alterados</p>
             </div>
-        </div>  
+        </div>
     </body>
     <footer>
         &#9400 Beibe

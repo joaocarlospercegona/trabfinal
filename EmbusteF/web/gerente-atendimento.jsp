@@ -22,6 +22,11 @@
         </script>
     </head>
     <body>
+        <c:if test="${empty gerenteOn}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>
@@ -36,7 +41,7 @@
                 </button>
             </div>
             <div id='session'>
-                <button id='user-name' class='drop-button'  onclick="location.href = 'login.jsp';">
+                <button id='user-name' class='drop-button'  onclick="location.href = 'LogoutServlet';">
                     Sair
                 </button>
             </div>
@@ -120,7 +125,7 @@
                                         <c:if test="${x.atendimento_nivel == 0}">
                                             <td>${x.atendimento_situacao}</td>
                                         </c:if>
-                                        <td><a href="resolucao-atendimento.jsp"><img src="ver.png" width=45 height=40></a></td>
+                                        <td><a href="GerenteServlet?action=resolucao&cod=${x.atendimento_codigo}"><img src="ver.png" width=45 height=40></a></td>
                                     </tr>
                             </c:forEach>
                         </tbody>

@@ -15,7 +15,7 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body>
-            <c:if test="${logado == null}">
+            <c:if test="${clienteOn == null}">
                 <jsp:forward page="login.jsp"> 
                     <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
                 </jsp:forward>
