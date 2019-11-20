@@ -153,7 +153,6 @@ public class GerenteServlet extends HttpServlet {
                                     funcionario.setFuncionario_numero(nr);
                                     funcionario.setFuncionario_complemento((String) request.getParameter("complemento"));
                                     funcionario.setFuncionario_senha(senha);
-                                    out.println(funcionario);
                                     insere_Funcionario(funcionario);
                                 }
                                 RequestDispatcher rd = getServletContext().

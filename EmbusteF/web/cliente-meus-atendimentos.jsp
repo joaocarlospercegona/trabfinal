@@ -69,7 +69,7 @@
                                     </c:forEach>
                                             
                                     <c:if test="${x.atendimento_situacao.equals('Em aberto')}">
-                                        <td style="color:yellow">${x.atendimento_situacao}</td>
+                                            <td style="color:yellow">${x.atendimento_situacao}</td>
                                     </c:if>
                                     <c:if test="${x.atendimento_situacao.equals('Finalizado')}">
                                         <td style="color:green">${x.atendimento_situacao}</td>
