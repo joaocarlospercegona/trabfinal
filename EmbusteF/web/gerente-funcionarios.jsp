@@ -69,8 +69,7 @@
                             <td>Editar</td>
                             <td>Remover</td>
                         </tr>
-                    </thead>
-                    
+                    </thead>                    
                     <tbody>
                         <c:forEach items="${funcionarios}" var="x">
                             <tr>

@@ -115,6 +115,19 @@ public class Facade {
         List<Tipo_Atendimento> c = dao.findEntitiest(true,100,1);
         return c;
     }
+    
+    public static List<Tipo_Atendimento> BuscaTodos_Tipos_Info(){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        List<Tipo_Atendimento> c = dao.findEntitiesTipo(true,100,1);
+        return c;
+    }
+    
+    public static List<Tipo_Atendimento> BuscaTodos_Tipos_InfoAberto(){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        List<Tipo_Atendimento> c = dao.findEntitiesTipoAberto(true,100,1);
+        return c;
+    }
+    
     public static void altera_atendimento(String solucao, int id){ 
         AtendimentoDAO dao = new AtendimentoDAO();
         dao.edit(solucao, id); 

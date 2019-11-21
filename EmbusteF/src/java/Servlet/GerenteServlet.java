@@ -1,6 +1,8 @@
 package Servlet;
 
 import static Facade.Facade.BuscaTipo;
+import static Facade.Facade.BuscaTodos_Tipos_Info;
+import static Facade.Facade.BuscaTodos_Tipos_InfoAberto;
 import static Facade.Facade.altera_Funcionario;
 import static Facade.Facade.altera_Gerente;
 import static Facade.Facade.buscaTodas_Categorias;
@@ -374,6 +376,17 @@ public class GerenteServlet extends HttpServlet {
                             
                             int finalizado = total - (aberto/100);
                             request.setAttribute("efetuados",finalizado);
+                            
+                            List<Tipo_Atendimento> tpAb = BuscaTodos_Tipos_InfoAberto();
+                            List<Tipo_Atendimento> tpto = BuscaTodos_Tipos_Info();
+                            List<Tipo_Atendimento> tp = new ArrayList();
+                            
+//                            int i =0;
+//                            for(Tipo_Atendimento t : tp){
+//                                tp.add(t);
+//                            }
+                            request.setAttribute("XX",tpAb);
+                            request.setAttribute("YY",tpto);
                             
                             //Para mostrar pós-modal
                             List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();

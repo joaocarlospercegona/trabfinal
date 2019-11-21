@@ -39,7 +39,34 @@
                             <h3 class="info-gerente">Quantidade de atendimentos efetuados até o momento:</h3><h3>Efetuados: ${efetuados}</h3>
                             <h3 class="info-gerente">Quantidade de atendimentos em aberto e a porcentagem em relação ao total:</h3>
                             <h3>Em aberto:${aberto}</h3><h3>Porcentagem: ${porcentagem}%</h3>
-                            <h3 class="info-gerente">Tipo de atendimento e atendimentos aberto/atendimentos total:</h3><h3>XX/YY</h3>                       
+                            <h3 class="info-gerente">Tipo de atendimento e atendimentos aberto/atendimentos total:</h3>
+                                     
+                        <table class='table table-hover'>
+                            <thead class='black white-text'>
+                                <tr>
+                                    <td width="200">Tipo</td>
+                                    <td width="200">Abertos</td>
+                                    <td width="200">Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="i" value="0"/>
+                                    <c:forEach items="${XX}" var="xx">
+                                        <tr>
+                                            <td>
+                                                ${xx.tipo_atendimento_nome}
+                                            </td>
+                                            <td>
+                                                ${xx.tipo_total}
+                                            </td>
+                                            <td>
+                                                ${YY.get(i).tipo_total}
+                                            </td>
+                                        </tr>
+                                        <c:set var="i" value="${i + 1}"/>
+                                    </c:forEach>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>

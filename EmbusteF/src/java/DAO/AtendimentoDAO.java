@@ -93,6 +93,86 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
     }
     
+    public List<Tipo_Atendimento> findEntitiesTipo(boolean all, int maxResults, int firstResult) {
+      List<Tipo_Atendimento> result = null;
+      java.sql.PreparedStatement ps = null;
+      java.sql.ResultSet rs = null;
+
+        try {
+          verificaConexao();
+          ps = conn.prepareStatement("select t.tipo_atendimento_nome,count(*) from atendimento a\n" +
+          "inner join tipo_atendimento t on t.tipo_atendimento_codigo = a.atendimento_cod_tipo_atendimento \n" +
+          "group by t.tipo_atendimento_nome");
+            rs = ps.executeQuery();
+            System.out.println("chegou");
+            if (rs.next()) {
+                result = new java.util.ArrayList<Tipo_Atendimento>();
+                if (!all) {
+                    int contagem = 1;  // primeiro next
+                    while (contagem < firstResult) {
+                        rs.next();
+                        contagem++;
+                    }
+                }
+                do {
+                  Tipo_Atendimento p = new Tipo_Atendimento();
+                  p.setTipo_atendimento_nome(rs.getString("tipo_atendimento_nome"));
+                  p.setTipo_total(rs.getInt("count"));
+                  result.add(p);
+                } while ((result.size() < maxResults || all) && rs.next());
+            }
+
+        } catch (java.sql.SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return result;
+
+    }
+    
+    public List<Tipo_Atendimento> findEntitiesTipoAberto (boolean all, int maxResults, int firstResult) {
+      List<Tipo_Atendimento> result = null;
+      java.sql.PreparedStatement ps = null;
+      java.sql.ResultSet rs = null;
+
+        try {
+            verificaConexao();
+            ps = conn.prepareStatement("select t.tipo_atendimento_nome,count(*) from atendimento a\n" +
+            "inner join tipo_atendimento t on t.tipo_atendimento_codigo = a.atendimento_cod_tipo_atendimento \n" +
+            "where a.atendimento_situacao = 'Em aberto'\n" +
+            "group by t.tipo_atendimento_nome");
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                result = new java.util.ArrayList<Tipo_Atendimento>();
+                if (!all) {
+                    int contagem = 1;  // primeiro next
+                    while (contagem < firstResult) {
+                        rs.next();
+                        contagem++;
+                    }
+                }
+                do {
+                  Tipo_Atendimento p = new Tipo_Atendimento();
+                  p.setTipo_atendimento_nome(rs.getString("tipo_atendimento_nome"));
+                  p.setTipo_total(rs.getInt("count"));
+                  result.add(p);
+                } while ((result.size() < maxResults || all) && rs.next());
+            }
+
+        } catch (java.sql.SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return result;
+
+    }
+    
     public List<Tipo_Atendimento> info_Tipo (boolean all, int maxResults, int firstResult) {
         List<Tipo_Atendimento> result = null;
         java.sql.PreparedStatement ps = null;
