@@ -27,21 +27,24 @@
         </script>
     </head>
     <body>
-        <div id="myModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h3 class="modal-title">Olá!</h3>
-                    </div>
-                    <div class="modal-body">
-                        <h5>Quantidade de atendimentos efetuados até o momento:</h5>
-                        <h5>Quantidade de atendimentos em aberto e a porcentagem em relação ao total:</h5>
-                        <h5>Tipo de atendimento e atendimentos aberto/atendimentos total</h5>                        
+        <c:if test="${validador.equals('primeiro')}">
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h1 class="modal-title">Últimas informações, chefe!</h1>
+                        </div>
+                        <div class="modal-body">
+                            <h3 class="info-gerente">Quantidade de atendimentos efetuados até o momento:</h3><h3>Efetuados: ${efetuados}</h3>
+                            <h3 class="info-gerente">Quantidade de atendimentos em aberto e a porcentagem em relação ao total:</h3>
+                            <h3>Em aberto:${aberto}</h3><h3>Porcentagem: ${porcentagem}%</h3>
+                            <h3 class="info-gerente">Tipo de atendimento e atendimentos aberto/atendimentos total:</h3><h3>XX/YY</h3>                       
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>        
+            </div>    
+        </c:if>
         <c:if test="${empty gerenteOn}">
             <jsp:forward page="login.jsp"> 
                 <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>

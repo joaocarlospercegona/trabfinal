@@ -92,6 +92,46 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
         return result;
 
     }
+    
+    public List<Tipo_Atendimento> info_Tipo (boolean all, int maxResults, int firstResult) {
+        List<Tipo_Atendimento> result = null;
+        java.sql.PreparedStatement ps = null;
+        java.sql.ResultSet rs = null;
+
+        try {
+          verificaConexao();
+          ps = conn.prepareStatement("select * from tipo_atendimento");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                result = new java.util.ArrayList<Tipo_Atendimento>();
+                if (!all) {
+                    int contagem = 1;  // primeiro next
+                    while (contagem < firstResult) {
+                        rs.next();
+                        contagem++;
+                    }
+                }
+                do {
+                  Tipo_Atendimento p = new Tipo_Atendimento();
+                  p.setTipo_atendimento_codigo(rs.getInt("tipo_atendimento_codigo"));
+                  p.setTipo_atendimento_nome(rs.getString("tipo_atendimento_nome"));
+                  
+                  result.add(p);
+                } while ((result.size() < maxResults || all) && rs.next());
+            }
+
+        } catch (java.sql.SQLException ex) {
+            ex.printStackTrace();
+            //log.severe("", ex);
+        } finally {
+            JDBCUtils.close(rs);
+            JDBCUtils.close(ps);
+        }
+        return result;
+
+    }
+    
     public List<Tipo_Atendimento> findEntitiest(boolean all, int maxResults, int firstResult) {
         List<Tipo_Atendimento> result = null;
       java.sql.PreparedStatement ps = null;

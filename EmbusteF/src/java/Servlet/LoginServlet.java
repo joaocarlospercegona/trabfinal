@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlet;
 
 
@@ -25,10 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author joao
- */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
@@ -102,7 +93,7 @@ public class LoginServlet extends HttpServlet {
                                 p.setNome(x.getGerente_nome());
                                 session.setAttribute("gerenteOn", p);
                                 RequestDispatcher rd = getServletContext().
-                                    getRequestDispatcher("/GerenteServlet?action=atendimentos_abertos");
+                                    getRequestDispatcher("/GerenteServlet?action=gerente_infos");
                                 rd.forward(request, response);
                             }
                         }

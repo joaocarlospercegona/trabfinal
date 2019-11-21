@@ -1,17 +1,25 @@
 Funcionalidades:
-	Fazer estados e cidades
-	Confirm n funciona com . no CPF (metacaracter)
+	Fazer estados e cidades	-> clientesForm
 	Tela inicial do gerente
-	Impedir remoçao do gerente logado
 	Criptografar senhas
-	Exceções
+
+Correções:
+	Confirm n funciona com . no CPF (metacaracter)	
+
+Exceções:
+	Impossível remover gerente logado
+	Senha incorreta
+	Usuário não existe
+	Necessário logar antes
+	Não é possível apagar objeto
+	Cliente não pode excluir atendimento finalizado
 	
 Minors:
-	Mudar de "Em Aberto" para "Aberto" (conferir jasper)
 	Colocar stroke nas palavras em amarelo
 	Melhorar tela solução
 	"Já possuo minha conta" no cadastro
 	Organizar código
+	Fazer inserts adequados
 	
 
 

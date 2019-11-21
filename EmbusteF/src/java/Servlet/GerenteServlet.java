@@ -5,6 +5,7 @@ import static Facade.Facade.altera_Funcionario;
 import static Facade.Facade.altera_Gerente;
 import static Facade.Facade.buscaTodas_Categorias;
 import static Facade.Facade.buscaTodos_Atendimentos;
+import static Facade.Facade.buscaTodos_Atendimentos_aberto_regra;
 import static Facade.Facade.buscaTodos_Atendimentos_abertos;
 import static Facade.Facade.buscaTodos_Funcionario;
 import static Facade.Facade.buscaTodos_Gerente;
@@ -77,8 +78,11 @@ public class GerenteServlet extends HttpServlet {
                         case "listar_gerente":
                         {
                             List<Gerente> gerentes =  buscaTodos_Gerente();
+                            String cpf = (String)request.getParameter("cpf");
+                            Gerente proprio = busca_Gerente(cpf);
                             request.setAttribute("gerentes",gerentes);
                             request.setAttribute("func","gerente");
+                            request.setAttribute("proprio",proprio);
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/gerente-funcionarios.jsp");
                             rd.forward(request, response);
@@ -352,7 +356,48 @@ public class GerenteServlet extends HttpServlet {
                             rd.forward(request, response);
                             break;
                         }
-                        
+                        case "gerente_infos":{
+                            List<Atendimento> c = buscaTodos_Atendimentos_aberto_regra();
+                            int aberto = 0;
+                            int total = 0;
+                            float res = 0;
+                            for(Atendimento x : c){
+                                if(x.getAtendimento_situacao().equals("Em aberto")){
+                                    aberto++;
+                                }
+                                total++;
+                            }
+                            aberto = aberto*100;
+                            res = aberto/total;
+                            request.setAttribute("porcentagem",res);
+                            request.setAttribute("aberto",aberto/100);
+                            
+                            int finalizado = total - (aberto/100);
+                            request.setAttribute("efetuados",finalizado);
+                            
+                            //Para mostrar pós-modal
+                            List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();
+                            List<Atendimento> atendimentos = new ArrayList();
+                            DateTime dataAtual = new DateTime();
+                            for(Atendimento x : atendiment){
+                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
+                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
+                                if (dias > 7)
+                                    x.setAtendimento_nivel(1);
+                                else
+                                    x.setAtendimento_nivel(0);
+                                atendimentos.add(x);
+                            }
+                            List<Produto> prod = buscaTodos_Produtos();
+                            request.setAttribute("produtos",prod);
+                            request.setAttribute("atendimentos",atendimentos);
+                            request.setAttribute("func","aberto");
+                            request.setAttribute("validador","primeiro");
+                            RequestDispatcher rd = getServletContext().
+                                   getRequestDispatcher("/gerente-atendimento.jsp");
+                            rd.forward(request, response);
+                            break;
+                        }                        
                         case "atendimentos_abertos":
                         {
                             List<Atendimento> atendiment =  buscaTodos_Atendimentos_abertos();

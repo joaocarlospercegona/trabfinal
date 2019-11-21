@@ -160,6 +160,11 @@ public class Facade {
     }
 //-----------------------------------------------------------------------------------------------
 //CATEGORIAS
+    public static List<Atendimento> buscaTodos_Atendimentos_aberto_regra(){
+        AtendimentoDAO dao = new AtendimentoDAO();
+        List<Atendimento> c = dao.findEntities(true,100,1);
+        return c;
+    }    
     public static List<categoria> buscaTodas_Categorias(){
         CategoriaDAO dao = new CategoriaDAO();
         List<categoria> c = dao.findEntities(true,100,1);
