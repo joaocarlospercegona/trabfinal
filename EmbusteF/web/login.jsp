@@ -26,7 +26,7 @@
                     <input type="radio" name="tipo" value="3"> Gerente<br>
                     <button type='submit' class='btn btn-primary margem'>Logar</button>
                 </form>
-                <a href="cadastro.jsp">Ainda não possui conta?</a>
+                <a href="LoginServlet?action=novo_usuario">Ainda não possui conta?</a>
             </div>
         </div>     
     </body>

@@ -4,6 +4,8 @@ import static Facade.Facade.BuscaTipo;
 import static Facade.Facade.BuscaTodos_Tipos;
 import static Facade.Facade.altera_Cliente;
 import static Facade.Facade.buscaTodas_Categorias;
+import static Facade.Facade.buscaTodosCidades;
+import static Facade.Facade.buscaTodosEstados;
 import static Facade.Facade.buscaTodos_Atendimentos;
 import static Facade.Facade.buscaTodos_Atendimentos_Cliente;
 import static Facade.Facade.buscaTodos_Produtos;
@@ -14,11 +16,14 @@ import static Facade.Facade.exclui_Atendimento;
 import static Facade.Facade.insere_Cliente;
 import static Facade.Facade.insere_atendimento;
 import classes.Atendimento;
+import classes.Cidade;
 import classes.Cliente;
+import classes.Estado;
 import classes.LoginBean;
 import classes.Produto;
 import classes.Tipo_Atendimento;
 import classes.categoria;
+import classes.cidadeTeste;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -62,6 +67,7 @@ public class ClienteServlet extends HttpServlet {
             HttpSession session = request.getSession();
             LoginBean clienteOn = (LoginBean) session.getAttribute("clienteOn");
             String action = request.getParameter("action");
+            
             String cpf = clienteOn.getCpf();
             
             if((clienteOn == null)&&(!action.equals("cadastro_cliente"))){

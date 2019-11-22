@@ -18,6 +18,36 @@
             $("#cep").mask("00000-000");
             $("#cpf").mask("000.000.000-00");
         </script>
+<!--        <script type="text/javascript" > //USAR ESSE
+
+                        function getCidades(){
+                        var idestado = $("#estado").val();
+                        var url = "AJAXServlet";
+                        //console.log("entrou1");
+                        $.ajax({
+                        url : url, // URL da sua Servlet
+                                data : {
+                                idestado : idestado
+                                }, // Parâmetro passado para a Servlet
+                                dataType : 'json',
+                                success : function(data) {
+                                console.log("executou");
+                                // Se sucesso, limpa e preenche a combo de cidade
+                                // alert(JSON.stringify(data));
+                                $("#cidade").empty();
+                                $.each(data, function(i, obj) {
+                                $("#cidade").append('<option value=' + obj.idcidadeteste + '>' + obj.nomecidadeteste + '</option>');
+                                });
+                                },
+                                error : function(request, textStatus, errorThrown) {
+                                console.log("deu erro");
+                                alert(request.status + ', Error: ' + request.statusText);
+                                // Erro
+                                }
+                        });
+                        }
+                    </script>-->
+
     </head>
     <body style='text-align:center; background-color: #21B180;'>
         <img class='imagem-inicial' src='static/logo_transparent.jpg' alt='aqui'/>
@@ -30,8 +60,19 @@
                     <input type='text'  class='form-control campo1' id='cpf' name='cpf' placeholder='CPF'><br>  
                     <input type='email'  class='form-control campo1' id='email' name='email' placeholder='Email'><br> 
                     <input type='text'  class='form-control campo1' id='cep' name='cep' placeholder='CEP'><br>
-                    <input type='text'  class='form-control campo1' id='estado' name='estado' placeholder='Estado'><br>       
-                    <input type='text'  class='form-control campo1' id='cidade' name='cidade' placeholder='Cidade'><br> 
+                    <label>Estado</label>
+                    <select id="estado" name="estado" required class="form-control">
+                        <c:forEach var="estadoss" items="${estadoss}">
+                            <option>
+                                ${estadoss.nomeEstado}
+                            </option>
+                        </c:forEach>
+                    </select>
+<!--
+                    <label>Cidade</label>
+                    <select id="cidade" name="cidade" required class="form-control" >
+                        <option >{city.nomecidadeteste}</option>
+                    </select>-->
                     <input type='text'  class='form-control campo1' id='bairro' name='bairro' placeholder='Bairro'><br>
                     <input type='text'  class='form-control campo1' id='rua' name='rua' placeholder='Rua'><br>
                     <input type='text'  class='form-control campo2' id='numero' name='numero' placeholder='Número'><br>

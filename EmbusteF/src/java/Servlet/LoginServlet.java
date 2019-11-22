@@ -1,16 +1,22 @@
 package Servlet;
 
 
+import static Facade.Facade.buscaTodosCidades;
+import static Facade.Facade.buscaTodosEstados;
 import static Facade.Facade.buscaTodos_Cliente;
 import static Facade.Facade.buscaTodos_Funcionario;
 import static Facade.Facade.buscaTodos_Gerente;
 import classes.Atendimento;
+import classes.Cidade;
 import classes.Cliente;
+import classes.Estado;
 import classes.Funcionario;
 import classes.Gerente;
 import classes.LoginBean;
+import classes.cidadeTeste;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,6 +50,28 @@ public class LoginServlet extends HttpServlet {
             // 1 para cliente
             // 2 para Funcionario
             // 3 para Gerente
+            String action = request.getParameter("action");
+            if(action.equals("novo_usuario")){
+                List<Estado> estados = buscaTodosEstados();
+                    List<Cidade> cidades = buscaTodosCidades();
+
+                    List<cidadeTeste> citeste = new ArrayList();
+                    System.out.println("estados:" + estados);
+//                    //out.println(cidades);
+//                    for (int i = 0; i < cidades.size(); i++) {
+//                        cidadeTeste a = new cidadeTeste();
+//                        a.setIdcidadeteste(cidades.get(i).getIdCidade());
+//                        a.setNomecidadeteste(cidades.get(i).getNomeCidade());
+//                        a.setIdestado(cidades.get(i).getFKidestado().getIdEstado());
+//                        citeste.add(a);
+//                    }
+//                    request.setAttribute("cidadess", citeste);
+
+                    request.setAttribute("estadoss", estados);
+                    RequestDispatcher rd = getServletContext().
+                            getRequestDispatcher("/cadastro.jsp");
+                    rd.forward(request, response);
+            }
             if((usuario != null)&&(senha != null)&&(tipo != null)){
                 try{
                     if("1".equals(tipo)){
@@ -107,12 +135,12 @@ public class LoginServlet extends HttpServlet {
                     //ver oq colocar aqui
                 } 
             }
-            else{
-                request.setAttribute("msg","Usuario/Senha Invalidos");
-                RequestDispatcher rd = getServletContext().
-                    getRequestDispatcher("/login.jsp");
-                rd.forward(request, response);
-            }
+//            else{
+//                request.setAttribute("msg","Usuario/Senha Invalidos");
+//                RequestDispatcher rd = getServletContext().
+//                    getRequestDispatcher("/login.jsp");
+//                rd.forward(request, response);
+//            }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

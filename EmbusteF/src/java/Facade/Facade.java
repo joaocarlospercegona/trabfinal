@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Facade;
 
 import DAO.AtendimentoDAO;
 import DAO.CategoriaDAO;
+import DAO.CidadeDAO;
 import DAO.ClienteDAO;
+import DAO.EstadoDAO;
 import DAO.FuncionarioDAO;
 import DAO.GerenteDAO;
 import DAO.ProdutoDAO;
 import classes.Atendimento;
+import classes.Cidade;
 import classes.Cliente;
+import classes.Estado;
 import classes.Funcionario;
 import classes.Gerente;
 import classes.Produto;
@@ -21,11 +20,41 @@ import classes.categoria;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author joao
- */
 public class Facade {
+//----------------------------------------------------------------------------------------------------
+//CIDADE
+     public static List<Cidade> buscaTodosCidades() {
+        CidadeDAO dao = new CidadeDAO();
+        List<Cidade> c = dao.findEntities(true, 100, 1);
+        return c;
+    }
+
+    public static List<Cidade> buscaTodasCidades(String id) {
+        CidadeDAO dao = new CidadeDAO();
+        List<Cidade> c = (List<Cidade>) dao.findEntitiesCidade(true, 100, 1, id);
+        return c;
+    }
+
+    public static Cidade buscaCidade(String idd) {
+        int id = Integer.parseInt(idd); //gambiarra
+        CidadeDAO dao = new CidadeDAO();
+        return dao.find(id);
+    }
+    
+//----------------------------------------------------------------------------------------------------
+//ESTADO   
+    public static List<Estado> buscaTodosEstados() {
+        EstadoDAO dao = new EstadoDAO();
+        List<Estado> c = dao.findEntities(true, 100, 1);
+        return c;
+    }
+
+    public static Estado busca(String idd) {
+        int id = Integer.parseInt(idd); //gambiarra
+        EstadoDAO dao = new EstadoDAO();
+        return dao.find(id);
+    }
+    
 //----------------------------------------------------------------------------------------------------
 //CLIENTE
     public static void insere_Cliente(Cliente pessoa){
