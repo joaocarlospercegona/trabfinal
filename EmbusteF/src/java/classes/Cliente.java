@@ -142,8 +142,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "Cliente{" + "cliente_nome=" + cliente_nome + ", cliente_cpf=" + cliente_cpf + ", cliente_email=" + cliente_email + ", cliente_rua=" + cliente_rua + ", cliente_numero=" + cliente_numero + ", cliente_complemento=" + cliente_complemento + ", cliente_bairro=" + cliente_bairro + ", cliente_cep=" + cliente_cep + ", cliente_cidade=" + cliente_cidade + ", cliente_telefone=" + cliente_telefone + ", cliente_senha=" + cliente_senha + '}';
+        return "Cliente{" + "cliente_nome=" + cliente_nome + ", cliente_cpf=" + cliente_cpf + ", cliente_email=" + cliente_email + ", cliente_rua=" + cliente_rua + ", cliente_numero=" + cliente_numero + ", cliente_complemento=" + cliente_complemento + ", cliente_bairro=" + cliente_bairro + ", cliente_cep=" + cliente_cep + ", cliente_cidade=" + cliente_cidade + ", cliente_telefone=" + cliente_telefone + ", cliente_senha=" + cliente_senha + ", cliente_estado=" + cliente_estado + ", cliente_salt=" + cliente_salt + '}';
     }
-    
     
 }

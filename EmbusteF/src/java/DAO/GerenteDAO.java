@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import classes.Gerente;
+import classes.Security;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joao
- */
 public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
 
     private static final Logger log = Logger.getLogger(FuncionarioDAO.class.getName());
@@ -29,10 +21,13 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
     @Override
     public void create(Gerente pessoa) {
         java.sql.PreparedStatement ps = null;
-      java.sql.ResultSet rs = null;
-      String sql = "INSERT INTO gerente (gerente_nome,gerente_cpf,gerente_email,gerente_rua,gerente_numero,gerente_complemento,gerente_bairro,gerente_cep,gerente_cidade,gerente_estado,gerente_telefone,gerente_senha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        java.sql.ResultSet rs = null;
+        String sql = "INSERT INTO gerente (gerente_nome,gerente_cpf,gerente_email,gerente_rua,gerente_numero,gerente_complemento,gerente_bairro,gerente_cep,gerente_cidade,gerente_estado,gerente_telefone,gerente_senha,gerente_salt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
+            String salt = Security.generateSalt(250).get();
+            String senha = pessoa.getGerente_senha();
+            String key = Security.hashPassword(senha, salt).get();
             ps = getConnection().prepareStatement(sql);
 
             Date dt = new Date();
@@ -48,7 +43,8 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
             ps.setString(9, pessoa.getGerente_cidade());
             ps.setString(10, pessoa.getGerente_estado());
             ps.setString(11, pessoa.getGerente_telefone());
-            ps.setString(12, pessoa.getGerente_senha());
+            ps.setString(12, key);
+            ps.setString(13, salt);
 
             if (ps.executeUpdate() == 0) {
                 log.warning(ps.toString() + " not inserted.");

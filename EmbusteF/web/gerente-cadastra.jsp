@@ -70,7 +70,7 @@
                         <option  value="1">Gerente</option>
                         <option  value="2">Funcionario</option>
                     </select>
-                    <button type='submit' class='btn btn-primary margem'>Salvar</button>
+                    <button type='submit' class='btn btn-primary margem'>Cadastrar</button>
                 </form>
                 <button class='btn btn-danger margem' onclick= "location.href='GerenteServlet?action=listar'">Voltar</button>
             </div>

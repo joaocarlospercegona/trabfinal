@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.io.Serializable;
 
-/**
- *
- * @author joao
- */
 public class Gerente implements Serializable {
     private String gerente_nome;
     private String gerente_cpf;
@@ -24,10 +15,11 @@ public class Gerente implements Serializable {
     private String gerente_telefone;
     private String gerente_senha;
     private String gerente_estado;
+    private String gerente_salt;
     
     public Gerente(){}
     
-    public Gerente(String gerente_nome, String gerente_cpf, String gerente_email, String gerente_rua, int gerente_numero, String gerente_complemento, String gerente_bairro, String gerente_cep, String gerente_cidade, String gerente_telefone, String gerente_senha,String gerente_estado) {
+    public Gerente(String gerente_nome, String gerente_cpf, String gerente_email, String gerente_rua, int gerente_numero, String gerente_complemento, String gerente_bairro, String gerente_cep, String gerente_cidade, String gerente_telefone, String gerente_senha,String gerente_estado, String gerente_salt) {
         this.gerente_nome = gerente_nome;
         this.gerente_cpf = gerente_cpf;
         this.gerente_email = gerente_email;
@@ -40,6 +32,7 @@ public class Gerente implements Serializable {
         this.gerente_telefone = gerente_telefone;
         this.gerente_senha = gerente_senha;
         this.gerente_estado = gerente_estado;
+        this.gerente_salt = gerente_salt;
     }
 
     public String getGerente_nome() {
@@ -138,10 +131,18 @@ public class Gerente implements Serializable {
         this.gerente_estado = gerente_estado;
     }
 
+    public String getGerente_salt() {
+        return gerente_salt;
+    }
+
+    public void setGerente_salt(String gerente_salt) {
+        this.gerente_salt = gerente_salt;
+    }
+
     @Override
     public String toString() {
-        return "Gerente{" + "gerente_nome=" + gerente_nome + ", gerente_cpf=" + gerente_cpf + ", gerente_email=" + gerente_email + ", gerente_rua=" + gerente_rua + ", gerente_numero=" + gerente_numero + ", gerente_complemento=" + gerente_complemento + ", gerente_bairro=" + gerente_bairro + ", gerente_cep=" + gerente_cep + ", gerente_cidade=" + gerente_cidade + ", gerente_telefone=" + gerente_telefone + ", gerente_senha=" + gerente_senha + '}';
+        return "Gerente{" + "gerente_nome=" + gerente_nome + ", gerente_cpf=" + gerente_cpf + ", gerente_email=" + gerente_email + ", gerente_rua=" + gerente_rua + ", gerente_numero=" + gerente_numero + ", gerente_complemento=" + gerente_complemento + ", gerente_bairro=" + gerente_bairro + ", gerente_cep=" + gerente_cep + ", gerente_cidade=" + gerente_cidade + ", gerente_telefone=" + gerente_telefone + ", gerente_senha=" + gerente_senha + ", gerente_estado=" + gerente_estado + ", gerente_salt=" + gerente_salt + '}';
     }
-    
-    
+
+  
 }
