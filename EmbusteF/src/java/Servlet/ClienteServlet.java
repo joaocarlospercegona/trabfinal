@@ -44,10 +44,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author joao
- */
 @WebServlet(name = "ClienteServlet", urlPatterns = {"/ClienteServlet"})
 public class ClienteServlet extends HttpServlet {
 
