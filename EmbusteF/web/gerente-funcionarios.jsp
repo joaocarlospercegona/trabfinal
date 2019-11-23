@@ -50,82 +50,78 @@
         </header> 
         <div class='caixa tabela'>
             <div class='conteudo'>
-    <c:if test="${func == 'funcionario'}" >
-                <h1>Funcionarios</h1>
-                <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
-                    <option value="GerenteServlet?action=listar">Funcionarios</option>
-                    <option value="GerenteServlet?action=listar_gerente">Gerente</option>
-                </select>
-                
-                
-                <table class='table table-hover'>
-                    <thead class='black white-text'>
-                        <tr>
-                            <td scope='col'>#</td>
-                            <td>Nome</td>
-                            <td>CPF</td>
-                            <td>E-mail</td>
-                            <td>Consultar</td>
-                            <td>Editar</td>
-                            <td>Remover</td>
-                        </tr>
-                    </thead>                    
-                    <tbody>
-                        <c:forEach items="${funcionarios}" var="x">
+                <c:if test="${func == 'funcionario'}" >
+                    <h1>Funcionarios</h1>
+                    <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
+                        <option value="GerenteServlet?action=listar">Funcionarios</option>
+                        <option value="GerenteServlet?action=listar_gerente">Gerente</option>
+                    </select>               
+                    <table class='table table-hover'>
+                        <thead class='black white-text'>
                             <tr>
-                                <td scope='row'>${i = i+1}</td>
-                                <td>${x.funcionario_nome}</td>
-                                <td>${x.funcionario_cpf}</td>
-                                <td>${x.funcionario_email}</td>
-                                <td width="50"><a href="GerenteServlet?action=visualizar&type=1&cpf=${x.funcionario_cpf}"><img src="ver.png" width=45 height=40></a></td>
-                                <td width="50"><a href="GerenteServlet?action=alterar&type=1&cpf=${x.funcionario_cpf}"><img src="edit.png" width=45 height=40></a></td>
-                                <td width="50"><a onclick="confirmaDeleteFunc(${x.funcionario_cpf})"><img src="exclui.png" width=45 height=40></a></td>
+                                <td scope='col'>#</td>
+                                <td>Nome</td>
+                                <td>CPF</td>
+                                <td>E-mail</td>
+                                <td>Consultar</td>
+                                <td>Editar</td>
+                                <td>Remover</td>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <form method="post" action="GerenteServlet?action=novo">
-                    <button type='submit' class='btn btn-success margem' >Cadastrar</button>
-                </form>
-    </c:if><c:if test="${func == 'gerente'}" >
-                <h1>Gerentes</h1>
-                <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
-                    <option value="GerenteServlet?action=listar_gerente">Gerente</option>
-                    <option value="GerenteServlet?action=listar">Funcionarios</option>
-                </select>
-                
-                
-                <table class='table table-hover'>
-                    <thead class='black white-text'>
-                        <tr>
-                            <td scope='col'>#</td>
-                            <td>Nome</td>
-                            <td>CPF</td>
-                            <td>E-mail</td>                            
-                            <td>Consultar</td>
-                            <td>Editar</td>
-                            <td>Remover</td>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        <c:forEach items="${gerentes}" var="x">
+                        </thead>                    
+                        <tbody>
+                            <c:forEach items="${funcionarios}" var="x">
+                                <tr>
+                                    <td scope='row'>${i = i+1}</td>
+                                    <td>${x.funcionario_nome}</td>
+                                    <td>${x.funcionario_cpf}</td>
+                                    <td>${x.funcionario_email}</td>
+                                    <td width="50"><a href="GerenteServlet?action=visualizar&type=1&cpf=${x.funcionario_cpf}"><img src="ver.png" width=45 height=40></a></td>
+                                    <td width="50"><a href="GerenteServlet?action=alterar&type=1&cpf=${x.funcionario_cpf}"><img src="edit.png" width=45 height=40></a></td>
+                                    <td width="50"><a onclick="confirmaDeleteFunc(${x.funcionario_cpf})"><img src="exclui.png" width=45 height=40></a></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <form method="post" action="GerenteServlet?action=novo">
+                        <button type='submit' class='btn btn-success margem' >Cadastrar</button>
+                    </form>
+                </c:if>
+                <c:if test="${func == 'gerente'}" >
+                    <h1>Gerentes</h1>
+                    <select id="comboBreaker" name="comboBreaker" class='form-control campo2' onchange="redirecionar(value)">
+                        <option value="GerenteServlet?action=listar_gerente">Gerente</option>
+                        <option value="GerenteServlet?action=listar">Funcionarios</option>
+                    </select>                
+                    <table class='table table-hover'>
+                        <thead class='black white-text'>
                             <tr>
-                                <td scope='row'>${i = i+1}</td>
-                                <td>${x.gerente_nome}</td>
-                                <td>${x.gerente_cpf}</td>
-                                <td>${x.gerente_email}</td>
-                                <td width="50"><a href="GerenteServlet?action=visualizar&type=2&cpf=${x.gerente_cpf}"><img src="ver.png" width=45 height=40></a></td>
-                                <td width="50"><a href="GerenteServlet?action=alterar&type=2&cpf=${x.gerente_cpf}"><img src="edit.png" width=45 height=40></a></td>
-                                <td width="50"><a onclick="confirmaDeleteGrt(${x.gerente_cpf})"><img src="exclui.png" width=45 height=40></a></td>
+                                <td scope='col'>#</td>
+                                <td>Nome</td>
+                                <td>CPF</td>
+                                <td>E-mail</td>                            
+                                <td>Consultar</td>
+                                <td>Editar</td>
+                                <td>Remover</td>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-                <form method="post" action="GerenteServlet?action=novo">
-                    <button type='submit' class='btn btn-success margem' >Cadastrar</button>
-                </form>
-    </c:if>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${gerentes}" var="x">
+                                <tr>
+                                    <td scope='row'>${i = i+1}</td>
+                                    <td>${x.gerente_nome}</td>
+                                    <td>${x.gerente_cpf}</td>
+                                    <td>${x.gerente_email}</td>
+                                    <td width="50"><a href="GerenteServlet?action=visualizar&type=2&cpf=${x.gerente_cpf}"><img src="ver.png" width=45 height=40></a></td>
+                                    <td width="50"><a href="GerenteServlet?action=alterar&type=2&cpf=${x.gerente_cpf}"><img src="edit.png" width=45 height=40></a></td>
+                                    <td width="50"><a onclick="confirmaDeleteGrt(${x.gerente_cpf})"><img src="exclui.png" width=45 height=40></a></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <form method="post" action="GerenteServlet?action=novo">
+                        <button type='submit' class='btn btn-success margem' >Cadastrar</button>
+                    </form>
+                </c:if>
             </div>
         </div>  
     </body>

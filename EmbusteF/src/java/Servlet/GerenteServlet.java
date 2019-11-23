@@ -6,6 +6,8 @@ import static Facade.Facade.BuscaTodos_Tipos_InfoAberto;
 import static Facade.Facade.altera_Funcionario;
 import static Facade.Facade.altera_Gerente;
 import static Facade.Facade.buscaTodas_Categorias;
+import static Facade.Facade.buscaTodosCidades;
+import static Facade.Facade.buscaTodosEstados;
 import static Facade.Facade.buscaTodos_Atendimentos;
 import static Facade.Facade.buscaTodos_Atendimentos_aberto_regra;
 import static Facade.Facade.buscaTodos_Atendimentos_abertos;
@@ -22,7 +24,9 @@ import static Facade.Facade.exclui_Gerente;
 import static Facade.Facade.insere_Funcionario;
 import static Facade.Facade.insere_Gerente;
 import classes.Atendimento;
+import classes.Cidade;
 import classes.Cliente;
+import classes.Estado;
 import classes.Funcionario;
 import classes.Gerente;
 import classes.LoginBean;
@@ -113,7 +117,10 @@ public class GerenteServlet extends HttpServlet {
                         }
                         case "novo":
                         {
+                            List<Estado> estados = buscaTodosEstados();
+                            List<Cidade> cidades = buscaTodosCidades();
 
+                            request.setAttribute("estados", estados);
                             RequestDispatcher rd = getServletContext().
                                      getRequestDispatcher("/gerente-cadastra.jsp");
                                 rd.forward(request, response);
@@ -212,6 +219,10 @@ public class GerenteServlet extends HttpServlet {
                                 request.setAttribute("func","2");
                                 request.setAttribute("c", p);
                             }
+                            List<Estado> estados = buscaTodosEstados();
+                            List<Cidade> cidades = buscaTodosCidades();
+
+                            request.setAttribute("estados", estados);
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/gerente-altera.jsp");
                             rd.forward(request, response);

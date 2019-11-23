@@ -15,11 +15,11 @@
         <link rel='stylesheet' href='css/header.css'>
     </head>
     <body>
-            <c:if test="${clienteOn == null}">
-                <jsp:forward page="login.jsp"> 
-                    <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
-                </jsp:forward>
-            </c:if>
+        <c:if test="${clienteOn == null}">
+            <jsp:forward page="login.jsp"> 
+                <jsp:param name="msg" value="Usuário deve se autenticar para acessar o sistema."/>
+            </jsp:forward>
+        </c:if>
         <header>
             <img id='logo-img' src='static/logo_transparent.jpg' alt='logotipo'>
             <div id='menu'>

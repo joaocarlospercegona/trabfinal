@@ -16,7 +16,7 @@
         <img class='imagem-inicial' src='static/logo_transparent.jpg' alt='aqui'/>
         <div class='caixa relatorio'>
             <div class='conteudo'>
-                <form method='post' action='LoginServlet'>          
+                <form method='post' action='LoginServlet?action=login'>          
                     <label class='margem'>Usuario:</label>
                     <input type='text'  class='form-control margem' id='usuario' name='usuario'>
                     <label for='pwd' class='margem'>Senha:</label>

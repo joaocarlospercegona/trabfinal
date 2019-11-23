@@ -51,15 +51,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ClienteServlet", urlPatterns = {"/ClienteServlet"})
 public class ClienteServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         PrintWriter out = response.getWriter();
@@ -68,7 +59,7 @@ public class ClienteServlet extends HttpServlet {
             LoginBean clienteOn = (LoginBean) session.getAttribute("clienteOn");
             String action = request.getParameter("action");
             
-            String cpf = clienteOn.getCpf();
+            System.out.println("cliente servlet");
             
             if((clienteOn == null)&&(!action.equals("cadastro_cliente"))){
                 request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
@@ -76,7 +67,9 @@ public class ClienteServlet extends HttpServlet {
                     getRequestDispatcher("/login.jsp");
                 rd.forward(request, response);
             }
+                        
             else{
+                
                 if(action != null){
                     switch (action){
                         case "cadastro_cliente":
@@ -85,7 +78,6 @@ public class ClienteServlet extends HttpServlet {
                             String senha = request.getParameter("senha");
                             String senha2 = request.getParameter("senha2");
                             if(senha.equals(senha2)){
-                            out.println(nr);
                                 Cliente c = new Cliente();
                                 c.setCliente_nome(request.getParameter("usuario"));
                                 c.setCliente_telefone(request.getParameter("telefone"));
@@ -108,8 +100,13 @@ public class ClienteServlet extends HttpServlet {
                         }                        
                         case "alterar_dados":
                         {
+                            String cpf = clienteOn.getCpf();
                             Cliente c = busca_Cliente(cpf);
                             request.setAttribute("c",c);
+                            List<Estado> estados = buscaTodosEstados();
+                            List<Cidade> cidades = buscaTodosCidades();
+
+                            request.setAttribute("estados", estados);
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/cliente-alterar-dados.jsp");
                             rd.forward(request, response);
@@ -117,8 +114,6 @@ public class ClienteServlet extends HttpServlet {
                         }
                         case "alterando_dados":
                         {
-                            //msm campos que a cadastra entao podemos criar uma funçao e retornar apenas o obj, mas deixarei isso 
-                            //para depois
                             int nr = Integer.parseInt(request.getParameter("numero"));
                             String senha = request.getParameter("senha");
                             String senha2 = request.getParameter("senha2");
@@ -136,8 +131,6 @@ public class ClienteServlet extends HttpServlet {
                                 c.setCliente_numero(nr);
                                 c.setCliente_complemento(request.getParameter("complemento"));
                                 c.setCliente_senha(senha);
-                                
-                                out.println(c.getCliente_cpf());
                                 altera_Cliente(c, c.getCliente_cpf());
                                 
                                 RequestDispatcher rd = getServletContext().
@@ -182,22 +175,26 @@ public class ClienteServlet extends HttpServlet {
                         }
                         case "Listagem_atendimentos":
                         {
+                            System.out.println("entrou no case");
                             List<Atendimento> atendimentos = new ArrayList();
                             List<Atendimento> atendiment = buscaTodos_Atendimentos_Cliente(clienteOn.getCpf());
                             List<Produto> prod = buscaTodos_Produtos();
                             request.setAttribute("produtos",prod);
-                            
-                            for(Atendimento x : atendiment){
-                                if(x.getAtendimento_situacao().equals("Finalizado")){
-                                    x.setAtendimento_nivel(1);
+                            System.out.println("antes if");
+                            if (atendiment != null){
+                                System.out.println("dentro if");
+                                for(Atendimento x : atendiment){
+                                    if(x.getAtendimento_situacao().equals("Finalizado")){
+                                        x.setAtendimento_nivel(1);
+                                    }
+                                    else if(x.getAtendimento_situacao().equals("Em aberto")){
+                                        x.setAtendimento_nivel(0);
+                                    }
+                                    atendimentos.add(x);
                                 }
-                                else if(x.getAtendimento_situacao().equals("Em aberto")){
-                                    x.setAtendimento_nivel(0);
-                                }
-                                atendimentos.add(x);
+                                request.setAttribute("atendimentos", atendimentos);
                             }
-                            out.println(atendimentos);
-                            request.setAttribute("atendimentos", atendimentos);
+                            System.out.println("antes meus at");
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/cliente-meus-atendimentos.jsp");
                             rd.forward(request, response);

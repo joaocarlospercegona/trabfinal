@@ -1,9 +1,11 @@
 Funcionalidades:
-	Fazer estados e cidades	-> clientesForm
-	Criptografar senhas
+	Criptografar senhas (funcionario e gerente)
 
 Correções:
-	Confirm n funciona com . no CPF (metacaracter)	
+	Confirm n funciona com . no CPF (metacaracter)
+	Corrigir alteração de estado e cidade
+	Corrigir alteração de senha
+	Atualizar Estado de acordo com usuario
 
 Exceções:
 	Impossível remover gerente logado
@@ -14,6 +16,7 @@ Exceções:
 	Cliente não pode excluir atendimento finalizado
 	
 Minors:
+	Fazer cadastro funcionar por conta
 	Colocar stroke nas palavras em amarelo
 	Melhorar tela solução
 	"Já possuo minha conta" no cadastro

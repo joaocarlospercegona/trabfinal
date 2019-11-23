@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head lang='pt-br'>
@@ -14,6 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <link rel='stylesheet' href='css/styles.css'>
         <link rel='stylesheet' href='css/header.css'>
+        <script src='functions.js'></script>
         <script type="text/javascript">
             $("#telefone").mask("(00) 00000-0000");
             $("#cep").mask("00000-000");
@@ -45,9 +47,18 @@
                     <input type='tel'  class='form-control campo0' id='telefone' name='telefone' placeholder='Telefone'><br>  
                     <input type='text'  class='form-control campo1' id='cpf' name="cpf" placeholder='CPF'><br>  
                     <input type='email'  class='form-control campo1' id='email' name='email' placeholder='Email'><br> 
+                    <select id="estado" name="estado" required class="form-control campo1" onchange="getCidades()">
+                        <c:forEach var="e" items="${estados}">
+                            <option disabled selected hidden>Estado</option>
+                            <option name="est" value="${e.idEstado}">
+                                ${e.nomeEstado}
+                            </option>
+                        </c:forEach>
+                    </select>   
+                    <select id="cidade" name="cidade" required class="form-control campo1" disabled>
+                        <option disabled selected hidden>Cidade</option>
+                    </select> 
                     <input type='text'  class='form-control campo1' id='cep' name='cep' placeholder='CEP'><br>
-                    <input type='text'  class='form-control campo1' id='estado' name='estado' placeholder='Estado'><br>       
-                    <input type='text'  class='form-control campo1' id='cidade' name='cidade' placeholder='Cidade'><br> 
                     <input type='text'  class='form-control campo1' id='bairro' name='bairro' placeholder='Bairro'><br>
                     <input type='text'  class='form-control campo1' id='rua' name='rua' placeholder='Rua'><br>
                     <input type='text'  class='form-control campo2' id='numero' name='numero' placeholder='Número'><br>

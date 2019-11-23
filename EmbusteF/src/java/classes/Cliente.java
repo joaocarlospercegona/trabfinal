@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- *
- * @author joao
- */
 public class Cliente implements Serializable {
     private String cliente_nome;
     private String cliente_cpf;
@@ -25,10 +16,11 @@ public class Cliente implements Serializable {
     private String cliente_telefone;
     private String cliente_senha;
     private String cliente_estado;
+    private String cliente_salt;
     
     public Cliente(){}
 
-    public Cliente(String cliente_nome, String cliente_cpf, String cliente_email, String cliente_rua, int cliente_numero, String cliente_complemento, String cliente_bairro, String cliente_cep, String cliente_cidade, String cliente_telefone, String cliente_senha, String cliente_estado) {
+    public Cliente(String cliente_nome, String cliente_cpf, String cliente_email, String cliente_rua, int cliente_numero, String cliente_complemento, String cliente_bairro, String cliente_cep, String cliente_cidade, String cliente_telefone, String cliente_senha, String cliente_estado, String cliente_salt) {
         this.cliente_nome = cliente_nome;
         this.cliente_cpf = cliente_cpf;
         this.cliente_email = cliente_email;
@@ -41,6 +33,7 @@ public class Cliente implements Serializable {
         this.cliente_telefone = cliente_telefone;
         this.cliente_senha = cliente_senha;
         this.cliente_estado = cliente_estado;
+        this.cliente_salt = cliente_salt;
     }
 
     public String getCliente_nome() {
@@ -61,6 +54,14 @@ public class Cliente implements Serializable {
 
     public String getCliente_email() {
         return cliente_email;
+    }
+
+    public String getCliente_salt() {
+        return cliente_salt;
+    }
+
+    public void setCliente_salt(String cliente_salt) {
+        this.cliente_salt = cliente_salt;
     }
 
     public void setCliente_email(String cliente_email) {

@@ -1,6 +1,5 @@
 package Servlet;
 
-
 import static Facade.Facade.buscaTodosCidades;
 import static Facade.Facade.buscaTodosEstados;
 import static Facade.Facade.buscaTodos_Cliente;
@@ -13,6 +12,7 @@ import classes.Estado;
 import classes.Funcionario;
 import classes.Gerente;
 import classes.LoginBean;
+import classes.Security;
 import classes.cidadeTeste;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,15 +29,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             PrintWriter out = response.getWriter();
@@ -45,39 +36,31 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             String usuario = request.getParameter("usuario");
             String senha   = request.getParameter("senha");
-            String tipo = request.getParameter("tipo");    
-            //Aqui ele vera se o usuario eh do tipo gerente,cliente ou ...
-            // 1 para cliente
-            // 2 para Funcionario
-            // 3 para Gerente
+            String tipo = request.getParameter("tipo");   
+            System.out.println("user" + usuario);
+            System.out.println("senha" + senha);
+            System.out.println("tipo" + tipo);
+            
+            //Cadastro de cliente
             String action = request.getParameter("action");
             if(action.equals("novo_usuario")){
                 List<Estado> estados = buscaTodosEstados();
-                    List<Cidade> cidades = buscaTodosCidades();
+                List<Cidade> cidades = buscaTodosCidades();
 
-                    List<cidadeTeste> citeste = new ArrayList();
-                    System.out.println("estados:" + estados);
-//                    //out.println(cidades);
-//                    for (int i = 0; i < cidades.size(); i++) {
-//                        cidadeTeste a = new cidadeTeste();
-//                        a.setIdcidadeteste(cidades.get(i).getIdCidade());
-//                        a.setNomecidadeteste(cidades.get(i).getNomeCidade());
-//                        a.setIdestado(cidades.get(i).getFKidestado().getIdEstado());
-//                        citeste.add(a);
-//                    }
-//                    request.setAttribute("cidadess", citeste);
-
-                    request.setAttribute("estadoss", estados);
-                    RequestDispatcher rd = getServletContext().
-                            getRequestDispatcher("/cadastro.jsp");
-                    rd.forward(request, response);
+                request.setAttribute("estados", estados);
+                
+                RequestDispatcher rd = getServletContext().
+                        getRequestDispatcher("/cadastro.jsp");
+                rd.forward(request, response);
             }
-            if((usuario != null)&&(senha != null)&&(tipo != null)){
+            
+            //Aqui ele vera se o usuario eh do tipo gerente,cliente ou funcionario
+            if((action.equals("login"))&&(usuario != null)&&(senha != null)&&(tipo != null)){
                 try{
                     if("1".equals(tipo)){
                         List<Cliente> lista = buscaTodos_Cliente();
                         for (Cliente x: lista) {
-                            if(usuario.equals(x.getCliente_email())&&(senha.equals(x.getCliente_senha()))){
+                            if(usuario.equals(x.getCliente_email()) && Security.verifyPassword(senha, x.getCliente_senha(), x.getCliente_salt())){
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getCliente_cpf());
                                 p.setNome(x.getCliente_nome());
@@ -93,7 +76,7 @@ public class LoginServlet extends HttpServlet {
                         rd.forward(request, response);
                     }
                                         
-                    if("2".equals(tipo)){
+                    else if("2".equals(tipo)){
                         List<Funcionario> lista = buscaTodos_Funcionario();
                         for (Funcionario x: lista) {
                             if(usuario.equals(x.getFuncionario_email())&&(senha.equals(x.getFuncionario_senha()))){
@@ -112,9 +95,11 @@ public class LoginServlet extends HttpServlet {
                             rd.forward(request, response);                        
                     }
                     
-                    if("3".equals(tipo)){
+                    else if("3".equals(tipo)){
+                        System.out.println("entrou no tipo");
                         List<Gerente> lista = buscaTodos_Gerente();
                         for (Gerente x: lista) {
+                            System.out.println("entrou na lista");
                             if(usuario.equals(x.getGerente_email())&&(senha.equals(x.getGerente_senha()))){
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getGerente_cpf());
@@ -135,12 +120,12 @@ public class LoginServlet extends HttpServlet {
                     //ver oq colocar aqui
                 } 
             }
-//            else{
-//                request.setAttribute("msg","Usuario/Senha Invalidos");
-//                RequestDispatcher rd = getServletContext().
-//                    getRequestDispatcher("/login.jsp");
-//                rd.forward(request, response);
-//            }
+            else{
+                request.setAttribute("msg","Usuario/Senha Invalidos");
+                RequestDispatcher rd = getServletContext().
+                    getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

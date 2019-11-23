@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import classes.Atendimento;
 import classes.Cliente;
+import classes.Security;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -17,10 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joao
- */
 public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
     
   private static final Logger log = Logger.getLogger(ClienteDAO.class.getName());
@@ -37,9 +29,12 @@ public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
     public void create(Cliente pessoa) {
       java.sql.PreparedStatement ps = null;
       java.sql.ResultSet rs = null;
-      String sql = "INSERT INTO cliente (cliente_nome,cliente_cpf,cliente_email,cliente_rua,cliente_numero,cliente_complemento,cliente_bairro,cliente_cep,cliente_cidade,cliente_estado,cliente_telefone,cliente_senha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-
+      String sql = "INSERT INTO cliente (cliente_nome,cliente_cpf,cliente_email,cliente_rua,cliente_numero,cliente_complemento,cliente_bairro,cliente_cep,cliente_cidade,cliente_estado,cliente_telefone,cliente_senha, cliente_salt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      
         try {
+            String salt = Security.generateSalt(250).get();
+            String senha = pessoa.getCliente_senha();
+            String key = Security.hashPassword(senha, salt).get();
             ps = getConnection().prepareStatement(sql);
             
             ps.setString(1, pessoa.getCliente_nome());
@@ -53,7 +48,8 @@ public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
             ps.setString(9, pessoa.getCliente_cidade());
             ps.setString(10, pessoa.getCliente_estado());
             ps.setString(11, pessoa.getCliente_telefone());
-            ps.setString(12, pessoa.getCliente_senha());
+            ps.setString(12, key);
+            ps.setString(13, salt);
 
             if (ps.executeUpdate() == 0) {
                 log.warning(ps.toString() + " not inserted.");
@@ -171,6 +167,7 @@ public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
                   p.setCliente_telefone(rs.getString("cliente_telefone"));
                   p.setCliente_senha(rs.getString("cliente_senha"));
                   p.setCliente_complemento(rs.getString("cliente_complemento"));
+                  p.setCliente_salt(rs.getString("cliente_salt"));
 
                   result.add(p);
                 } while ((result.size() < maxResults || all) && rs.next());

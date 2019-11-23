@@ -54,9 +54,18 @@
                     <input type='tel'  class='form-control campo0' id='telefone' name='telefone' placeholder='Telefone' value="${c.cliente_telefone}"><br>
                     <input type='text'  class='form-control campo1' id='cpf' name='cpf' placeholder='CPF' value="${c.cliente_cpf}" disabled ><br>  
                     <input type='email'  class='form-control campo1' id='email' name='email' placeholder='Email' value="${c.cliente_email}"disabled ><br> 
+                    <select id="estado" name="estado" required class="form-control campo1" onchange="getCidades()">
+                        <c:forEach var="e" items="${estados}">
+                            <option disabled selected hidden>Estado</option>
+                            <option name="est" value="${e.idEstado}">
+                                ${e.nomeEstado}
+                            </option>
+                        </c:forEach>
+                    </select>   
+                    <select id="cidade" name="cidade" required class="form-control campo1" disabled>
+                        <option disabled selected hidden>Cidade</option>
+                    </select>  
                     <input type='text'  class='form-control campo1' id='cep' name='cep' placeholder='CEP' value="${c.cliente_cep}"><br>
-                    <input type='text'  class='form-control campo1' id='estado' name='estado' placeholder='Estado' value="${c.cliente_estado}"><br>    
-                    <input type='text'  class='form-control campo1' id='cidade' name='cidade' placeholder='Cidade' value="${c.cliente_cidade}"><br> 
                     <input type='text'  class='form-control campo1' id='bairro' name='bairro' placeholder='Bairro' value="${c.cliente_bairro}"><br>
                     <input type='text'  class='form-control campo1' id='rua' name='rua' placeholder='Rua' value="${c.cliente_rua}"><br>
                     <input type='number'  class='form-control campo2' id='numero' name='numero' placeholder='Numero' value="${c.cliente_numero}"><br>
