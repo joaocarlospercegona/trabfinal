@@ -64,7 +64,7 @@
                     <input type='text'  class='form-control campo2' id='numero' name='numero' placeholder='Número'><br>
                     <input type='text'  class='form-control campo2' id='complemento' name='complemento' placeholder='Complemento'><br> 
                     <input type='password'  class='form-control campo1' id='senha' name='senha' placeholder='Sua senha'><br>
-                    <input type='password'  class='form-control campo1' id='senha' name='senha2' placeholder='Confirmação da senha'><br> 
+                    <input type='password'  class='form-control campo1' id='senha2' name='senha2' placeholder='Confirmação da senha'><br> 
                     <select name="tipo" id="tipo" required class='form-control campo0'>
                         <option disabled selected hidden>Cargo</option>
                         <option  value="1">Gerente</option>

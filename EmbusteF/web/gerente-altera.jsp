@@ -48,14 +48,14 @@
                     <input type='email'  class='form-control campo1' id='email' name='email' placeholder='Email' value="${c.pessoa_email}"disabled ><br> 
                     <select id="estado" name="estado" required class="form-control campo1" onchange="getCidades()">
                         <c:forEach var="e" items="${estados}">
-                            <option disabled selected hidden>Estado</option>
+                            <option disabled selected hidden>${c.pessoa_estado}</option>
                             <option name="est" value="${e.idEstado}">
                                 ${e.nomeEstado}
                             </option>
                         </c:forEach>
                     </select>   
                     <select id="cidade" name="cidade" required class="form-control campo1" disabled>
-                        <option disabled selected hidden>Cidade</option>
+                        <option disabled selected hidden>${c.pessoa_cidade}</option>
                     </select>  
                     <input type='text'  class='form-control campo1' id='cep' name='cep' placeholder='CEP' value="${c.pessoa_cep}"><br>
                     <input type='text'  class='form-control campo1' id='bairro' name='bairro' placeholder='Bairro' value="${c.pessoa_bairro}"><br>

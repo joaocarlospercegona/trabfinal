@@ -50,7 +50,7 @@ public class Facade {
     }
 
     public static Estado busca(String idd) {
-        int id = Integer.parseInt(idd); //gambiarra
+        int id = Integer.parseInt(idd); 
         EstadoDAO dao = new EstadoDAO();
         return dao.find(id);
     }

@@ -50,8 +50,8 @@ public class LoginServlet extends HttpServlet {
                         getRequestDispatcher("/cadastro.jsp");
                 rd.forward(request, response);
             }
-            
-            //Aqui ele vera se o usuario eh do tipo gerente,cliente ou funcionario
+
+            //login
             if((action.equals("login"))&&(usuario != null)&&(senha != null)&&(tipo != null)){
                 try{
                     if("1".equals(tipo)){

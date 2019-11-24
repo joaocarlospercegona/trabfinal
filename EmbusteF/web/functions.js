@@ -49,7 +49,6 @@ function confirmaDeleteFunc (ba){
 }
 
 function getCidades(){
-    console.log("chegou");
     var idestado = $("#estado").val();
     var url = "AJAXServlet";
     $.ajax({
@@ -62,12 +61,22 @@ function getCidades(){
             $("#cidade").empty();
             $("#cidade").attr("disabled", false);
             $.each(data, function(i, obj) {
-                $("#cidade").append('<option value=' + obj.idcidadeteste + '>' + obj.nomecidadeteste + '</option>');
+                $("#cidade").append('<option value=' + obj.nomecidadeteste + '>' + obj.nomecidadeteste + '</option>');
             });
+            var  texto = $('#estado').find(':selected').text();
+            //$('#estado').find(':selected').val() = texto;
+            var valor = $('#estado').find(':selected').val(texto); 
+            console.log(texto);
+            $(document).ready(function() {
+                $('#estado').find(':selected').val().change(function(){
+                    $('#estado').find(':selected').val($(this).find(":selected").text());
+                })
+                .trigger('change');
+            });     
+            console.log($('#estado').find(':selected').val());       
         },
         error : function(request, textStatus, errorThrown) {
-        console.log("deu erro");
-        alert(request.status + ', Error: ' + request.statusText);
+            alert(request.status + ', Error: ' + request.statusText);
         }
     });
 }

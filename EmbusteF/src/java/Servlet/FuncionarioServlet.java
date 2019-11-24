@@ -274,17 +274,19 @@ public class FuncionarioServlet extends HttpServlet {
                             List<Produto> prod = buscaTodos_Produtos();
                             request.setAttribute("produtos",prod);
                             DateTime dataAtual = new DateTime();
-                            for(Atendimento x : atendiment){
-                                DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
-                                int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
-                                if (x.getAtendimento_situacao().equals("Finalizado"))
-                                    x.setAtendimento_nivel(2);
-                                else if (dias > 7)
-                                    x.setAtendimento_nivel(1);
-                                else
-                                    x.setAtendimento_nivel(0);
-                                atendimentos.add(x);
-                            }     
+                            if (atendiment != null){
+                                for(Atendimento x : atendiment){
+                                    DateTime dataAtendimento = new DateTime(x.getAtendimento_data_hora());
+                                    int dias = Days.daysBetween(dataAtendimento, dataAtual).getDays();
+                                    if (x.getAtendimento_situacao().equals("Finalizado"))
+                                        x.setAtendimento_nivel(2);
+                                    else if (dias > 7)
+                                        x.setAtendimento_nivel(1);
+                                    else
+                                        x.setAtendimento_nivel(0);
+                                    atendimentos.add(x);
+                                }  
+                            }                               
                             request.setAttribute("atendimentos",atendimentos);
                             request.setAttribute("func","todos");
                             RequestDispatcher rd = getServletContext().

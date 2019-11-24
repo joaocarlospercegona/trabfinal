@@ -67,10 +67,13 @@ public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
 
     public void edit(Cliente cliente, String cpf) {
       java.sql.PreparedStatement ps = null;
-      String sql = "UPDATE cliente SET cliente_nome = ?,cliente_email = ?, cliente_cpf = ?, cliente_rua = ?, cliente_numero = ?,cliente_complemento = ?,cliente_bairro = ?, cliente_cep = ?, cliente_cidade = ?,cliente_estado = ? , cliente_telefone = ?, cliente_senha = ? "
+      String sql = "UPDATE cliente SET cliente_nome = ?,cliente_email = ?, cliente_cpf = ?, cliente_rua = ?, cliente_numero = ?,cliente_complemento = ?,cliente_bairro = ?, cliente_cep = ?, cliente_cidade = ?,cliente_estado = ? , cliente_telefone = ?, cliente_senha = ?, cliente_salt = ? "
               + " where cliente_cpf = ?";
 
         try {
+            String salt = Security.generateSalt(250).get();
+            String senha = cliente.getCliente_senha();
+            String key = Security.hashPassword(senha, salt).get();
             ps = getConnection().prepareStatement(sql);
             
             ps.setString(1,  cliente.getCliente_nome());
@@ -80,12 +83,12 @@ public class ClienteDAO extends BaseDAOImp implements BaseDAO<Cliente>{
             ps.setInt(5,     cliente.getCliente_numero());
             ps.setString(6,  cliente.getCliente_complemento());
             ps.setString(7,  cliente.getCliente_bairro());
-            ps.setString(8,  cliente.getCliente_cep());
+            ps.setString(8,  cpf);
             ps.setString(9,  cliente.getCliente_cidade());
             ps.setString(10, cliente.getCliente_estado());
             ps.setString(11, cliente.getCliente_telefone());
-            ps.setString(12, cliente.getCliente_senha());
-            ps.setString(13, cpf);
+            ps.setString(12, key);
+            ps.setString(13, salt);
             
             if (ps.executeUpdate() == 0) {
                 log.warning(ps.toString() + " not updated.");

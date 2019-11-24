@@ -1,9 +1,6 @@
 Correções:
-	Se não tiver atendimento
+	Consertar id estado
 	Confirm n funciona com . no CPF (metacaracter)
-	Corrigir alteração de senha
-	Atualizar Estado de acordo com usuario
-	Insert de cidade/estado e não id
 
 Exceções:
 	Impossível remover gerente logado
@@ -14,13 +11,18 @@ Exceções:
 	Cliente não pode excluir atendimento finalizado
 	
 Minors:
+	Criar logins separados adm/cliente	
 	Fazer cadastro funcionar por conta
 	Colocar stroke nas palavras em amarelo
 	Melhorar tela solução
-	Organizar código
 	Fazer inserts adequados
 	Corrigir erro styles
 	Verificar tamanho senha update
 	
+Organizar código:
+	Remover js da jsp
+	Apagar comentários desnecessários
+	Apagar souts e out.println
+	Mudar nome classes e arquivos
 
 

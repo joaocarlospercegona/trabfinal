@@ -64,10 +64,13 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
     
     public void edit(Funcionario funcionario, String cpf) {
         java.sql.PreparedStatement ps = null;
-      String sql = "UPDATE funcionario SET funcionario_nome = ?, funcionario_rua = ?, funcionario_numero = ?,funcionario_complemento = ?,funcionario_bairro = ?, funcionario_cep = ?, funcionario_cidade = ?, funcionario_estado = ?, funcionario_telefone = ?,  funcionario_senha = ?  "
+      String sql = "UPDATE funcionario SET funcionario_nome = ?, funcionario_rua = ?, funcionario_numero = ?,funcionario_complemento = ?,funcionario_bairro = ?, funcionario_cep = ?, funcionario_cidade = ?, funcionario_estado = ?, funcionario_telefone = ?,  funcionario_senha = ? ,funcionario_salt  "
               + " where funcionario_cpf = ?";
 
         try {
+            String salt = Security.generateSalt(250).get();
+            String senha = funcionario.getFuncionario_senha();
+            String key = Security.hashPassword(senha, salt).get();
             ps = getConnection().prepareStatement(sql);
             
             ps.setString(1,  funcionario.getFuncionario_nome());
@@ -81,6 +84,8 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
             ps.setString(9, funcionario.getFuncionario_telefone());
             ps.setString(10, funcionario.getFuncionario_senha());
             ps.setString(11, cpf);
+            ps.setString(12, key);
+            ps.setString(13, salt);
             
             if (ps.executeUpdate() == 0) {
                 log.warning(ps.toString() + " not updated.");
@@ -161,6 +166,7 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
                   p.setFuncionario_telefone(rs.getString("funcionario_telefone"));
                   p.setFuncionario_senha(rs.getString("funcionario_senha"));
                   p.setFuncionario_complemento(rs.getString("funcionario_complemento"));
+                  p.setFuncionario_salt(rs.getString("funcionario_salt"));
 
                   result.add(p);
                 } while ((result.size() < maxResults || all) && rs.next());

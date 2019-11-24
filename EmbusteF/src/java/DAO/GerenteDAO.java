@@ -62,10 +62,13 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
 
      public void edit(Gerente gerente, String cpf) {
         java.sql.PreparedStatement ps = null;
-      String sql = "UPDATE gerente SET gerente_nome = ?, gerente_rua = ?, gerente_numero = ?,gerente_complemento = ?,gerente_bairro = ?, gerente_cep = ?, gerente_cidade = ?,gerente_telefone = ?, gerente_senha = ?, gerente_estado = ?  "
+      String sql = "UPDATE gerente SET gerente_nome = ?, gerente_rua = ?, gerente_numero = ?,gerente_complemento = ?,gerente_bairro = ?, gerente_cep = ?, gerente_cidade = ?,gerente_telefone = ?, gerente_senha = ?, gerente_estado = ?, gerente_salt = ?  "
               + " where gerente_cpf = ?";
 
         try {
+            String salt = Security.generateSalt(250).get();
+            String senha = gerente.getGerente_senha();
+            String key = Security.hashPassword(senha, salt).get();
             ps = getConnection().prepareStatement(sql);
             
             ps.setString(1,  gerente.getGerente_nome());
@@ -79,6 +82,8 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
             ps.setString(9, gerente.getGerente_senha());
             ps.setString(10,  gerente.getGerente_estado());
             ps.setString(11, cpf);
+            ps.setString(12, key);
+            ps.setString(13, salt);
             
             if (ps.executeUpdate() == 0) {
                 log.warning(ps.toString() + " not updated.");
