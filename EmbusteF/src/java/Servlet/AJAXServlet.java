@@ -15,64 +15,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author lps
- */
 @WebServlet(name = "AJAXServlet", urlPatterns = {"/AJAXServlet"})
 public class AJAXServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-
-        //System.out.println("frick");
-        //out.print("frick");
         String estado = request.getParameter("idestado");
 
-        //System.out.println("Id:" + estado);
-        // Vai no BD buscar todas as cidades deste estado, em uma lista
         List<Cidade> lista = Facade.buscaTodosCidades();
         List<cidadeTeste> listaMandar = new ArrayList();
 
         lista.forEach((x) -> {
             String idstring = Integer.toString(x.getFKidestado().getIdEstado());
-            //Estado estadox = EstadoFacade.busca(idEstado);
             if (idstring.equals(estado)) {
                 cidadeTeste a = new cidadeTeste(x.getIdCidade(), x.getNomeCidade());
                 listaMandar.add(a);
             }
         });
-
-//        List<cidadeTeste> lista = new ArrayList<cidadeTeste>();
-//        cidadeTeste c = new cidadeTeste();
-//        c.setIdcidadeteste(1);
-//        c.setNomecidadeteste("Curitiba");
-//        lista.add(c);
-//        c = new cidadeTeste();
-//        c.setIdcidadeteste(2);
-//        c.setNomecidadeteste("frick");
-//        lista.add(c);
-//        
-//       
-//        // transforma o MAP em JSON
-//        String json = new Gson().toJson(lista);   
-//
-//        // retorna o JSON
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        response.getWriter().write(json);  
-        //lista.add(c);
         // transforma o MAP em JSON
         String json = new Gson().toJson(listaMandar);
 

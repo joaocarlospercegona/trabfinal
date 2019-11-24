@@ -2,17 +2,11 @@ package DAO;
 
 import static Facade.Facade.busca;
 import classes.Cidade;
-//import static Beans.Cidade_.fKidestado;
 import classes.Estado;
-//import static facade.EstadoFacade.busca;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author lps
- */
 public class CidadeDAO extends BaseDAOImp implements BaseDAO<Cidade> {
 
     private static final Logger log = Logger.getLogger(ClienteDAO.class.getName());
@@ -50,7 +44,7 @@ public class CidadeDAO extends BaseDAOImp implements BaseDAO<Cidade> {
             if (rs.next()) {
                 result = new java.util.ArrayList<Cidade>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1;  
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -93,7 +87,7 @@ public class CidadeDAO extends BaseDAOImp implements BaseDAO<Cidade> {
             if (rs.next()) {
                 result = new java.util.ArrayList<Cidade>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1;  
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -154,30 +148,30 @@ public class CidadeDAO extends BaseDAOImp implements BaseDAO<Cidade> {
 
     @Override
     public void create(Cidade vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void edit(Cidade vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void destroy(Cidade obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public void destroy(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void destroy(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 }

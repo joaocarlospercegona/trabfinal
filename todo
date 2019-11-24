@@ -1,11 +1,9 @@
-Funcionalidades:
-	Criptografar senhas (funcionario e gerente)
-
 Correções:
+	Se não tiver atendimento
 	Confirm n funciona com . no CPF (metacaracter)
-	Corrigir alteração de estado e cidade
 	Corrigir alteração de senha
 	Atualizar Estado de acordo com usuario
+	Insert de cidade/estado e não id
 
 Exceções:
 	Impossível remover gerente logado
@@ -22,6 +20,7 @@ Minors:
 	Organizar código
 	Fazer inserts adequados
 	Corrigir erro styles
+	Verificar tamanho senha update
 	
 
 

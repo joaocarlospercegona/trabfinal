@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import java.sql.Connection;
@@ -12,10 +7,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Dieval
- */
 public final class Conexao {
 
     private static Conexao INSTANCE = null;
@@ -41,8 +32,6 @@ public final class Conexao {
             java.sql.Connection c = null;
             try {
                 Class.forName("org.postgresql.Driver");
-
-//                c = DriverManager.getConnection("jdbc:h2:file:C:\\projetos\\aula\\AgendaJDBC\\dados\\agenda",
                 c = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Embuste",
                 "usuario", "form4141");
 

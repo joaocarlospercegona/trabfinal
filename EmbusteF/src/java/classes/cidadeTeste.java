@@ -1,9 +1,5 @@
 package classes;
 
-/**
- *
- * @author lps
- */
 public class cidadeTeste {
 
     int idcidadeteste;
@@ -52,5 +48,4 @@ public class cidadeTeste {
     public void setNomecidadeteste(String nomecidadeteste) {
         this.nomecidadeteste = nomecidadeteste;
     }
-
 }

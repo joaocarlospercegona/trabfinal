@@ -44,9 +44,9 @@ public class FuncionarioServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             PrintWriter out = response.getWriter();
-             response.setContentType("text/html;charset=UTF-8");
-             HttpSession session = request.getSession();
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
+            HttpSession session = request.getSession();
             LoginBean funcOn = (LoginBean) session.getAttribute("funcOn");
             String action = request.getParameter("action");
             String cpf = funcOn.getCpf();
@@ -63,7 +63,6 @@ public class FuncionarioServlet extends HttpServlet {
                         {
                             String msg = (String) request.getAttribute("msg");
                             List<categoria> categorias = buscaTodas_Categorias();
-                            out.println(categorias);
                             request.setAttribute("cat",categorias);
                             request.setAttribute("func","categoria");
                             request.setAttribute("msgC",msg);
@@ -124,7 +123,6 @@ public class FuncionarioServlet extends HttpServlet {
                         {
                             categoria categoria = new categoria();
                             categoria.setCategoria_nome(request.getParameter("nome"));
-                            //aqui chamamos o model para se conectar com o banco e inserir um novo produto
                             insere_Categoria(categoria);
                             request.setAttribute("func","categoria");
                             RequestDispatcher rd = getServletContext().
@@ -138,7 +136,6 @@ public class FuncionarioServlet extends HttpServlet {
                             int id = Integer.parseInt(idd);
                             categoria categoria = new categoria();
                             categoria = busca_Categoria(id);
-                            //vamos fazer algo para tudo ficar na funcionario cadastro categoria
                             request.setAttribute("func","alterar");
                             request.setAttribute("categoria", categoria);
                             RequestDispatcher rd = getServletContext().
@@ -183,7 +180,6 @@ public class FuncionarioServlet extends HttpServlet {
                             int peso = Integer.parseInt(pesoS);
                             String idd = request.getParameter("idp");
                             int id = Integer.parseInt(idd);
-                            out.println("select ="+cod_categoria +"peso = "+ peso +"idp = "+id);
                             Produto produto = new Produto();
                             produto.setProduto_nome(request.getParameter("nome"));
                             produto.setProduto_descricao(request.getParameter("descricao"));
@@ -206,7 +202,6 @@ public class FuncionarioServlet extends HttpServlet {
                             categoria = busca_Categoria(id);
                             request.setAttribute("func","visualizar");
                             request.setAttribute("categoria", categoria);
-                            out.println("cat:" + categoria);
                             
                             RequestDispatcher rd = getServletContext().
                                    getRequestDispatcher("/funcionario-cad-categ.jsp");
@@ -215,7 +210,6 @@ public class FuncionarioServlet extends HttpServlet {
                         }
                         case "visualizar_produto":
                         {
-                            out.println("aqui");
                             String idd = request.getParameter("id");
                             int id = Integer.parseInt(idd);
                             Produto produto = busca_Produtos(id);
@@ -304,7 +298,6 @@ public class FuncionarioServlet extends HttpServlet {
                             Produto p = new Produto();
                             Tipo_Atendimento t = new Tipo_Atendimento();
                             String cod = request.getParameter("cod");
-                            out.println(cod);
                             Atendimento atendimento = new Atendimento();
                             atendimento = busca_Atendimento(cod);
                             c = busca_Cliente(atendimento.getAtendimento_cpf_cliente());

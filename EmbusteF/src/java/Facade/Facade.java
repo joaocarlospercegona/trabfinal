@@ -67,7 +67,6 @@ public class Facade {
         dao.edit(cliente,cpf); 
     }
     public static void exclui_Cliente(String cpff){
-        //int cpf = Integer.parseInt(cpff);
         ClienteDAO dao = new ClienteDAO();
         dao.destroy(cpff);
     }
@@ -97,7 +96,6 @@ public class Facade {
         dao.edit(funcionario,id); 
     }
     public static void exclui_Funcionario(String idd){
-        //int id = Integer.parseInt(idd);
         FuncionarioDAO dao = new FuncionarioDAO();
         dao.destroy(idd);
     }

@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
-/**
- *
- * @author joao
- */
 public class categoria {
     private int categoria_codigo;
     private String categoria_nome;
@@ -41,6 +32,5 @@ public class categoria {
     @Override
     public String toString() {
         return "categoria{" + "categoria_codigo=" + categoria_codigo + ", categoria_nome=" + categoria_nome + '}';
-    }
-    
+    }    
 }

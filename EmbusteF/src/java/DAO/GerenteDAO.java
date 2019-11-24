@@ -93,7 +93,7 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
     
     @Override
     public void edit(Gerente vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
@@ -144,7 +144,7 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
             if (rs.next()) {
                 result = new java.util.ArrayList<Gerente>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1; 
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -164,6 +164,7 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
                   p.setGerente_telefone(rs.getString("gerente_telefone"));
                   p.setGerente_senha(rs.getString("gerente_senha"));
                   p.setGerente_complemento(rs.getString("gerente_complemento"));
+                  p.setGerente_salt(rs.getString("gerente_salt"));
 
                   result.add(p);
                 } while ((result.size() < maxResults || all) && rs.next());
@@ -240,7 +241,7 @@ public class GerenteDAO extends BaseDAOImp implements BaseDAO<Gerente> {
 
     @Override
     public Gerente find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     
 }

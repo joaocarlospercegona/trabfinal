@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import classes.Atendimento;
@@ -12,10 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joao
- */
 public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
     
     private static final Logger log = Logger.getLogger(AtendimentoDAO.class.getName());
@@ -62,7 +53,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
             if (rs.next()) {
                 result = new java.util.ArrayList<Atendimento>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1; 
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -108,7 +99,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
             if (rs.next()) {
                 result = new java.util.ArrayList<Tipo_Atendimento>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1; 
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -148,7 +139,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
             if (rs.next()) {
                 result = new java.util.ArrayList<Tipo_Atendimento>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1; 
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -186,7 +177,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
             if (rs.next()) {
                 result = new java.util.ArrayList<Tipo_Atendimento>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1; 
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -225,7 +216,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
             if (rs.next()) {
                 result = new java.util.ArrayList<Tipo_Atendimento>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1;  
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -341,7 +332,7 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
     @Override
     public void edit(Atendimento vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
@@ -375,22 +366,22 @@ public class AtendimentoDAO extends BaseDAOImp implements BaseDAO<Atendimento>{
 
     @Override
     public List<Atendimento> findEntities(int maxResults, int firstResult) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Atendimento find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public int getCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void destroy(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
  

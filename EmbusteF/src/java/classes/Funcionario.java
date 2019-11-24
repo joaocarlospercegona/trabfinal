@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.io.Serializable;
 
-/**
- *
- * @author joao
- */
 public class Funcionario implements Serializable {
     private String funcionario_nome;
     private String funcionario_cpf;
@@ -24,10 +15,11 @@ public class Funcionario implements Serializable {
     private String funcionario_telefone;
     private String funcionario_senha;
     private String funcionario_estado;
+    private String funcionario_salt;
     
     public Funcionario(){}
 
-    public Funcionario(String funcionario_nome, String funcionario_cpf, String funcionario_email, String funcionario_rua, int funcionario_numero, String funcionario_complemento, String funcionario_bairro, String funcionario_cep, String funcionario_cidade, String funcionario_telefone, String funcionario_senha, String funcionario_estado) {
+    public Funcionario(String funcionario_nome, String funcionario_cpf, String funcionario_email, String funcionario_rua, int funcionario_numero, String funcionario_complemento, String funcionario_bairro, String funcionario_cep, String funcionario_cidade, String funcionario_telefone, String funcionario_senha, String funcionario_estado, String funcionario_salt) {
         this.funcionario_nome = funcionario_nome;
         this.funcionario_cpf = funcionario_cpf;
         this.funcionario_email = funcionario_email;
@@ -40,6 +32,7 @@ public class Funcionario implements Serializable {
         this.funcionario_telefone = funcionario_telefone;
         this.funcionario_senha = funcionario_senha;
         this.funcionario_estado = funcionario_estado;
+        this.funcionario_salt = funcionario_salt;
     }
 
     public String getFuncionario_nome() {
@@ -130,6 +123,14 @@ public class Funcionario implements Serializable {
         this.funcionario_senha = funcionario_senha;
     }
 
+    public String getFuncionario_salt() {
+        return funcionario_salt;
+    }
+
+    public void setFuncionario_salt(String funcionario_salt) {
+        this.funcionario_salt = funcionario_salt;
+    }
+
     public String getFuncionario_estado() {
         return funcionario_estado;
     }
@@ -140,8 +141,6 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "Funcionario{" + "funcionario_nome=" + funcionario_nome + ", funcionario_cpf=" + funcionario_cpf + ", funcionario_email=" + funcionario_email + ", funcionario_rua=" + funcionario_rua + ", funcionario_numero=" + funcionario_numero + ", funcionario_complemento=" + funcionario_complemento + ", funcionario_bairro=" + funcionario_bairro + ", funcionario_cep=" + funcionario_cep + ", funcionario_cidade=" + funcionario_cidade + ", funcionario_telefone=" + funcionario_telefone + ", funcionario_senha=" + funcionario_senha + '}';
-    }
-    
-    
+        return "Funcionario{" + "funcionario_nome=" + funcionario_nome + ", funcionario_cpf=" + funcionario_cpf + ", funcionario_email=" + funcionario_email + ", funcionario_rua=" + funcionario_rua + ", funcionario_numero=" + funcionario_numero + ", funcionario_complemento=" + funcionario_complemento + ", funcionario_bairro=" + funcionario_bairro + ", funcionario_cep=" + funcionario_cep + ", funcionario_cidade=" + funcionario_cidade + ", funcionario_telefone=" + funcionario_telefone + ", funcionario_senha=" + funcionario_senha + ", funcionario_estado=" + funcionario_estado + ", funcionario_salt=" + funcionario_salt + '}';
+    }    
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import classes.Produto;
@@ -10,10 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joao
- */
 public class ProdutoDAO extends BaseDAOImp implements BaseDAO<Produto>{
     private static final Logger log = Logger.getLogger(ClienteDAO.class.getName());
   
@@ -126,7 +117,7 @@ public class ProdutoDAO extends BaseDAOImp implements BaseDAO<Produto>{
             if (rs.next()) {
                 result = new java.util.ArrayList<Produto>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1; 
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -237,17 +228,14 @@ public class ProdutoDAO extends BaseDAOImp implements BaseDAO<Produto>{
         return result;
     }
 
-    
-    //------------------------------------------------------------------------------------------------------------------
-    
     @Override
     public void edit(Produto vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void destroy(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     public String retorna(int cod) {

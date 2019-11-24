@@ -56,8 +56,8 @@ public class GerenteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             PrintWriter out = response.getWriter();
-             response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html;charset=UTF-8");
             HttpSession session = request.getSession();
             LoginBean logado = (LoginBean) session.getAttribute("gerenteOn");
             String action = request.getParameter("action");
@@ -100,7 +100,6 @@ public class GerenteServlet extends HttpServlet {
                             Produto p = new Produto();
                             Tipo_Atendimento t = new Tipo_Atendimento();
                             String cod = request.getParameter("cod");
-                            out.println(cod);
                             Atendimento atendimento = new Atendimento();
                             atendimento = busca_Atendimento(cod);
                             c = busca_Cliente(atendimento.getAtendimento_cpf_cliente());
@@ -132,10 +131,7 @@ public class GerenteServlet extends HttpServlet {
                             String senha = request.getParameter("senha");
                             String senha2 = request.getParameter("senha2");
                             
-                            if(senha.equals(senha2)){
-                                //option == 1 eh gerente
-                                //option == 2 eh funcionario
-                                
+                            if(senha.equals(senha2)){                                
                                 if(option.equals("1")){
                                     Gerente gerente = new Gerente();
                                     gerente.setGerente_nome((String) request.getParameter("nome"));
@@ -173,14 +169,11 @@ public class GerenteServlet extends HttpServlet {
                                 rd.forward(request, response);
                             }
                             break;
-                        }
-                        
+                        }                        
                         case "alterar":
                         {
                             String cpf = (String)request.getParameter("cpf");
                             String type = request.getParameter("type");
-                            //1 funcionario
-                            //2 gerente
                             if(type.equals("1")){
                                 Funcionario c = new Funcionario();
                                 c = busca_Funcionario(cpf);
@@ -234,11 +227,7 @@ public class GerenteServlet extends HttpServlet {
                             String cpf = (String) request.getParameter("cpfu");
                             String email = (String) request.getParameter("emailu");
                             String option = (String) request.getParameter("tipo");
-                            //option == 2 eh gerente
-                            //option == 1 eh funcionario
                             String func = (String) request.getParameter("func");
-                            out.println(func);
-                            out.println(option);
                             int nr = Integer.parseInt(request.getParameter("numero"));
                             String senha = request.getParameter("senha");
                             String senha2 = request.getParameter("senha2");
@@ -258,8 +247,7 @@ public class GerenteServlet extends HttpServlet {
                                 funcionario.setFuncionario_rua((String) request.getParameter("rua"));
                                 funcionario.setFuncionario_numero(nr);
                                 funcionario.setFuncionario_complemento((String) request.getParameter("complemento"));
-                                funcionario.setFuncionario_senha(senha);
-                            
+                                funcionario.setFuncionario_senha(senha);                            
                                 
                                 gerente.setGerente_nome((String) request.getParameter("nome"));
                                 gerente.setGerente_cpf(cpf);
@@ -284,12 +272,10 @@ public class GerenteServlet extends HttpServlet {
                             }
                             else{
                                 if(option.equals("2")){
-                                    //deletar o usuario da table func e inserir ele na gerencia
                                     exclui_Funcionario(cpf);
                                     insere_Gerente(gerente);
                                 }
                                 else if(option.equals("1")){
-                                    //deletar o usuario da table gerente e inserir na funcionario
                                     exclui_Gerente(cpf);
                                     insere_Funcionario(funcionario);
                                 }
@@ -304,8 +290,6 @@ public class GerenteServlet extends HttpServlet {
                         {
                             String cpf = (String)request.getParameter("cpf");
                             String type = request.getParameter("type");
-                            //1 funcionario
-                            //2 gerente
                             if(type.equals("1")){
                                 exclui_Funcionario(cpf);
                             }
@@ -323,8 +307,6 @@ public class GerenteServlet extends HttpServlet {
                         {
                             String cpf = (String)request.getParameter("cpf");
                             String type = request.getParameter("type");
-                            //1 funcionario
-                            //2 gerente
                             if(type.equals("1")){
                                 Funcionario c = busca_Funcionario(cpf);
                                 Pessoa p = new Pessoa();
@@ -391,11 +373,6 @@ public class GerenteServlet extends HttpServlet {
                             List<Tipo_Atendimento> tpAb = BuscaTodos_Tipos_InfoAberto();
                             List<Tipo_Atendimento> tpto = BuscaTodos_Tipos_Info();
                             List<Tipo_Atendimento> tp = new ArrayList();
-                            
-//                            int i =0;
-//                            for(Tipo_Atendimento t : tp){
-//                                tp.add(t);
-//                            }
                             request.setAttribute("XX",tpAb);
                             request.setAttribute("YY",tpto);
                             

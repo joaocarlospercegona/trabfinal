@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import classes.categoria;
@@ -10,10 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joao
- */
 public class CategoriaDAO extends BaseDAOImp implements BaseDAO<categoria>{
     private static final Logger log = Logger.getLogger(ClienteDAO.class.getName());
   
@@ -120,7 +111,7 @@ public class CategoriaDAO extends BaseDAOImp implements BaseDAO<categoria>{
             if (rs.next()) {
                 result = new java.util.ArrayList<categoria>();
                 if (!all) {
-                    int contagem = 1;  // primeiro next
+                    int contagem = 1;  
                     while (contagem < firstResult) {
                         rs.next();
                         contagem++;
@@ -221,9 +212,6 @@ public class CategoriaDAO extends BaseDAOImp implements BaseDAO<categoria>{
         }
         return result;
     }
-
-    
-    //------------------------------------------------------------------------------------------------------------------
     
     @Override
     public void edit(categoria vo) {

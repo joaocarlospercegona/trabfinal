@@ -29,7 +29,6 @@ public class GeradorRelatorios extends HttpServlet {
     throws ServletException, IOException {
         Connection con = null;
         try {
-            // Conexão com o banco
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(
             "jdbc:postgresql://localhost:5432/Embuste",

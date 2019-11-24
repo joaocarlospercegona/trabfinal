@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-/**
- *
- * @author joao
- */
 public class Atendimento {
     private int atendimento_codigo;
     private Date atendimento_data_hora;
@@ -43,9 +34,7 @@ public class Atendimento {
 
     public void setAtendimento_nivel(int atendimento_nivel) {
         this.atendimento_nivel = atendimento_nivel;
-    }
-
-    
+    }    
 
     public int getAtendimento_codigo() {
         return atendimento_codigo;
@@ -115,7 +104,5 @@ public class Atendimento {
     public String toString() {
         return "Atendimento{" + "atendimento_codigo=" + atendimento_codigo + ", atendimento_data_hora=" + atendimento_data_hora + ", atendimento_cpf_cliente=" + atendimento_cpf_cliente + ", atendimento_situacao=" + atendimento_situacao + ", atendimento_cod_produto=" + atendimento_cod_produto + ", atendimento_cod_tipo_atendimento=" + atendimento_cod_tipo_atendimento + ", atendimento_descricao=" + atendimento_descricao + ", atendimento_solucao=" + atendimento_solucao + ", atendimento_nivel=" + atendimento_nivel + '}';
     }
-    
-    
-    
+        
 }

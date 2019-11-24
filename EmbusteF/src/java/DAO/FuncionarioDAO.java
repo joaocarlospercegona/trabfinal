@@ -1,21 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import classes.Cliente;
 import classes.Funcionario;
+import classes.Security;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joao
- */
 public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
 
     private static final Logger log = Logger.getLogger(FuncionarioDAO.class.getName());
@@ -32,13 +24,15 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
     public void create(Funcionario pessoa) {
       java.sql.PreparedStatement ps = null;
       java.sql.ResultSet rs = null;
-      String sql = "INSERT INTO funcionario (funcionario_nome,funcionario_cpf,funcionario_email,funcionario_rua,funcionario_numero,funcionario_complemento,funcionario_bairro,funcionario_cep,funcionario_cidade,funcionario_estado,funcionario_telefone,funcionario_senha) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+      String sql = "INSERT INTO funcionario (funcionario_nome,funcionario_cpf,funcionario_email,funcionario_rua,funcionario_numero,funcionario_complemento,funcionario_bairro,funcionario_cep,funcionario_cidade,funcionario_estado,funcionario_telefone,funcionario_senha,funcionario_salt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        try {
+        try {           
+            String salt = Security.generateSalt(250).get();
+            String senha = pessoa.getFuncionario_senha();
+            String key = Security.hashPassword(senha, salt).get();
             ps = getConnection().prepareStatement(sql);
 
             Date dt = new Date();
-
             ps.setString(1, pessoa.getFuncionario_nome());
             ps.setString(2, pessoa.getFuncionario_cpf());
             ps.setString(3, pessoa.getFuncionario_email());
@@ -49,8 +43,9 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
             ps.setString(8, pessoa.getFuncionario_cep());
             ps.setString(9, pessoa.getFuncionario_cidade());
             ps.setString(10, pessoa.getFuncionario_estado());
-            ps.setString(11, pessoa.getFuncionario_telefone());
-            ps.setString(12, pessoa.getFuncionario_senha());
+            ps.setString(11, pessoa.getFuncionario_telefone());  
+            ps.setString(12, key);
+            ps.setString(13, salt);
 
             if (ps.executeUpdate() == 0) {
                 log.warning(ps.toString() + " not inserted.");
@@ -183,7 +178,7 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
     
     @Override
     public void edit(Funcionario vo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     
@@ -248,7 +243,7 @@ public class FuncionarioDAO extends BaseDAOImp implements BaseDAO<Funcionario>{
 
     @Override
     public Funcionario find(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
    

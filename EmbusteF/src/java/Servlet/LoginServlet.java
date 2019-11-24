@@ -37,9 +37,6 @@ public class LoginServlet extends HttpServlet {
             String usuario = request.getParameter("usuario");
             String senha   = request.getParameter("senha");
             String tipo = request.getParameter("tipo");   
-            System.out.println("user" + usuario);
-            System.out.println("senha" + senha);
-            System.out.println("tipo" + tipo);
             
             //Cadastro de cliente
             String action = request.getParameter("action");
@@ -79,7 +76,7 @@ public class LoginServlet extends HttpServlet {
                     else if("2".equals(tipo)){
                         List<Funcionario> lista = buscaTodos_Funcionario();
                         for (Funcionario x: lista) {
-                            if(usuario.equals(x.getFuncionario_email())&&(senha.equals(x.getFuncionario_senha()))){
+                            if(usuario.equals(x.getFuncionario_email()) && Security.verifyPassword(senha, x.getFuncionario_senha(), x.getFuncionario_salt())){
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getFuncionario_cpf());
                                 p.setNome(x.getFuncionario_nome());
@@ -96,11 +93,9 @@ public class LoginServlet extends HttpServlet {
                     }
                     
                     else if("3".equals(tipo)){
-                        System.out.println("entrou no tipo");
                         List<Gerente> lista = buscaTodos_Gerente();
                         for (Gerente x: lista) {
-                            System.out.println("entrou na lista");
-                            if(usuario.equals(x.getGerente_email())&&(senha.equals(x.getGerente_senha()))){
+                            if(usuario.equals(x.getGerente_email()) && Security.verifyPassword(senha, x.getGerente_senha(), x.getGerente_salt())){
                                 LoginBean p = new LoginBean();
                                 p.setCpf(x.getGerente_cpf());
                                 p.setNome(x.getGerente_nome());

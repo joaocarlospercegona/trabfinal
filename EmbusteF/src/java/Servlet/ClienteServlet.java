@@ -54,9 +54,7 @@ public class ClienteServlet extends HttpServlet {
             HttpSession session = request.getSession();
             LoginBean clienteOn = (LoginBean) session.getAttribute("clienteOn");
             String action = request.getParameter("action");
-            
-            System.out.println("cliente servlet");
-            
+                        
             if((clienteOn == null)&&(!action.equals("cadastro_cliente"))){
                 request.setAttribute("msg","Usuario deve se autenticar para acessar o sistema.");
                 RequestDispatcher rd = getServletContext().
@@ -171,14 +169,11 @@ public class ClienteServlet extends HttpServlet {
                         }
                         case "Listagem_atendimentos":
                         {
-                            System.out.println("entrou no case");
                             List<Atendimento> atendimentos = new ArrayList();
                             List<Atendimento> atendiment = buscaTodos_Atendimentos_Cliente(clienteOn.getCpf());
                             List<Produto> prod = buscaTodos_Produtos();
                             request.setAttribute("produtos",prod);
-                            System.out.println("antes if");
                             if (atendiment != null){
-                                System.out.println("dentro if");
                                 for(Atendimento x : atendiment){
                                     if(x.getAtendimento_situacao().equals("Finalizado")){
                                         x.setAtendimento_nivel(1);
@@ -190,7 +185,6 @@ public class ClienteServlet extends HttpServlet {
                                 }
                                 request.setAttribute("atendimentos", atendimentos);
                             }
-                            System.out.println("antes meus at");
                             RequestDispatcher rd = getServletContext().
                                 getRequestDispatcher("/cliente-meus-atendimentos.jsp");
                             rd.forward(request, response);
